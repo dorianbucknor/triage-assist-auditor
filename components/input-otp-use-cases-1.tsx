@@ -89,7 +89,7 @@ const Example = () => {
         </Button>
       </form>
       <div className="text-center text-sm text-muted-foreground">
-        Didn't receive the email?{" "}
+        Didn&apos;t receive the email?{" "}
         <Button className="h-auto p-0 font-normal" type="button" variant="link">
           Resend code
         </Button>

@@ -14,7 +14,7 @@ export default function Chip({
 	return (
 		<div
 			{...props}
-			className="flex items-center space-x-2 mt-1 bg-gray-200 rounded-full px-3 py-1"
+			className="flex bg-card items-center space-x-2 mt-1 border-2  rounded-full px-3 py-1"
 		>
 			<span className="text-xs">{label}</span>
 			<Button
