@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronUp, AlertCircle, CheckCircle, Syringe } from "lucide-react";
+import { ChevronUp, AlertCircle, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
@@ -18,30 +18,18 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import ScenarioForm from "@/components/scenario-form";
-import type { ClinicalGrading, Scenario, TriageData } from "@/types/scenario";
+import ScenarioForm from "@/components/app/scenario-form";
+import type {
+	AIResponse,
+	ClinicalGrading,
+	Scenario,
+	TriageData,
+} from "@/lib/types";
+import ResponseCard from "@/components/app/ai-response-card";
+import TreatmentRecommendations from "@/components/app/treatment-reccommendation-card";
+import GradingSection from "@/components/app/clician-grading-section";
 
 // Types for our data structure
-interface AIResponse {
-	triageLevel: {
-		level: "ESI-1" | "ESI-2" | "ESI-3" | "ESI-4" | "ESI-5";
-		reasoning: string;
-		confidence: number;
-	};
-	diagnosis: {
-		primary: string;
-		reasoning: string;
-		confidence: number;
-	};
-	treatment: {
-		recommendations: string[];
-		reasoning: string;
-		confidence: number;
-	};
-}
 
 // Sample data - replace with actual data from your backend
 const sampleScenario: Scenario = {
@@ -168,332 +156,6 @@ function generateMockAIResponse(formData: TriageData): AIResponse {
 	};
 }
 
-function ResponseCard({
-	title,
-	level,
-	reasoning,
-	confidence,
-	icon: Icon,
-}: {
-	title: string;
-	level?: string;
-	reasoning: string;
-	confidence: number;
-	icon: React.ComponentType<{ className?: string }>;
-}) {
-	const getConfidenceColor = (conf: number) => {
-		if (conf >= 85) return "bg-green-100 text-green-800";
-		if (conf >= 70) return "bg-yellow-100 text-yellow-800";
-		return "bg-red-100 text-red-800";
-	};
-
-	return (
-		<Card className="mb-4">
-			<CardHeader>
-				<div className="flex items-center gap-2">
-					<Icon className="h-5 w-5" />
-					<h3 className="font-semibold text-lg">{title}</h3>
-				</div>
-			</CardHeader>
-			<CardContent className="space-y-4">
-				{level && (
-					<div className="text-2xl font-bold text-primary">
-						{level}
-					</div>
-				)}
-				<div>
-					<h4 className="text-sm font-medium mb-2">Reasoning</h4>
-					<p className="text-sm text-muted-foreground">{reasoning}</p>
-				</div>
-				<div className="flex items-center justify-between">
-					<span className="text-sm font-medium">Confidence</span>
-					<span
-						className={`px-3 py-1 rounded-full text-sm font-semibold ${getConfidenceColor(confidence)}`}
-					>
-						{confidence}%
-					</span>
-				</div>
-			</CardContent>
-		</Card>
-	);
-}
-
-function TreatmentRecommendations({
-	recommendations,
-	reasoning,
-	confidence,
-}: {
-	recommendations: string[];
-	reasoning: string;
-	confidence: number;
-}) {
-	const getConfidenceColor = (conf: number) => {
-		if (conf >= 85) return "bg-green-100 text-green-800";
-		if (conf >= 70) return "bg-yellow-100 text-yellow-800";
-		return "bg-red-100 text-red-800";
-	};
-
-	return (
-		<Card className="mb-4">
-			<CardHeader>
-				<div className="flex items-center gap-2">
-					<Syringe className="h-5 w-5" />
-					<h3 className="font-semibold text-lg">
-						Treatment Recommendations
-					</h3>
-				</div>
-			</CardHeader>
-			<CardContent className="space-y-4">
-				<div className="space-y-2">
-					<h4 className="text-sm font-medium">Recommended Actions</h4>
-					<ul className="space-y-2">
-						{recommendations.map((rec, idx) => (
-							<li key={idx} className="flex gap-2 text-sm">
-								<span className="text-primary font-bold">
-									•
-								</span>
-								<span>{rec}</span>
-							</li>
-						))}
-					</ul>
-				</div>
-				<div>
-					<h4 className="text-sm font-medium mb-2">Reasoning</h4>
-					<p className="text-sm text-muted-foreground">{reasoning}</p>
-				</div>
-				<div className="flex items-center justify-between">
-					<span className="text-sm font-medium">Confidence</span>
-					<span
-						className={`px-3 py-1 rounded-full text-sm font-semibold ${getConfidenceColor(confidence)}`}
-					>
-						{confidence}%
-					</span>
-				</div>
-			</CardContent>
-		</Card>
-	);
-}
-
-function GradingSection({
-	onGrade,
-}: {
-	onGrade: (grading: ClinicalGrading) => void;
-}) {
-	const [grading, setGrading] = useState<ClinicalGrading>({
-		triageLevelScale: 5,
-		diagnosisScale: 5,
-		treatmentScale: 5,
-	});
-
-	const handleSubmit = () => {
-		onGrade(grading);
-	};
-
-	return (
-		<div className="space-y-4">
-			<h2 className="font-semibold text-lg">Clinical Grading</h2>
-
-			{/* Triage Level Grading */}
-			<Card>
-				<CardHeader>
-					<h3 className="font-medium">Triage Level Assessment</h3>
-				</CardHeader>
-				<CardContent className="space-y-4">
-					<div className="space-y-3">
-						<Label className="text-base">AI assigned: ESI-2</Label>
-						<div className="flex gap-2">
-							{[1, 2, 3, 4, 5].map((scale) => (
-								<Button
-									key={scale}
-									variant={
-										grading.triageLevelScale === scale
-											? "default"
-											: "outline"
-									}
-									size="sm"
-									onClick={() =>
-										setGrading({
-											...grading,
-											triageLevelScale: scale,
-										})
-									}
-									className="flex-1"
-								>
-									{scale}
-								</Button>
-							))}
-						</div>
-						<div className="flex justify-between text-xs text-muted-foreground">
-							<span>Strongly Disagree</span>
-							<span>Strongly Agree</span>
-						</div>
-					</div>
-
-					{grading.triageLevelScale <= 2 && (
-						<div className="space-y-2 pt-4 border-t">
-							<Label htmlFor="correct-triage">
-								Correct Triage Level
-							</Label>
-							<Input
-								id="correct-triage"
-								placeholder="e.g., ESI-1"
-								value={grading.correctTriageLevel || ""}
-								onChange={(e) =>
-									setGrading({
-										...grading,
-										correctTriageLevel: e.target.value,
-									})
-								}
-							/>
-						</div>
-					)}
-				</CardContent>
-			</Card>
-
-			{/* Diagnosis Grading */}
-			<Card>
-				<CardHeader>
-					<h3 className="font-medium">Diagnosis Assessment</h3>
-				</CardHeader>
-				<CardContent className="space-y-4">
-					<div className="space-y-3">
-						<Label className="text-base">
-							AI assigned: Acute Coronary Syndrome (ACS)
-						</Label>
-						<div className="flex gap-2">
-							{[1, 2, 3, 4, 5].map((scale) => (
-								<Button
-									key={scale}
-									variant={
-										grading.diagnosisScale === scale
-											? "default"
-											: "outline"
-									}
-									size="sm"
-									onClick={() =>
-										setGrading({
-											...grading,
-											diagnosisScale: scale,
-										})
-									}
-									className="flex-1"
-								>
-									{scale}
-								</Button>
-							))}
-						</div>
-						<div className="flex justify-between text-xs text-muted-foreground">
-							<span>Strongly Disagree</span>
-							<span>Strongly Agree</span>
-						</div>
-					</div>
-
-					{grading.diagnosisScale <= 2 && (
-						<div className="space-y-2 pt-4 border-t">
-							<Label htmlFor="correct-diagnosis">
-								Correct Diagnosis
-							</Label>
-							<Input
-								id="correct-diagnosis"
-								placeholder="Enter the correct diagnosis"
-								value={grading.correctDiagnosis || ""}
-								onChange={(e) =>
-									setGrading({
-										...grading,
-										correctDiagnosis: e.target.value,
-									})
-								}
-							/>
-						</div>
-					)}
-				</CardContent>
-			</Card>
-
-			{/* Treatment Grading */}
-			<Card>
-				<CardHeader>
-					<h3 className="font-medium">Treatment Assessment</h3>
-				</CardHeader>
-				<CardContent className="space-y-4">
-					<div className="space-y-3">
-						<Label className="text-base">
-							AI treatment recommendations
-						</Label>
-						<div className="flex gap-2">
-							{[1, 2, 3, 4, 5].map((scale) => (
-								<Button
-									key={scale}
-									variant={
-										grading.treatmentScale === scale
-											? "default"
-											: "outline"
-									}
-									size="sm"
-									onClick={() =>
-										setGrading({
-											...grading,
-											treatmentScale: scale,
-										})
-									}
-									className="flex-1"
-								>
-									{scale}
-								</Button>
-							))}
-						</div>
-						<div className="flex justify-between text-xs text-muted-foreground">
-							<span>Strongly Disagree</span>
-							<span>Strongly Agree</span>
-						</div>
-					</div>
-
-					{grading.treatmentScale <= 2 && (
-						<div className="space-y-2 pt-4 border-t">
-							<Label htmlFor="correct-treatment">
-								Correct Treatment/Recommendations
-							</Label>
-							<Textarea
-								id="correct-treatment"
-								placeholder="Enter the correct treatment recommendations"
-								value={grading.correctTreatment || ""}
-								onChange={(e) =>
-									setGrading({
-										...grading,
-										correctTreatment: e.target.value,
-									})
-								}
-							/>
-						</div>
-					)}
-				</CardContent>
-			</Card>
-
-			{/* Additional Notes */}
-			<Card>
-				<CardHeader>
-					<h3 className="font-medium">Additional Notes</h3>
-				</CardHeader>
-				<CardContent>
-					<Textarea
-						placeholder="Add any additional clinical notes or observations..."
-						value={grading.notes || ""}
-						onChange={(e) =>
-							setGrading({
-								...grading,
-								notes: e.target.value,
-							})
-						}
-					/>
-				</CardContent>
-			</Card>
-
-			<Button onClick={handleSubmit} className="w-full">
-				Submit Grading
-			</Button>
-		</div>
-	);
-}
-
 export default function TriageAssistantPage() {
 	const [isSheetOpen, setIsSheetOpen] = useState(false);
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -547,7 +209,6 @@ export default function TriageAssistantPage() {
 		if (currentScenarioIndex < scenarios.length - 1) {
 			setCurrentScenarioIndex(currentScenarioIndex + 1);
 		} else {
-			// Show message or loop back
 			setCurrentScenarioIndex(0);
 		}
 	};
@@ -558,46 +219,33 @@ export default function TriageAssistantPage() {
 	};
 
 	return (
-		<div className="min-h-screen bg-background">
+		<div className="min-h-screen ">
 			<div className="container mx-auto px-4 py-6">
-				{/* Header with Controls */}
-				<div className="mb-8">
-					<div className="flex items-center justify-between mb-4">
-						<div>
-							<h1 className="text-3xl font-bold mb-2">
-								Triage Assistant Testing
-							</h1>
-							<p className="text-muted-foreground">
-								Evaluate MedGemma AI responses against clinical
-								expertise (Scenario {currentScenarioIndex + 1}{" "}
-								of {scenarios.length})
-							</p>
-						</div>
-						<div className="flex gap-3">
-							<Button
-								variant="outline"
-								onClick={handleSkip}
-								disabled={scenarios.length === 0}
-							>
-								Skip
-							</Button>
-							<Button onClick={() => setIsDialogOpen(true)}>
-								Add
-							</Button>
-						</div>
-					</div>
-				</div>
-
-				{/* Main Layout: Desktop - Side by Side, Mobile - Stacked */}
 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-					{/* Center Section - Scenario and AI Response (2 cols on desktop) */}
-					<div className="lg:col-span-2">
-						{/* Patient Scenario Card */}
+					<div className="lg:col-span-2 ">
 						<Card className="mb-6">
 							<CardHeader>
-								<h2 className="text-xl font-semibold">
-									Patient Scenario
-								</h2>
+								<div className="flex flex-row justify-between items-center">
+									<h2 className="text-xl font-semibold">
+										Patient Scenario
+									</h2>
+									<div className="space-x-4">
+										<Button
+											variant="outline"
+											onClick={handleSkip}
+											disabled={scenarios.length === 0}
+										>
+											Skip
+										</Button>
+										<Button
+											onClick={() =>
+												setIsDialogOpen(true)
+											}
+										>
+											Add Scenario
+										</Button>
+									</div>
+								</div>
 							</CardHeader>
 							<CardContent className="space-y-4">
 								<div className="grid grid-cols-2 gap-4">
@@ -675,7 +323,7 @@ export default function TriageAssistantPage() {
 									<p className="text-sm text-muted-foreground mb-3">
 										Vital Signs
 									</p>
-									<div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+									<div className="grid grid-cols-2 md:grid-cols-4 gap-3">
 										<div className="bg-muted p-3 rounded-lg">
 											<p className="text-xs text-muted-foreground">
 												BP
@@ -733,6 +381,28 @@ export default function TriageAssistantPage() {
 														.vitals.oxygenSaturation
 												}
 												%
+											</p>
+										</div>
+										<div className="bg-muted p-3 rounded-lg">
+											<p className="text-xs text-muted-foreground">
+												Glucose
+											</p>
+											<p className="font-semibold">
+												{
+													currentScenario.triageData
+														.vitals.temperature
+												}
+											</p>
+										</div>
+										<div className="bg-muted p-3 rounded-lg">
+											<p className="text-xs text-muted-foreground">
+												BHCG
+											</p>
+											<p className="font-semibold">
+												{
+													currentScenario.triageData
+														.vitals.oxygenSaturation
+												}
 											</p>
 										</div>
 									</div>
@@ -827,7 +497,7 @@ export default function TriageAssistantPage() {
 
 				{/* Add Scenario Dialog */}
 				<Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-					<DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+					<DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto ">
 						<DialogHeader>
 							<DialogTitle>Add New Scenario</DialogTitle>
 							<DialogDescription>
