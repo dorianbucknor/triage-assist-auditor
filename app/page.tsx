@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import Header from "@/components/ui/header";
 import MouseGlow from "@/components/ui/mouse-glow";
-import { createServerClient } from "@/providers/supabase/server";
 
 const FEATURES = [
 	{

@@ -1,10 +1,8 @@
 import "server-only";
 
-import { cookies } from "next/headers";
 import { cache } from "react";
 import { createServerClient } from "@/providers/supabase/server";
-import { redirect } from "next/navigation";
-import { decodeJwt, jwtDecrypt } from "jose";
+import { decodeJwt } from "jose";
 import { UserData } from "@/lib/types";
 import { Session } from "@supabase/supabase-js";
 

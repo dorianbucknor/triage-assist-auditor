@@ -1,8 +1,5 @@
 import React from "react";
 import Header from "@/components/ui/header";
-import { supabaseClient } from "@/providers/supabase/client";
-import { redirect } from "next/navigation";
-import { createServerClient } from "@/providers/supabase/server";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

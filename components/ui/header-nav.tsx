@@ -4,16 +4,9 @@ import { ThemeToggle } from "../ThemeToggle";
 import { useAtom } from "jotai";
 import { userAtom } from "@/providers/jotai/jotai";
 import { Button } from "./button";
-import { Menu, UserCircle2 } from "lucide-react";
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import SignOutTrigger from "../app/sign-out";
-import {
-	NavigationMenu,
-	NavigationMenuContent,
-	NavigationMenuItem,
-	NavigationMenuLink,
-	NavigationMenuTrigger,
-} from "./navigation-menu";
 import AccountMenu from "./account-menu";
 import {
 	DropdownMenu,
@@ -22,8 +15,6 @@ import {
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
-	DropdownMenuSub,
-	DropdownMenuSubTrigger,
 	DropdownMenuTrigger,
 } from "./dropdown-menu";
 import { supabaseClient } from "@/providers/supabase/client";
