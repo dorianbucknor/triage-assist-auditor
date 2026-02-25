@@ -10,6 +10,7 @@ import {
 	TableHead,
 	TableCell,
 } from "@/components/ui/table";
+import AuthRedirect from "@/components/auth-redirect";
 
 type Role = "admin" | "editor" | "viewer" | "user";
 

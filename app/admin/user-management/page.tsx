@@ -36,6 +36,7 @@ import {
 	SheetFooter,
 } from "@/components/ui/sheet";
 import { toast } from "sonner";
+import AuthRedirect from "@/components/auth-redirect";
 
 type Role = "admin" | "editor" | "viewer" | "user";
 
@@ -461,7 +462,10 @@ export default function UserManagementPage() {
 						<Select
 							value={(editForm.role as Role) || "user"}
 							onValueChange={(v) =>
-								setEditForm((s) => ({ ...s, role: v as Role }))
+								setEditForm((s) => ({
+									...s,
+									role: v as Role,
+								}))
 							}
 						>
 							<SelectTrigger>
