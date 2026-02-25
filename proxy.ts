@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { verifySession } from "./app/lib/dal";
+import { verifySession } from "./lib/dal";
 
 // Define public, admin and protected route matchers
 const publicRoutes = ["/auth/sign-in", "/auth/register"];

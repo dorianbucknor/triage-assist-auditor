@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { HeartPulse } from "lucide-react";
 import { Badge } from "./badge";
-import { verifySession } from "@/app/lib/dal";
+import { verifySession } from "@/lib/dal";
 import HeaderNav from "./header-nav";
 
 export default async function Header() {
