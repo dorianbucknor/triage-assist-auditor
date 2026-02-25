@@ -28,8 +28,6 @@ import type {
 import ResponseCard from "@/components/app/ai-response-card";
 import TreatmentRecommendations from "@/components/app/treatment-reccommendation-card";
 import GradingSection from "@/components/app/clician-grading-section";
-import AuthRedirect from "@/components/auth-redirect";
-import { VisuallyHidden } from "radix-ui";
 
 // Types for our data structure
 

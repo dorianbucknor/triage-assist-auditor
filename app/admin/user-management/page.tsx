@@ -36,7 +36,6 @@ import {
 	SheetFooter,
 } from "@/components/ui/sheet";
 import { toast } from "sonner";
-import AuthRedirect from "@/components/auth-redirect";
 
 type Role = "admin" | "editor" | "viewer" | "user";
 
