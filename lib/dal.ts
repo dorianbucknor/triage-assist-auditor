@@ -4,7 +4,7 @@ import { cache } from "react";
 import { createServerClient } from "@/providers/supabase/server";
 import { decodeJwt } from "jose";
 import { UserData } from "@/lib/types";
-import { Session } from "@supabase/supabase-js";
+import { Session, User } from "@supabase/supabase-js";
 
 async function supabaseClient() {
 	return await createServerClient();
@@ -62,16 +62,20 @@ type SessionResponse = {
 	userId: string | null;
 	session: Session | null;
 	userRole: string | null;
+	user: User | null;
 };
 
 export const verifySession = cache(async () => {
 	const {
 		data: { session },
 	} = await (await supabaseClient()).auth.getSession();
+	const {
+		data: { user },
+	} = await (await supabaseClient()).auth.getUser();
 
-	if (!session) {
+	if (!user) {
 		return {
-			isAuth: false,
+			isAuth: !!session && !!user,
 			userId: null,
 			session,
 			userRole: null,
@@ -80,12 +84,15 @@ export const verifySession = cache(async () => {
 
 	// const key = new TextEncoder().encode(process.env.NEXT_PUBLIC_SUPABASE_KEY);
 
-	const cookie = decodeJwt(session.access_token);
+	const cookie = session
+		? decodeJwt(session.access_token)
+		: { user_role: null };
 
 	return {
-		isAuth: true,
-		userId: session.user.id,
+		isAuth: !!session && !!user,
+		userId: user.id,
 		session,
 		userRole: cookie["user_role"],
+		user,
 	} as SessionResponse;
 });

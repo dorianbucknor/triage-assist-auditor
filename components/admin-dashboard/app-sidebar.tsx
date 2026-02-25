@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
+import { supabaseClient } from "@/providers/supabase/client";
 
 export default function AppSidebar({
 	...props
@@ -59,6 +60,7 @@ export default function AppSidebar({
 					<SidebarMenu>
 						<SidebarMenuItem>
 							<SidebarMenuButton
+								className="cursor-pointer"
 								onClick={() => {
 									router.push("/admin/dashboard");
 									sidebar.setOpenMobile(false);
@@ -79,7 +81,7 @@ export default function AppSidebar({
 						</SidebarMenuItem>
 						<SidebarMenuItem>
 							<SidebarMenuButton
-								// className="bg-secondary text-primary hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
+								className="cursor-pointer"
 								onClick={() => {
 									router.push("/admin/user-management");
 									sidebar.setOpenMobile(false);
@@ -105,16 +107,20 @@ export default function AppSidebar({
 				<SidebarMenu>
 					<SidebarMenuItem>
 						<SidebarMenuButton
-							onClick={() => router.push("/sign-in")}
+							onClick={async () => {
+								try {
+									await supabaseClient.auth.signOut();
+								} catch (error) {
+									console.log(error);
+								}
+								router.push("/auth/sign-in");
+							}}
 							asChild
 						>
-							<span>
-								<LogOut className="mr-2 h-4 w-4" />
+							<div className="cursor-pointer">
+								<LogOut className="mr-2 h-4 w-4 " />
 								Log Out
-							</span>
-							{/* <Button variant="destructive"> */}
-
-							{/* </Button> */}
+							</div>
 						</SidebarMenuButton>
 					</SidebarMenuItem>
 				</SidebarMenu>

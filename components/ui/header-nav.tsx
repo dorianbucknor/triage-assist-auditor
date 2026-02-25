@@ -41,7 +41,6 @@ export default function HeaderNav() {
 					)}
 				</div>
 				<div>
-					{" "}
 					{user ? (
 						<SignOutTrigger />
 					) : (

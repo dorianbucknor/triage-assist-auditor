@@ -2,10 +2,10 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Moon, Sun } from "lucide-react";
+import { Moon, MoonIcon, Sun, SunIcon } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 export function ThemeToggle({
@@ -37,7 +37,7 @@ export function ThemeToggle({
 }) {
 	const { resolvedTheme, setTheme } = useTheme();
 
-	const isDark = resolvedTheme === "dark";
+	const isDark = useMemo(() => resolvedTheme === "dark", [resolvedTheme]);
 
 	return (
 		<div>
@@ -52,7 +52,7 @@ export function ThemeToggle({
 							className,
 						)}
 					>
-						{isDark ? <Sun /> : <Moon />}
+						{isDark ? <SunIcon /> : <MoonIcon />}
 					</Button>
 				</TooltipTrigger>
 				<TooltipContent>
