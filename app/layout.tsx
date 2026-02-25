@@ -5,7 +5,7 @@ import { ThemeProvider } from "../providers/ThemeProvider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import ToasterClient from "@/components/toaster-client";
 import StoreProvider from "@/providers/jotai/jotai";
-import { getUser, verifySession } from "./lib/dal";
+import { getUser, verifySession } from "../lib/dal";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",

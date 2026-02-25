@@ -1,4 +1,5 @@
 import { createServerClient as sbServer } from "@supabase/ssr";
+import { isDynamicServerError } from "next/dist/client/components/hooks-server-context";
 import { cookies } from "next/headers";
 
 export async function createServerClient() {
@@ -30,6 +31,13 @@ export async function createServerClient() {
 
 		return serverConnection;
 	} catch (error) {
+		// 1. Check if it's a Next.js dynamic rendering signal
+		if (isDynamicServerError(error)) {
+			throw error;
+		}
+		// 2. Handle actual initialization errors
 		throw new Error("Failed to create Supabase client: " + error);
 	}
 }
+
+export const dynamic = "force-dynamic";

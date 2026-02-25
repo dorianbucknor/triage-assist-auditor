@@ -1,4 +1,4 @@
-import { verifySession } from "@/app/lib/dal";
+import { verifySession } from "@/lib/dal";
 import { LoginForm } from "@/components/login-form";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { HeartPulse } from "lucide-react";

@@ -1,4 +1,4 @@
-import { verifySession } from "../lib/dal";
+import { verifySession } from "../../lib/dal";
 import { redirect } from "next/navigation";
 
 export default async function AuthPage() {
