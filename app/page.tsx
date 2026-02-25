@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import Header from "@/components/ui/header";
+import MouseGlow from "@/components/ui/mouse-glow";
+import { createServerClient } from "@/providers/supabase/server";
 
 const FEATURES = [
 	{
@@ -38,18 +40,19 @@ const STATS = [
 	{ value: "IRB", unit: "Aligned", sub: "data protocols" },
 ];
 
-export default function LandingPage() {
+export default async function LandingPage() {
 	return (
 		<div
 			className="min-h-screen bg-background text-foreground overflow-x-hidden transition-colors duration-300"
 			style={{ fontFamily: "'DM Sans', sans-serif" }}
 		>
+			<MouseGlow />
 			{/* ── Grid texture overlay ─────────────────────────────────────────
           Uses CSS class from triage-theme.css which handles opacity per theme */}
 			<div className="grid-texture pointer-events-none fixed inset-0" />
 
 			{/* ── Ambient glow ─────────────────────────────────────────────── */}
-			<div className="ambient-glow pointer-events-none fixed top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full blur-[120px]" />
+			<div className="ambient-cglow pointer-events-none fixed top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full blur-[120px]" />
 
 			<Header />
 			<section className="relative z-10 max-w-6xl mx-auto px-8 pt-28 pb-24">
@@ -85,7 +88,7 @@ export default function LandingPage() {
 						size="lg"
 						className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base rounded-sm px-8 py-6 glow-emerald transition-all"
 					>
-						<Link href="/auth/sign-up">
+						<Link href="/auth/register">
 							Register as a Clinician
 						</Link>
 					</Button>
@@ -346,9 +349,7 @@ export default function LandingPage() {
 							size="lg"
 							className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base rounded-sm px-10 py-6 glow-emerald transition-all"
 						>
-							<Link href="/sign-up">
-								Create Clinician Account
-							</Link>
+							<Link href="/auth/register">Register Now</Link>
 						</Button>
 						<Button
 							asChild

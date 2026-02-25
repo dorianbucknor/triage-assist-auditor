@@ -1,14 +1,16 @@
 import React from "react";
-import { Button } from "./button";
 import Link from "next/link";
 import { HeartPulse } from "lucide-react";
-import { ThemeToggle } from "../ThemeToggle";
 import { Badge } from "./badge";
+import { verifySession } from "@/app/lib/dal";
+import HeaderNav from "./header-nav";
 
-export default function Header() {
+export default async function Header() {
+	const { session } = await verifySession();
+
 	return (
 		<header className="relative z-50 flex items-center justify-between px-8 py-5 border-b border-border/60 backdrop-blur-sm bg-background/10">
-			<div className="flex items-center gap-3">
+			<div className="flex items-center gap-2 relative">
 				{/* Minimal cross logo */}
 				<HeartPulse className="h-6 w-6 text-primary" />
 				<Link
@@ -20,13 +22,13 @@ export default function Header() {
 				</Link>
 				<Badge
 					variant="outline"
-					className="text-[10px] border-primary/40 text-primary tracking-wider"
+					className="text-[8px] border-primary/40 text-primary tracking-wider"
 				>
 					BETA
 				</Badge>
 			</div>
 
-			{
+			{!session && (
 				<nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
 					<Link
 						href="#about"
@@ -47,25 +49,10 @@ export default function Header() {
 						Dimensions
 					</Link>
 				</nav>
-			}
+			)}
 
 			<div className="flex items-center gap-2">
-				{/* Theme toggle */}
-				<ThemeToggle />
-
-				<Button
-					asChild
-					variant="ghost"
-					className="text-muted-foreground hover:text-foreground hover:bg-accent text-sm"
-				>
-					<Link href="/auth/sign-in">Sign In</Link>
-				</Button>
-				<Button
-					asChild
-					className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-sm rounded-sm px-5 glow-emerald"
-				>
-					<Link href="/auth/sign-up">Clinician Access →</Link>
-				</Button>
+				<HeaderNav />
 			</div>
 		</header>
 	);

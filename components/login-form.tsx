@@ -6,54 +6,96 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
 	Field,
 	FieldDescription,
+	FieldError,
 	FieldGroup,
 	FieldLabel,
-	FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { supabaseClient } from "@/lib/supabase";
+import { supabaseClient } from "@/providers/supabase/client";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
-import { useState } from "react";
-import { AuthError } from "@supabase/supabase-js";
+import TosPrivacyDialog from "./tos-privacy-dialog";
+import {  useRef, useState } from "react";
+import Image from "next/image";
+import squareStock from "@/public/square-stock.jpg";
+import { Turnstile, TurnstileInstance } from "@marsidev/react-turnstile";
+import { Controller, useForm } from "react-hook-form";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {  useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export function LoginForm({
 	className,
 	...props
 }: React.ComponentProps<"div">) {
-	const [error, setError] = useState<AuthError | null>(null);
+	const [error, setError] = useState<string | null>(null);
+	const [captchaToken, setCaptchaToken] = useState<string>("");
+	const captchaRef = useRef<TurnstileInstance | null>(null);
+	const router = useRouter();
+
+	const validationSchema = z.object({
+		email: z.email("Please enter a valid email address"),
+		password: z.string(),
+	});
+
+	const form = useForm({
+		resolver: zodResolver(validationSchema),
+		defaultValues: {
+			email: "",
+			password: "",
+		},
+		mode: "onBlur",
+	});
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		const formData = new FormData(event.currentTarget);
-		const email = formData.get("email") as string;
-		const password = formData.get("password") as string;
+		form.trigger();
+
+		if (!captchaRef.current) return;
+
+		// captchaRef.current.getResponse
+
+		const email = form.getValues("email");
+		const password = form.getValues("password");
 
 		try {
-			const { data, error } =
-				await supabaseClient.auth.signInWithPassword({
-					email,
-					password,
-				});
+			const {
+				data: { user },
+				error,
+			} = await supabaseClient.auth.signInWithPassword({
+				email: email.trim().toLowerCase(),
+				password: password,
+				options: {
+					captchaToken,
+				},
+			});
 
 			if (error) {
-				setError(error);
-			} else {
-				console.log("Successfully signed in:", data);
-				alert("Successfully signed in!");
-				// Redirect or update UI as needed
+				setError(error.message);
+				captchaRef.current.reset();
+				return;
+			}
+
+			if (user) {
+				toast("Successfully signed in!");
+				router.push("/app");
 			}
 		} catch (error) {
 			console.error("Unexpected error:", error);
-			alert("An unexpected error occurred. Please try again later.");
+			toast.error(
+				"An unexpected error occurred. Please try again later.",
+			);
 		}
 	};
+
+	const [showTos, setShowTos] = useState(false);
 
 	return (
 		<div className={cn("flex flex-col gap-6", className)} {...props}>
 			{error && (
 				<Alert variant="destructive">
 					<AlertTitle>Login Failed</AlertTitle>
-					<AlertDescription>{error.message}</AlertDescription>
+					<AlertDescription>{error}</AlertDescription>
 				</Alert>
 			)}
 			<Card className="overflow-hidden p-0">
@@ -68,29 +110,52 @@ export function LoginForm({
 									Login to your Triage Assist account
 								</p>
 							</div>
-							<Field>
-								<FieldLabel htmlFor="email">Email</FieldLabel>
-								<Input
-									id="email"
-									type="email"
-									placeholder="m@example.com"
-									required
-								/>
-							</Field>
-							<Field>
-								<div className="flex items-center">
-									<FieldLabel htmlFor="password">
-										Password
-									</FieldLabel>
-									<a
-										href="#"
-										className="ml-auto text-sm underline-offset-2 hover:underline"
+							<Controller
+								control={form.control}
+								name="email"
+								render={({ field, fieldState }) => (
+									<Field
+										data-invalid={fieldState.invalid}
+										className="flex-1"
 									>
-										Forgot your password?
-									</a>
-								</div>
-								<Input id="password" type="password" required />
-							</Field>
+										<FieldLabel htmlFor="email">
+											Email
+										</FieldLabel>
+										<Input
+											{...field}
+											aria-invalid={fieldState.invalid}
+											type="email"
+											placeholder="m@example.com"
+										/>
+										<FieldError>
+											{fieldState.error?.message}
+										</FieldError>
+									</Field>
+								)}
+							/>
+							<Controller
+								control={form.control}
+								name="password"
+								render={({ field, fieldState }) => (
+									<Field
+										data-invalid={fieldState.invalid}
+										className="flex-1"
+									>
+										<FieldLabel htmlFor="password">
+											Password
+										</FieldLabel>
+										<Input
+											{...field}
+											aria-invalid={fieldState.invalid}
+											type="password"
+											placeholder="••••••••"
+										/>
+										<FieldError>
+											{fieldState.error?.message}
+										</FieldError>
+									</Field>
+								)}
+							/>
 							<Field>
 								<Button type="submit">Login</Button>
 							</Field>
@@ -143,14 +208,16 @@ export function LoginForm({
 							</Field> */}
 							<FieldDescription className="text-center">
 								Don&apos;t have an account?{" "}
-								<a href="#">Sign up</a>
+								<a href="/auth/register">Request Access</a>
 							</FieldDescription>
 						</FieldGroup>
 					</form>
 					<div className="bg-muted relative hidden md:block">
-						<img
-							src="/placeholder.svg"
+						<Image
+							src={squareStock.src}
 							alt="Image"
+							// width="100"
+							fill
 							className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
 						/>
 					</div>
@@ -158,9 +225,52 @@ export function LoginForm({
 			</Card>
 			<FieldDescription className="px-6 text-center">
 				By clicking continue, you agree to our{" "}
-				<a href="#">Terms of Service</a> and{" "}
-				<a href="#">Privacy Policy</a>.
+				<button
+					type="button"
+					onClick={() => setShowTos(true)}
+					className="underline-offset-2 hover:underline"
+				>
+					Terms of Service
+				</button>{" "}
+				and{" "}
+				<button
+					type="button"
+					onClick={() => setShowTos(true)}
+					className="underline-offset-2 hover:underline"
+				>
+					Privacy Policy
+				</button>
+				.
 			</FieldDescription>
+
+			<div className="w-full flex relative justify-center ">
+				<Turnstile
+					ref={captchaRef}
+					siteKey={
+						process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_KEY || ""
+					}
+					onSuccess={(token: string) => {
+						setCaptchaToken(token);
+					}}
+					onTimeout={() => {
+						setCaptchaToken("");
+						captchaRef.current?.reset();
+					}}
+					onError={(error) => {
+						setCaptchaToken("");
+						captchaRef.current?.reset();
+					}}
+					className="relative"
+				/>
+			</div>
+			<TosPrivacyDialog
+				open={showTos}
+				onAccept={() => setShowTos(false)}
+				onReject={() => {
+					setShowTos(false);
+					window.location.href = "/";
+				}}
+			/>
 		</div>
 	);
 }
