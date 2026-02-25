@@ -36,7 +36,7 @@ export default async function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<StoreProvider userAuth={{ data: userData, session }}>
+				<StoreProvider userAuth={{ session, data: userData }}>
 					<ThemeProvider>
 						<ToasterClient />
 						<TooltipProvider> {children}</TooltipProvider>

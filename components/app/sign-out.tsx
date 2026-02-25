@@ -18,7 +18,7 @@ export default function SignOutTrigger() {
 						await supabaseClient.auth.signOut();
 					}}
 				>
-					<Link href="/">
+					<Link href="/auth/sign-in">
 						<LogOut />
 					</Link>
 				</Button>
