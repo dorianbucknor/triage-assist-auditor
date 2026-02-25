@@ -26,7 +26,7 @@ export default function GradingSection({
 			<h2 className="font-semibold text-lg">Clinical Grading</h2>
 
 			{/* Triage Level Grading */}
-			<Card >
+			<Card>
 				<CardHeader>
 					<h3 className="font-medium">Triage Level Assessment</h3>
 				</CardHeader>
@@ -61,7 +61,7 @@ export default function GradingSection({
 						</div>
 					</div>
 
-					{grading.triageLevelScale <= 2 && (
+					{grading.triageLevelScale <= 3 && (
 						<div className="space-y-2 pt-4 border-t">
 							<Label htmlFor="correct-triage">
 								Correct Triage Level
@@ -120,7 +120,7 @@ export default function GradingSection({
 						</div>
 					</div>
 
-					{grading.diagnosisScale <= 2 && (
+					{grading.diagnosisScale <= 3 && (
 						<div className="space-y-2 pt-4 border-t">
 							<Label htmlFor="correct-diagnosis">
 								Correct Diagnosis
@@ -179,7 +179,7 @@ export default function GradingSection({
 						</div>
 					</div>
 
-					{grading.treatmentScale <= 2 && (
+					{grading.treatmentScale <= 3 && (
 						<div className="space-y-2 pt-4 border-t">
 							<Label htmlFor="correct-treatment">
 								Correct Treatment/Recommendations
