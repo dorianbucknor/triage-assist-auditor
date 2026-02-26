@@ -19,6 +19,7 @@ import {
 	HeartPulse,
 	Home,
 	LogOut,
+	NotebookPenIcon,
 	TrendingUpDown,
 	User,
 	Users,
@@ -87,17 +88,22 @@ export default function AppSidebar({
 									sidebar.setOpenMobile(false);
 								}}
 								isActive={tab === "user-management"}
-								// style={
-								// 	tab === "user-management"
-								// 		? {
-								// 				backgroundColor: "#000000",
-								// 				color: "#ffffff",
-								// 			}
-								// 		: {}
-								// }
 							>
 								<Users className="mr-2 h-4 w-4" />
 								User Management
+							</SidebarMenuButton>
+						</SidebarMenuItem>
+						<SidebarMenuItem>
+							<SidebarMenuButton
+								className="cursor-pointer"
+								onClick={() => {
+									router.push("/admin/access-requests");
+									sidebar.setOpenMobile(false);
+								}}
+								isActive={tab === "access-requests"}
+							>
+								<Users className="mr-2 h-4 w-4" />
+								Access Requests
 							</SidebarMenuButton>
 						</SidebarMenuItem>
 					</SidebarMenu>
@@ -105,6 +111,19 @@ export default function AppSidebar({
 			</SidebarContent>
 			<SidebarFooter>
 				<SidebarMenu>
+					<SidebarMenuItem>
+						<SidebarMenuButton
+							onClick={async () => {
+								router.push("/app");
+							}}
+							asChild
+						>
+							<div className="cursor-pointer">
+								<NotebookPenIcon className="mr-2 h-4 w-4 " />
+								AI Scenario Audit
+							</div>
+						</SidebarMenuButton>
+					</SidebarMenuItem>
 					<SidebarMenuItem>
 						<SidebarMenuButton
 							onClick={async () => {

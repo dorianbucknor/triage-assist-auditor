@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Moon, MoonIcon, Sun, SunIcon } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-
 export function ThemeToggle({
 	variant,
 	size,
@@ -38,7 +37,6 @@ export function ThemeToggle({
 	const { resolvedTheme, setTheme } = useTheme();
 
 	const isDark = useMemo(() => resolvedTheme === "dark", [resolvedTheme]);
-
 	return (
 		<div>
 			<Tooltip>
@@ -52,7 +50,15 @@ export function ThemeToggle({
 							className,
 						)}
 					>
-						{isDark ? <SunIcon /> : <MoonIcon />}
+						{isDark ? (
+							<span key="sun">
+								<SunIcon key="sun-icon" />
+							</span>
+						) : (
+							<span key="moon">
+								<MoonIcon key="moon-icon" />
+							</span>
+						)}
 					</Button>
 				</TooltipTrigger>
 				<TooltipContent>
