@@ -5,9 +5,9 @@ import { HeartPulse } from "lucide-react";
 import { redirect } from "next/navigation";
 
 export default async function LoginPage() {
-	const { user, userRole } = await verifySession();
+	const { isAuth, userRole } = await verifySession();
 
-	if (user) {
+	if (isAuth) {
 		if (userRole === "user") {
 			redirect("/app");
 		} else {
