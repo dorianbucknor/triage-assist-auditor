@@ -71,10 +71,7 @@ export function LoginForm({
 				email: email.trim().toLowerCase(),
 				password: password,
 				options: {
-					captchaToken:
-						process.env.NODE_ENV === "production"
-							? captchaToken
-							: "1x0000000000000000000000000000000AA", //todo--rem
+					captchaToken: captchaToken, //todo--rem
 					// captchaToken,
 				},
 			});
@@ -220,11 +217,7 @@ export function LoginForm({
 				<Turnstile
 					ref={captchaRef}
 					siteKey={
-						process.env.NODE_ENV === "production"
-							? process.env
-									.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_KEY || ""
-							: "1x00000000000000000000AA"
-						//  || ""
+						process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_KEY || ""
 					}
 					onSuccess={(token: string) => {
 						setCaptchaToken(token);
