@@ -1,11 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { atomWithStorage, useHydrateAtoms } from "jotai/utils";
+import {
+	atomWithStorage,
+	loadable,
+	unwrap,
+	useHydrateAtoms,
+} from "jotai/utils";
 import { atom, createStore } from "jotai/vanilla";
-import { Provider, useAtom } from "jotai";
-import React from "react";
+import { Provider, useAtom, useStore } from "jotai";
+import React, { useEffect } from "react";
 import { ClinicalGrading, Scenario, User, UserData } from "@/lib/types";
 import { supabaseClient } from "../supabase/client";
+import { Session } from "@supabase/supabase-js";
 
 //creates global atom of currentScenarioGrading with local storage
 const currentScenarioGradingAtom = atomWithStorage<ClinicalGrading | null>(
@@ -17,13 +24,13 @@ const currentScenarioAtom = atomWithStorage<Scenario | null>(
 	"currentScenario",
 	null,
 );
-//creates global atom of scenarios with local storage
-const scenariosAtom = atomWithStorage<Scenario[] | null>("scenarios", []);
+
+
 //creates global atom of user
 const userAtom = atom<User | null>(null);
 
 //default stirage location
-const store = createStore();
+export const store = createStore();
 
 export default function StoreProvider({
 	children,
@@ -32,31 +39,67 @@ export default function StoreProvider({
 	children: React.ReactNode;
 	userAuth: User | null;
 }) {
-	supabaseClient.auth.onAuthStateChange(async (event, session) => {
-		switch (event) {
-			case "SIGNED_IN":
-				if (session) {
+	useHydrateAtoms([[userAtom, userAuth]], { store });
+
+	return (
+		<Provider>
+			<DataLoad>{children}</DataLoad>
+		</Provider>
+	);
+}
+
+function DataLoad({ children }: { children: React.ReactNode }) {
+	// const store = useStore({store});
+	// const [user] = useAtom(userAtom, { store });
+
+	useEffect(() => {
+		// 1. Define the update logic in a reusable function
+		const updateUserData = async (session: Session) => {
+			if (session) {
+				try {
+					const profile = await getUserData(session.user.id);
 					store.set(userAtom, {
-						data: await getUserData(session.user.id),
+						data: profile,
 						session,
 					});
-				} else {
-					store.set(userAtom, null);
+				} catch (error) {
+					console.error("Failed to fetch profile:", error);
+					// Handle error: maybe set user to null or show a toast
 				}
-				break;
-			case "SIGNED_OUT":
+			} else {
 				store.set(userAtom, null);
-				break;
-		}
-	});
+			}
+		};
 
-	return <Provider store={store}>{children}</Provider>;
+		// 3. Listen for all relevant state changes
+		const {
+			data: { subscription },
+		} = supabaseClient.auth.onAuthStateChange(async (event, session) => {
+			switch (event) {
+				case "INITIAL_SESSION":
+				case "SIGNED_IN":
+				case "TOKEN_REFRESHED":
+					if (!session) return;
+					await updateUserData(session);
+					break;
+				case "SIGNED_OUT":
+				case "USER_UPDATED": // Good to handle if they change email/pass
+					store.set(userAtom, null);
+					break;
+			}
+		});
+
+		return () => {
+			subscription.unsubscribe();
+		};
+	}, []);
+
+	return <>{children}</>;
 }
 
 export {
 	currentScenarioGradingAtom,
 	currentScenarioAtom,
-	scenariosAtom,
 	userAtom,
 };
 

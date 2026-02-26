@@ -2,7 +2,7 @@
 import React from "react";
 import { ThemeToggle } from "../ThemeToggle";
 import { useAtom } from "jotai";
-import { userAtom } from "@/providers/jotai/jotai";
+import { store, userAtom } from "@/providers/jotai/jotai";
 import { Button } from "./button";
 import { Menu } from "lucide-react";
 import Link from "next/link";
@@ -20,7 +20,7 @@ import {
 import { supabaseClient } from "@/providers/supabase/client";
 
 export default function HeaderNav() {
-	const [user] = useAtom(userAtom);
+	const [user] = useAtom(userAtom, { store: store });
 
 	return (
 		<nav>
