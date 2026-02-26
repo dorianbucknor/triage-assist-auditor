@@ -8,23 +8,38 @@ import { useState } from "react";
 
 export default function GradingSection({
 	onGrade,
+	initialGrading,
 }: {
-	onGrade: (grading: ClinicalGrading) => void;
+	onGrade: (grading: ClinicalGrading) => Promise<boolean>;
+	initialGrading?: ClinicalGrading;
 }) {
 	const [grading, setGrading] = useState<ClinicalGrading>({
 		triageLevelScale: 5,
 		diagnosisScale: 5,
 		treatmentScale: 5,
+		...initialGrading,
 	});
 
-	const handleSubmit = () => {
-		onGrade(grading);
+	const handleSubmit = async () => {
+		const success = await onGrade(grading);
+
+		//reset
+		if (success) {
+			setGrading({
+				triageLevelScale: 5,
+				diagnosisScale: 5,
+				treatmentScale: 5,
+				correctDiagnosis: "",
+				correctTreatment: "",
+				notes: "",
+				correctTriageLevel: "",
+			});
+		}
 	};
 
 	return (
 		<div className="space-y-4">
 			<h2 className="font-semibold text-lg">Clinical Grading</h2>
-
 			{/* Triage Level Grading */}
 			<Card>
 				<CardHeader>
@@ -219,7 +234,10 @@ export default function GradingSection({
 				</CardContent>
 			</Card>
 
-			<Button onClick={handleSubmit} className="w-full">
+			<Button
+				onClick={async () => await handleSubmit()}
+				className="w-full"
+			>
 				Submit Grading
 			</Button>
 		</div>

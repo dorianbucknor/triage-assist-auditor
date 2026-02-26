@@ -17,15 +17,17 @@ export default function AccountMenu() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<AccountTooltip>
-					<Button
-						variant="ghost"
-						size="icon-sm"
-						className="!cursor-pointer text-muted-foreground hover:text-foreground hover:bg-accent text-sm"
-					>
-						<UserCircle2 />
-					</Button>
-				</AccountTooltip>
+				<div>
+					<AccountTooltip>
+						<Button
+							variant="ghost"
+							size="icon-sm"
+							className="!cursor-pointer text-muted-foreground hover:text-foreground hover:bg-accent text-sm"
+						>
+							<UserCircle2 />
+						</Button>
+					</AccountTooltip>
+				</div>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
 				<DropdownMenuGroup>

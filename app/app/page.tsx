@@ -18,9 +18,10 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "@/components/ui/dialog";
-import ScenarioForm from "@/components/app/scenario-form";
+import TriageForm from "@/components/app/scenario-form";
 import type {
 	AIResponse,
+	APIResponse,
 	ClinicalGrading,
 	Scenario,
 	TriageData,
@@ -28,194 +29,221 @@ import type {
 import ResponseCard from "@/components/app/ai-response-card";
 import TreatmentRecommendations from "@/components/app/treatment-reccommendation-card";
 import GradingSection from "@/components/app/clician-grading-section";
+import {
+	useInfiniteQuery,
+	useQueryClient,
+	InfiniteData,
+} from "@tanstack/react-query";
+import { useAtom } from "jotai";
+import { store, userAtom } from "@/providers/jotai/jotai";
+import { useEffect } from "react";
+import { redirect } from "next/navigation";
+import { toast } from "sonner";
 
 // Types for our data structure
+const PAGE_SIZE: number = 5;
 
-// Sample data - replace with actual data from your backend
-const sampleScenario: Scenario = {
-	scenarioId: "PT-001",
-	dateEntered: new Date(),
-	public: true,
-	triageData: {
-		age: 45,
-		height: 165,
-		gender: "Female",
-		chiefComplaint: {
-			title: "Severe chest pain and shortness of breath",
-			description:
-				"Patient presenting with acute onset of severe chest pain radiating to left arm, accompanied by dyspnea. Pain started 2 hours ago while patient was at rest.",
+async function getUngradedScenarios(
+	page: number,
+	limit = PAGE_SIZE,
+): Promise<Scenario[]> {
+	const res = await fetch(
+		`/api/scenarios?action=fetch_ungraded_by_user&amount=${limit}&page=${page}`,
+		{
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
 		},
-		vitals: {
-			bloodPressure: "160/95",
-			pulse: 102,
-			respiratoryRate: 22,
-			temperature: 37.1,
-			oxygenSaturation: 94,
-			glucose: 110,
-			bhcg: "Negative",
-		},
-		medicalHistory: ["Hypertension", "Former smoker (10 pack-years)"],
-		weight: undefined,
-		modeOfArrival: "",
-		mentalStatus: "",
-		respiratoryStatus: "",
-		currentMedication: [],
-		smoker: null,
-		alcohol: null,
-		allergies: [],
-		surgicalHistory: [],
-		immunization: [],
-		urinalysis: null,
-	},
-	aiResponse: {
-		triageLevel: {
-			level: "ESI-2",
-			reasoning:
-				"High-risk situation indicating need for immediate ECG and continuous monitoring. Patient presents with acute chest pain and dyspnea with tachycardia and hypertension.",
-			confidence: 92,
-		},
-		diagnosis: {
-			primary: "Acute Coronary Syndrome (ACS) - Rule out MI",
-			reasoning:
-				"Classic presentation of ACS with chest pain radiating to left arm, dyspnea, diaphoresis implied by vital sign elevation, and risk factors present.",
-			confidence: 85,
-		},
-		treatment: {
-			recommendations: [
-				"Immediate 12-lead ECG",
-				"Cardiac monitoring",
-				"Aspirin 325mg (if not contraindicated)",
-				"Oxygen to maintain SpO2 >94%",
-				"IV access",
-				"Serial troponin levels",
-			],
-			reasoning:
-				"Standard protocol for suspected ACS requiring immediate intervention and diagnostic assessment.",
-			confidence: 88,
-		},
-	},
-};
+	);
 
-// Helper function to generate mock AI response based on scenario
-function generateMockAIResponse(formData: TriageData): AIResponse {
-	const triageScores: Record<
-		string,
-		"ESI-1" | "ESI-2" | "ESI-3" | "ESI-4" | "ESI-5"
-	> = {
-		alert: "ESI-3",
-		disoriented: "ESI-2",
-		unresponsive: "ESI-1",
-		lethargic: "ESI-2",
-		"oriented ×3": "ESI-3",
-	};
+	if (!res.ok) {
+		toast.error("Failed to fetch scenarios: " + res.statusText);
+	}
 
-	const respiratoryFactors: Record<string, number> = {
-		normal: 0,
-		laboured: 1,
-		stridor: 2,
-		wheezing: 1,
-		"absent resp": 3,
-	};
+	const { data, error } = (await res.json()) as APIResponse<Scenario[]>;
 
-	// Determine triage level based on mental status and respiratory status
-	const mentalStatusScore = triageScores[formData.mentalStatus] || "ESI-3";
-	const respiratoryScore =
-		respiratoryFactors[formData.respiratoryStatus] || 0;
+	if (error) {
+		toast.error("Failed to fetch scenarios: " + error);
+		return [];
+	}
 
-	const finalTriageLevel =
-		respiratoryScore >= 2 || formData.mentalStatus === "unresponsive"
-			? "ESI-1"
-			: mentalStatusScore;
+	return data;
+}
 
+function getPrefetchParams(pagesCount: number): {
+	queryKey: (string | number)[];
+	queryFn: () => Promise<Scenario[]>;
+} {
 	return {
-		triageLevel: {
-			level: finalTriageLevel,
-			reasoning: `Patient presents with mental status: ${formData.mentalStatus} and respiratory status: ${formData.respiratoryStatus}. Based on chief complaint (${formData.chiefComplaint}) and vital signs, immediate assessment recommended.`,
-			confidence: 75 + Math.random() * 20,
-		},
-		diagnosis: {
-			primary:
-				formData.chiefComplaint.title.substring(0, 50) +
-				(formData.chiefComplaint.title.length > 50 ? "..." : ""),
-			reasoning: `Clinical assessment based on patient presentation. Chief complaint indicates potential ${formData.chiefComplaint.title.toLowerCase()}. Further diagnostic workup recommended.`,
-			confidence: 70 + Math.random() * 20,
-		},
-		treatment: {
-			recommendations: [
-				"Establish IV access",
-				"Continuous cardiac monitoring",
-				"Pain management as appropriate",
-				"Draw baseline labs and cultures if infection suspected",
-				"Consider imaging studies based on presentation",
-				"Oxygen therapy if SpO2 <94%",
-			],
-			reasoning:
-				"Standard emergency department protocol for acute patient presentation with comprehensive assessment and intervention.",
-			confidence: 78 + Math.random() * 15,
-		},
+		queryKey: ["scenarios", PAGE_SIZE],
+		queryFn: () => getUngradedScenarios(pagesCount, PAGE_SIZE),
 	};
 }
 
+function getScenariosBatch(
+	data: { pages: Scenario[][] } | undefined,
+): Scenario[] {
+	return data?.pages.flat() ?? [];
+}
+
 export default function TriageAssistantPage() {
-	const [isSheetOpen, setIsSheetOpen] = useState(false);
-	const [isDialogOpen, setIsDialogOpen] = useState(false);
-	const [scenarios, setScenarios] = useState<Scenario[]>([sampleScenario]);
+	const [user] = useAtom(userAtom, { store: store });
 	const [currentScenarioIndex, setCurrentScenarioIndex] = useState(0);
 
-	const currentScenario = scenarios[currentScenarioIndex];
+	const [isSheetOpen, setIsSheetOpen] = useState(false);
+	const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-	const handleAddScenario = (formData: TriageData) => {
-		// Convert form data to scenario
-		const newScenario: Scenario = {
-			scenarioId: `SC-${String(scenarios.length + 1).padStart(3, "0")}`,
-			dateEntered: new Date(),
-			public: true,
-			triageData: {
-				age: formData?.age || 0,
-				gender: formData.gender,
-				chiefComplaint: formData.chiefComplaint,
-				vitals: {
-					bloodPressure: `${formData.vitals.bloodPressure}`,
-					pulse: formData.vitals.pulse,
-					respiratoryRate: formData.vitals.respiratoryRate || 0,
-					temperature: formData.vitals.temperature,
-					oxygenSaturation: formData.vitals.oxygenSaturation,
-					bhcg: formData.vitals.bhcg,
-					glucose: formData.vitals.glucose,
-				},
-				medicalHistory: formData.medicalHistory,
-				height: undefined,
-				weight: undefined,
-				modeOfArrival: "",
-				mentalStatus: "",
-				respiratoryStatus: "",
-				currentMedication: [],
-				smoker: null,
-				alcohol: null,
-				allergies: [],
-				surgicalHistory: [],
-				immunization: [],
-				urinalysis: null,
+	const queryClient = useQueryClient();
+
+	if (!user || !user.data) {
+		redirect("/auth/sign-in");
+	}
+
+	const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
+		useInfiniteQuery({
+			queryKey: ["scenarios", PAGE_SIZE],
+			queryFn: ({ pageParam = 0 }) =>
+				getUngradedScenarios(pageParam, PAGE_SIZE),
+			getNextPageParam: (lastPage, pages) =>
+				lastPage.length < PAGE_SIZE ? undefined : pages.length,
+			initialPageParam: 0,
+			retry: (failureCount, error) => {
+				if (failureCount >= 3) {
+					console.log("Error prefeching scenarios: " + error);
+					toast.error(
+						"Failed to prefetch scenarios after multiple attempts. Please check your connection.",
+					);
+					return false; // Stop retrying after 3 attempts
+				}
+				return true; // Retry on other errors
 			},
-			aiResponse: generateMockAIResponse(formData),
-		};
+			retryDelay(failureCount, error) {
+				const delay = Math.min(1000 * 4 * failureCount, 30000); // Exponential backoff with max delay
+				console.log(
+					`Retrying fetch scenarios in ${delay}ms... (Attempt ${failureCount})`,
+				);
+				return delay;
+			},
+		});
 
-		setScenarios([...scenarios, newScenario]);
-		setCurrentScenarioIndex(scenarios.length); // Go to the newly added scenario
-		setIsDialogOpen(false);
-	};
+	const scenarios = getScenariosBatch(data);
+
+	// Prefetch next page when remaining scenarios are low
+	useEffect(() => {
+		if (
+			hasNextPage &&
+			!isFetchingNextPage &&
+			scenarios.length > 0 &&
+			currentScenarioIndex >= scenarios.length - 2
+		) {
+			fetchNextPage();
+		}
+	}, [
+		currentScenarioIndex,
+		scenarios.length,
+		hasNextPage,
+		isFetchingNextPage,
+		fetchNextPage,
+	]);
+
+	// Auto-prefetch the next page on mount
+	useEffect(() => {
+		if (hasNextPage && !isFetchingNextPage && data?.pages.length) {
+			queryClient.prefetchInfiniteQuery({
+				queryKey: ["scenarios", PAGE_SIZE],
+				queryFn: ({ pageParam = data.pages.length }) =>
+					getUngradedScenarios(pageParam, PAGE_SIZE),
+				getNextPageParam: (
+					lastPage: Scenario[],
+					pages: Scenario[][],
+				) => (lastPage.length < PAGE_SIZE ? undefined : pages.length),
+				initialPageParam: 0,
+				retry: (failureCount, error) => {
+					if (failureCount >= 3) {
+						console.log("Error prefeching scenarios: " + error);
+						toast.error(
+							"Failed to prefetch scenarios after multiple attempts. Please check your connection.",
+						);
+						return false; // Stop retrying after 3 attempts
+					}
+					return true; // Retry on other errors
+				},
+				retryDelay(failureCount, error) {
+					const delay = Math.min(1000 * 2 ** failureCount, 30000); // Exponential backoff with max delay
+					console.log(
+						`Retrying fetch scenarios in ${delay}ms... (Attempt ${failureCount})`,
+					);
+					return delay;
+				},
+			});
+		}
+	}, [data?.pages.length, hasNextPage, isFetchingNextPage, queryClient]);
+
+	const currentScenario =
+		currentScenarioIndex < scenarios.length
+			? scenarios[currentScenarioIndex]
+			: null;
 
 	const handleSkip = () => {
-		if (currentScenarioIndex < scenarios.length - 1) {
+		if (currentScenarioIndex < scenarios!.length - 1) {
 			setCurrentScenarioIndex(currentScenarioIndex + 1);
 		} else {
 			setCurrentScenarioIndex(0);
 		}
 	};
 
-	const handleGradeSubmit = (grading: ClinicalGrading) => {
+	const handleGradeSubmit = async (grading: ClinicalGrading) => {
 		console.log("Grading submitted:", grading);
-		// Send to backend API
+
+		const res = await fetch("/api/grade-scenario", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				scenarioId: currentScenario?.id,
+				grading,
+			}),
+		});
+
+		if (!res.ok) {
+			toast.error("Failed to submit grading");
+			return false;
+		}
+		const { error } = (await res.json()) as APIResponse<null>;
+
+		if (error) {
+			toast.error("Failed to submit grading! " + error);
+			return false;
+		}
+
+		// Move to next scenario after grading
+		if (currentScenarioIndex < scenarios!.length - 1) {
+			setCurrentScenarioIndex(currentScenarioIndex + 1);
+		} else {
+			setCurrentScenarioIndex(0);
+		}
+
+		//Remove graded scenario from cache to avoid showing it again
+		queryClient.setQueryData<InfiniteData<Scenario[]>>(
+			["scenarios", PAGE_SIZE],
+			(oldData) => {
+				if (!oldData) return oldData;
+				const newPages = oldData.pages.map((page) =>
+					page.filter(
+						(scenario) => scenario.id !== currentScenario?.id,
+					),
+				);
+				return {
+					...oldData,
+					pages: newPages,
+				};
+			},
+		);
+
+		//reset grading for next scenario
+		return true;
 	};
 
 	return (
@@ -233,7 +261,11 @@ export default function TriageAssistantPage() {
 										<Button
 											variant="outline"
 											onClick={handleSkip}
-											disabled={scenarios.length === 0}
+											disabled={
+												scenarios!.length === 0 ||
+												currentScenarioIndex >=
+													scenarios!.length - 1
+											}
 										>
 											Skip
 										</Button>
@@ -247,230 +279,235 @@ export default function TriageAssistantPage() {
 									</div>
 								</div>
 							</CardHeader>
-							<CardContent className="space-y-4">
-								<div className="grid grid-cols-2 gap-4">
-									<div>
-										<p className="text-sm text-muted-foreground">
-											Age
-										</p>
-										<p className="font-semibold">
-											{currentScenario.triageData.age ||
-												"Unknown"}
-										</p>
+							{currentScenario && (
+								<CardContent className="space-y-4">
+									<div className="grid grid-cols-2 gap-4">
+										<div>
+											<p className="text-sm text-muted-foreground">
+												Age
+											</p>
+											<p className="font-semibold">
+												{currentScenario.triageData
+													?.age || "Unknown"}
+											</p>
+										</div>
+										<div>
+											<p className="text-sm text-muted-foreground">
+												Gender
+											</p>
+											<p className="font-semibold">
+												{
+													currentScenario.content
+														?.gender
+												}
+											</p>
+										</div>
+										<div>
+											<p className="text-sm text-muted-foreground">
+												Height
+											</p>
+											<p className="font-semibold">
+												{currentScenario.content
+													?.height || "-"}
+												cm
+											</p>
+										</div>
+										<div>
+											<p className="text-sm text-muted-foreground">
+												Weight
+											</p>
+											<p className="font-semibold">
+												{currentScenario.content
+													?.weight || "-"}{" "}
+												kg
+											</p>
+										</div>
 									</div>
-									<div>
-										<p className="text-sm text-muted-foreground">
-											Gender
-										</p>
-										<p className="font-semibold">
-											{currentScenario.triageData.gender}
-										</p>
-									</div>
-									<div>
-										<p className="text-sm text-muted-foreground">
-											Height
-										</p>
-										<p className="font-semibold">
-											{currentScenario.triageData
-												.height || "-"}{" "}
-											cm
-										</p>
-									</div>
-									<div>
-										<p className="text-sm text-muted-foreground">
-											Weight
-										</p>
-										<p className="font-semibold">
-											{currentScenario.triageData
-												.weight || "-"}{" "}
-											kg
-										</p>
-									</div>
-								</div>
 
-								<div className="pt-4 border-t">
-									<p className="text-sm text-muted-foreground mb-2">
-										Chief Complaint
-									</p>
-									<p className="font-semibold text-lg mb-4">
-										{
-											currentScenario.triageData
-												.chiefComplaint.title
-										}
-									</p>
+									<div className="pt-4 border-t">
+										<p className="text-sm text-muted-foreground mb-2">
+											Chief Complaint
+										</p>
+										<p className="font-semibold text-lg mb-4">
+											{
+												currentScenario.content
+													?.chiefComplaint.title
+											}
+										</p>
 
-									<p className="text-sm text-muted-foreground mb-2">
-										Details
-									</p>
-									<p className="text-sm text-foreground">
-										{
-											currentScenario.triageData
-												.chiefComplaint.description
-										}
-									</p>
-								</div>
-								<div className="pt-4 border-t">
-									<p className="text-sm text-muted-foreground mb-2">
-										Medical History Summary
-									</p>
-									<p className="text-sm text-foreground">
-										{currentScenario.triageData.medicalHistory.join(
-											", ",
-										)}
-									</p>
-								</div>
-								<div className="pt-4 border-t">
-									<p className="text-sm text-muted-foreground mb-3">
-										Vital Signs
-									</p>
-									<div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-										<div className="bg-muted p-3 rounded-lg">
-											<p className="text-xs text-muted-foreground">
-												BP
-											</p>
-											<p className="font-semibold">
-												{
-													currentScenario.triageData
-														.vitals.bloodPressure
-												}
-											</p>
-										</div>
-										<div className="bg-muted p-3 rounded-lg">
-											<p className="text-xs text-muted-foreground">
-												HR
-											</p>
-											<p className="font-semibold">
-												{
-													currentScenario.triageData
-														.vitals.pulse
-												}{" "}
-												bpm
-											</p>
-										</div>
-										<div className="bg-muted p-3 rounded-lg">
-											<p className="text-xs text-muted-foreground">
-												RR
-											</p>
-											<p className="font-semibold">
-												{
-													currentScenario.triageData
-														.vitals.respiratoryRate
-												}
-												/min
-											</p>
-										</div>
-										<div className="bg-muted p-3 rounded-lg">
-											<p className="text-xs text-muted-foreground">
-												Temp
-											</p>
-											<p className="font-semibold">
-												{
-													currentScenario.triageData
-														.vitals.temperature
-												}
-												°C
-											</p>
-										</div>
-										<div className="bg-muted p-3 rounded-lg">
-											<p className="text-xs text-muted-foreground">
-												SpO2
-											</p>
-											<p className="font-semibold">
-												{
-													currentScenario.triageData
-														.vitals.oxygenSaturation
-												}
-												%
-											</p>
-										</div>
-										<div className="bg-muted p-3 rounded-lg">
-											<p className="text-xs text-muted-foreground">
-												Glucose
-											</p>
-											<p className="font-semibold">
-												{
-													currentScenario.triageData
-														.vitals.temperature
-												}
-											</p>
-										</div>
-										<div className="bg-muted p-3 rounded-lg">
-											<p className="text-xs text-muted-foreground">
-												BHCG
-											</p>
-											<p className="font-semibold">
-												{
-													currentScenario.triageData
-														.vitals.oxygenSaturation
-												}
-											</p>
+										<p className="text-sm text-muted-foreground mb-2">
+											Details
+										</p>
+										<p className="text-sm text-foreground">
+											{
+												currentScenario.content
+													?.chiefComplaint.description
+											}
+										</p>
+									</div>
+									<div className="pt-4 border-t">
+										<p className="text-sm text-muted-foreground mb-2">
+											Medical History Summary
+										</p>
+										<p className="text-sm text-foreground">
+											{currentScenario.content?.medicalHistory?.join(
+												", ",
+											)}
+										</p>
+									</div>
+									<div className="pt-4 border-t">
+										<p className="text-sm text-muted-foreground mb-3">
+											Vital Signs
+										</p>
+										<div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+											<div className="bg-muted p-3 rounded-lg">
+												<p className="text-xs text-muted-foreground">
+													BP
+												</p>
+												<p className="font-semibold">
+													{currentScenario.content
+														?.vitals
+														?.bloodPressure || "-"}
+												</p>
+											</div>
+											<div className="bg-muted p-3 rounded-lg">
+												<p className="text-xs text-muted-foreground">
+													HR
+												</p>
+												<p className="font-semibold">
+													{currentScenario.content
+														?.vitals?.pulse || "-"}
+													bpm
+												</p>
+											</div>
+											<div className="bg-muted p-3 rounded-lg">
+												<p className="text-xs text-muted-foreground">
+													RR
+												</p>
+												<p className="font-semibold">
+													{currentScenario.content
+														?.vitals
+														?.respiratoryRate ||
+														"-"}
+													/min
+												</p>
+											</div>
+											<div className="bg-muted p-3 rounded-lg">
+												<p className="text-xs text-muted-foreground">
+													Temp
+												</p>
+												<p className="font-semibold">
+													{currentScenario.content
+														?.vitals?.temperature ||
+														"-"}
+													°C
+												</p>
+											</div>
+											<div className="bg-muted p-3 rounded-lg">
+												<p className="text-xs text-muted-foreground">
+													SpO2
+												</p>
+												<p className="font-semibold">
+													{currentScenario.content
+														?.vitals
+														?.oxygenSaturation ||
+														"-"}
+													%
+												</p>
+											</div>
+											<div className="bg-muted p-3 rounded-lg">
+												<p className="text-xs text-muted-foreground">
+													Glucose
+												</p>
+												<p className="font-semibold">
+													{currentScenario.content
+														?.vitals?.glucose ||
+														"-"}
+												</p>
+											</div>
+											<div className="bg-muted p-3 rounded-lg">
+												<p className="text-xs text-muted-foreground">
+													BHCG
+												</p>
+												<p className="font-semibold">
+													{currentScenario.content
+														?.vitals?.bhcg || "-"}
+												</p>
+											</div>
 										</div>
 									</div>
-								</div>
-							</CardContent>
+								</CardContent>
+							)}
 						</Card>
 
 						{/* AI Response Section */}
-						<div>
-							<h2 className="text-xl font-semibold mb-4">
-								AI Assessment
-							</h2>
 
-							<ResponseCard
-								title="Triage Level"
-								level={
-									currentScenario.aiResponse.triageLevel.level
-								}
-								reasoning={
-									currentScenario.aiResponse.triageLevel
-										.reasoning
-								}
-								confidence={
-									currentScenario.aiResponse.triageLevel
-										.confidence
-								}
-								icon={AlertCircle}
-							/>
+						{currentScenario && (
+							<div>
+								<h2 className="text-xl font-semibold mb-4">
+									AI Assessment
+								</h2>
 
-							<ResponseCard
-								title="Diagnosis"
-								level={
-									currentScenario.aiResponse.diagnosis.primary
-								}
-								reasoning={
-									currentScenario.aiResponse.diagnosis
-										.reasoning
-								}
-								confidence={
-									currentScenario.aiResponse.diagnosis
-										.confidence
-								}
-								icon={CheckCircle}
-							/>
+								<ResponseCard
+									title="Triage Level"
+									level={
+										currentScenario.aiResponse.triageLevel
+											.level
+									}
+									reasoning={
+										currentScenario.aiResponse.triageLevel
+											.reasoning
+									}
+									confidence={
+										currentScenario.aiResponse.triageLevel
+											.confidence
+									}
+									icon={AlertCircle}
+								/>
 
-							<TreatmentRecommendations
-								recommendations={
-									currentScenario.aiResponse.treatment
-										.recommendations
-								}
-								reasoning={
-									currentScenario.aiResponse.treatment
-										.reasoning
-								}
-								confidence={
-									currentScenario.aiResponse.treatment
-										.confidence
-								}
-							/>
-						</div>
+								<ResponseCard
+									title="Diagnosis"
+									level={
+										currentScenario.aiResponse.diagnosis
+											.primary
+									}
+									reasoning={
+										currentScenario.aiResponse.diagnosis
+											.reasoning
+									}
+									confidence={
+										currentScenario.aiResponse.diagnosis
+											.confidence
+									}
+									icon={CheckCircle}
+								/>
+
+								<TreatmentRecommendations
+									recommendations={
+										currentScenario.aiResponse.treatment
+											.reccommendations
+									}
+									reasoning={
+										currentScenario.aiResponse.treatment
+											.reasoning
+									}
+									confidence={
+										currentScenario.aiResponse.treatment
+											.confidence
+									}
+								/>
+							</div>
+						)}
 					</div>
 
 					{/* Right Section - Grading (Hidden on mobile, visible on desktop) */}
-					<div className="hidden lg:block">
-						<div className="sticky top-6">
-							<GradingSection onGrade={handleGradeSubmit} />
+					{currentScenario && (
+						<div className="hidden lg:block">
+							<div className="sticky top-6">
+								<GradingSection onGrade={handleGradeSubmit} />
+							</div>
 						</div>
-					</div>
+					)}
 				</div>
 
 				{/* Mobile Bottom Sheet Trigger */}
@@ -505,7 +542,9 @@ export default function TriageAssistantPage() {
 							Grading
 						</SheetTitle>
 
-						<GradingSection onGrade={handleGradeSubmit} />
+						{currentScenario && (
+							<GradingSection onGrade={handleGradeSubmit} />
+						)}
 					</SheetContent>
 				</Sheet>
 
@@ -521,8 +560,8 @@ export default function TriageAssistantPage() {
 							</DialogDescription>
 						</DialogHeader>
 						<div className="py-4">
-							<ScenarioForm
-								onSubmit={handleAddScenario}
+							<TriageForm
+								// onSubmit={handleAddScenario}
 								onClose={() => setIsDialogOpen(false)}
 							/>
 						</div>

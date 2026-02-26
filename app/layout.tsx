@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import ToasterClient from "@/components/toaster-client";
 import StoreProvider from "@/providers/jotai/jotai";
 import { getUser, verifySession } from "../lib/dal";
+import QueryClientWrapper from "@/providers/query-client-wrapper";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -36,12 +37,14 @@ export default async function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<StoreProvider userAuth={{ session, data: userData }}>
-					<ThemeProvider>
-						<ToasterClient />
-						<TooltipProvider> {children}</TooltipProvider>
-					</ThemeProvider>
-				</StoreProvider>
+				<QueryClientWrapper>
+					<StoreProvider userAuth={{ session, data: userData }}>
+						<ThemeProvider>
+							<ToasterClient />
+							<TooltipProvider> {children}</TooltipProvider>
+						</ThemeProvider>
+					</StoreProvider>
+				</QueryClientWrapper>
 			</body>
 		</html>
 	);

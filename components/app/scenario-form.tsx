@@ -83,7 +83,7 @@ const initialFormData: TriageData = {
 	},
 };
 
-function ScenarioForm({
+function TriageForm({
 	onSubmit,
 	onClose,
 }: {
@@ -969,4 +969,4 @@ function ScenarioForm({
 	);
 }
 
-export default ScenarioForm;
+export default TriageForm;
