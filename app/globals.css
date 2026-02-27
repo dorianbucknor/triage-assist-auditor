@@ -137,6 +137,21 @@
 	}
 	/* globals.css — add this AFTER your :root / .dark blocks */
 
+	/* Chrome, Safari, Edge, Opera */
+	.no-outer-arrows::-webkit-outer-spin-button,
+	.no-outer-arrows::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+    .no-outer-arrows {
+        -moz-appearance: textfield; /* Firefox */
+    }
+	/* Firefox */
+	input[type="number"] {
+		-moz-appearance: textfield;
+		appearance: textfield; /* Standard property for newer Firefox versions */
+	}
+
 	@theme inline {
 		--color-background: var(--background);
 		--color-foreground: var(--foreground);

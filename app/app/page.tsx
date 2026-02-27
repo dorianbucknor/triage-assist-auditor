@@ -48,7 +48,7 @@ async function getUngradedScenarios(
 	limit = PAGE_SIZE,
 ): Promise<Scenario[]> {
 	const res = await fetch(
-		`/api/scenarios?action=fetch_ungraded_by_user&amount=${limit}&page=${page}`,
+		`/api/scenarios?action=GET_UNGRADED&amount=${limit}&page=${page}`,
 		{
 			method: "GET",
 			headers: {
@@ -102,7 +102,7 @@ export default function TriageAssistantPage() {
 
 	const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
 		useInfiniteQuery({
-			queryKey: ["scenarios", PAGE_SIZE],
+			queryKey: ["ungraded-scenarios", PAGE_SIZE],
 			queryFn: ({ pageParam = 0 }) =>
 				getUngradedScenarios(pageParam, PAGE_SIZE),
 			getNextPageParam: (lastPage, pages) =>
@@ -151,7 +151,7 @@ export default function TriageAssistantPage() {
 	useEffect(() => {
 		if (hasNextPage && !isFetchingNextPage && data?.pages.length) {
 			queryClient.prefetchInfiniteQuery({
-				queryKey: ["scenarios", PAGE_SIZE],
+				queryKey: ["ungraded-scenarios", PAGE_SIZE],
 				queryFn: ({ pageParam = data.pages.length }) =>
 					getUngradedScenarios(pageParam, PAGE_SIZE),
 				getNextPageParam: (
@@ -194,16 +194,21 @@ export default function TriageAssistantPage() {
 	};
 
 	const handleGradeSubmit = async (grading: ClinicalGrading) => {
-		console.log("Grading submitted:", grading);
+		if (!user || !user.data) return false;
 
-		const res = await fetch("/api/grade-scenario", {
+		const res = await fetch("/api/scenarios", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				scenarioId: currentScenario?.id,
-				grading,
+				action: "ADD_GRADING",
+				data: {
+					...grading,
+					scenarioId: currentScenario?.id,
+					authorId: user.data.id,
+                    
+				},
 			}),
 		});
 
@@ -331,7 +336,7 @@ export default function TriageAssistantPage() {
 										<p className="font-semibold text-lg mb-4">
 											{
 												currentScenario.content
-													?.chiefComplaint.title
+													?.chiefComplaint?.title
 											}
 										</p>
 
@@ -341,7 +346,8 @@ export default function TriageAssistantPage() {
 										<p className="text-sm text-foreground">
 											{
 												currentScenario.content
-													?.chiefComplaint.description
+													?.chiefComplaint
+													?.description
 											}
 										</p>
 									</div>
@@ -451,16 +457,15 @@ export default function TriageAssistantPage() {
 								<ResponseCard
 									title="Triage Level"
 									level={
-										currentScenario.aiResponse.triageLevel
-											.level
+										currentScenario.aiResponse.triage?.level
 									}
 									reasoning={
-										currentScenario.aiResponse.triageLevel
-											.reasoning
+										currentScenario.aiResponse.triage
+											?.reason || "No reason provided"
 									}
 									confidence={
-										currentScenario.aiResponse.triageLevel
-											.confidence
+										currentScenario.aiResponse.triage
+											?.confidence || 0
 									}
 									icon={AlertCircle}
 								/>
@@ -473,7 +478,7 @@ export default function TriageAssistantPage() {
 									}
 									reasoning={
 										currentScenario.aiResponse.diagnosis
-											.reasoning
+											.reason
 									}
 									confidence={
 										currentScenario.aiResponse.diagnosis
@@ -489,7 +494,7 @@ export default function TriageAssistantPage() {
 									}
 									reasoning={
 										currentScenario.aiResponse.treatment
-											.reasoning
+											.reason
 									}
 									confidence={
 										currentScenario.aiResponse.treatment

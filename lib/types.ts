@@ -2,12 +2,12 @@
 import { Session } from "@supabase/supabase-js";
 export type UserRole = "admin" | "editor" | "viewer" | "user";
 
-export interface TriageData {
+export type TriageData = {
 	// Demographics
 	age: number | null;
 	gender: string;
-	height: number | null | undefined;
-	weight: number | null | undefined;
+	height: number | null;
+	weight: number | null;
 	// Chief Complaint & History
 	chiefComplaint: { title: string; description: string };
 	modeOfArrival: string;
@@ -44,19 +44,22 @@ export interface TriageData {
 		wbc: string;
 		ketones: string;
 	} | null;
-}
+	otherLabs?: {
+		[key: string]: any;
+	} | null;
+};
 export type APIResponse<T> = {
 	error: string | null;
 	redirect: string | null;
 	success: boolean;
 	data: T;
 };
-export interface PatientScenario extends TriageData {
+export type PatientScenario = TriageData & {
 	scenarioId: string;
 	createdAt: Date;
-}
+};
 
-export interface Scenario {
+export type Scenario = {
 	id: string;
 	authorId: string;
 	createdAt: Date;
@@ -70,28 +73,28 @@ export interface Scenario {
 	metadata: {
 		[key: string]: any;
 	} | null;
-}
-export interface ScenarioContent {
+};
+export type ScenarioContent = {
 	// Demographics
-	age: number | null;
-	gender: string;
-	height: number | null;
-	weight: number | null;
+	age?: number | null;
+	gender?: string;
+	height?: number | null;
+	weight?: number | null;
 	// Chief Complaint & History
 	chiefComplaint: ChiefComplaint;
 	// Past Medical History
-	medicalHistory: string[];
+	medicalHistory?: string[];
 	// Vitals
-	vitals: Vitals | null;
+	vitals?: Vitals | null;
 	// Urinalysis
-	urinalysis: Urinalysis | null;
-	extras: {
+	urinalysis?: Urinalysis | null;
+	extras?: {
 		[key: string]: any;
 	} | null;
-	otherLabs: {
+	otherLabs?: {
 		[key: string]: any;
 	} | null;
-}
+};
 
 export interface ChiefComplaint {
 	title: string;
@@ -127,31 +130,40 @@ export interface Vitals {
 	} | null;
 }
 export interface AIResponse {
-	triageLevel: {
+	triage: {
 		level: "ESI-1" | "ESI-2" | "ESI-3" | "ESI-4" | "ESI-5";
-		reasoning: string;
+		reason: string;
 		confidence: number;
 	};
 	diagnosis: {
 		primary: string;
-		reasoning: string;
+		reason: string;
 		confidence: number;
 	};
 	treatment: {
 		reccommendations: string[];
-		reasoning: string;
+		reason: string;
 		confidence: number;
 	};
 }
 
 export interface ClinicalGrading {
-	triageLevelScale: number; // 1-5
-	correctTriageLevel?: string;
-	diagnosisScale: number; // 1-5
-	correctDiagnosis?: string;
-	treatmentScale: number; // 1-5
-	correctTreatment?: string;
-	notes?: string;
+	id: string;
+	triageGrading: number; // 1-5
+	triageFeedback?: string;
+	diagnosisGrading: number; // 1-5
+	diagnosisFeedback?: string;
+	treatmentGrading: number; // 1-5
+	treatmentFeedback?: string;
+	additionalNotes?: string;
+	extras?: Record<string, unknown>;
+	exclude: boolean;
+	public: boolean;
+	score: number; // Overall score calculated from the individual gradings
+	authorId: string; // ID of the clinician who submitted the grading
+	scenarioId: string; // ID of the scenario being graded
+	createdAt: Date;
+	updatedAt: Date;
 }
 
 export interface AccessRequest {
