@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { ChevronUp, AlertCircle, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -28,7 +28,9 @@ import type {
 } from "@/lib/types";
 import ResponseCard from "@/components/app/ai-response-card";
 import TreatmentRecommendations from "@/components/app/treatment-reccommendation-card";
-import GradingSection from "@/components/app/clician-grading-section";
+import GradingSection, {
+	GradingSectionRef,
+} from "@/components/app/clician-grading-section";
 import {
 	useInfiniteQuery,
 	useQueryClient,
@@ -39,6 +41,7 @@ import { store, userAtom } from "@/providers/jotai/jotai";
 import { useEffect } from "react";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
+import { getUserRole } from "@/lib/utils";
 
 // Types for our data structure
 const PAGE_SIZE: number = 5;
@@ -90,7 +93,7 @@ function getScenariosBatch(
 export default function TriageAssistantPage() {
 	const [user] = useAtom(userAtom, { store: store });
 	const [currentScenarioIndex, setCurrentScenarioIndex] = useState(0);
-
+	const gradingSectionRef = useRef<GradingSectionRef>(null);
 	const [isSheetOpen, setIsSheetOpen] = useState(false);
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -186,6 +189,7 @@ export default function TriageAssistantPage() {
 			: null;
 
 	const handleSkip = () => {
+        handleReset();
 		if (currentScenarioIndex < scenarios!.length - 1) {
 			setCurrentScenarioIndex(currentScenarioIndex + 1);
 		} else {
@@ -207,7 +211,6 @@ export default function TriageAssistantPage() {
 					...grading,
 					scenarioId: currentScenario?.id,
 					authorId: user.data.id,
-                    
 				},
 			}),
 		});
@@ -247,8 +250,11 @@ export default function TriageAssistantPage() {
 			},
 		);
 
-		//reset grading for next scenario
 		return true;
+	};
+
+	const handleReset = () => {
+		gradingSectionRef.current?.reset();
 	};
 
 	return (
@@ -272,15 +278,19 @@ export default function TriageAssistantPage() {
 													scenarios!.length - 1
 											}
 										>
-											Skip
+											Next
 										</Button>
-										<Button
-											onClick={() =>
-												setIsDialogOpen(true)
-											}
-										>
-											Add Scenario
-										</Button>
+										{user.session &&
+											getUserRole(user.session) !=
+												"user" && (
+												<Button
+													onClick={() =>
+														setIsDialogOpen(true)
+													}
+												>
+													Add Scenario
+												</Button>
+											)}
 									</div>
 								</div>
 							</CardHeader>
@@ -509,7 +519,7 @@ export default function TriageAssistantPage() {
 					{currentScenario && (
 						<div className="hidden lg:block">
 							<div className="sticky top-6">
-								<GradingSection onGrade={handleGradeSubmit} />
+								<GradingSection ref={gradingSectionRef} onGrade={handleGradeSubmit} />
 							</div>
 						</div>
 					)}
@@ -548,7 +558,7 @@ export default function TriageAssistantPage() {
 						</SheetTitle>
 
 						{currentScenario && (
-							<GradingSection onGrade={handleGradeSubmit} />
+							<GradingSection ref={gradingSectionRef} onGrade={handleGradeSubmit} />
 						)}
 					</SheetContent>
 				</Sheet>

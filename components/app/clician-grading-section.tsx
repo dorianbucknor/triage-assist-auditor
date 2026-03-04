@@ -1,12 +1,10 @@
 import { ClinicalGrading } from "@/lib/types";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader } from "../ui/card";
-import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
-import { useState } from "react";
+import { useState, useImperativeHandle, forwardRef } from "react";
 import { toast } from "sonner";
-import { useForm } from "react-hook-form";
 import { FieldError } from "../ui/field";
 import { cn } from "@/lib/utils";
 import {
@@ -19,13 +17,17 @@ import {
 
 const MIN_SCALE = 3;
 
-export default function GradingSection({
-	onGrade,
-	initialGrading,
-}: {
-	onGrade?: (grading: ClinicalGrading) => Promise<boolean>;
-	initialGrading?: ClinicalGrading;
-}) {
+export interface GradingSectionRef {
+	reset: () => void;
+}
+
+const GradingSection = forwardRef<
+	GradingSectionRef,
+	{
+		onGrade?: (grading: ClinicalGrading) => Promise<boolean>;
+		initialGrading?: ClinicalGrading;
+	}
+>(function GradingSection({ onGrade, initialGrading }, ref) {
 	const [grading, setGrading] = useState<ClinicalGrading>({
 		triageGrading: 5,
 		diagnosisGrading: 5,
@@ -50,6 +52,40 @@ export default function GradingSection({
 		diagnosis: null,
 		treatment: null,
 	});
+
+	// Controller to reset grading and errors
+	const reset = () => {
+		setGrading({
+			triageGrading: 5,
+			diagnosisGrading: 5,
+			treatmentGrading: 5,
+			diagnosisFeedback: "",
+			treatmentFeedback: "",
+			additionalNotes: "",
+			triageFeedback: "",
+			extras: {},
+			exclude: false,
+			public: false,
+			score: 0,
+			authorId: "",
+			scenarioId: "",
+			createdAt: new Date(Date.now()),
+			updatedAt: new Date(Date.now()),
+			id: "",
+			...initialGrading,
+		});
+
+		setErrors({
+			triage: null,
+			diagnosis: null,
+			treatment: null,
+		});
+	};
+
+	// Expose reset controller to parent component
+	useImperativeHandle(ref, () => ({
+		reset,
+	}));
 
 	const handleSubmit = async () => {
 		if (
@@ -85,27 +121,9 @@ export default function GradingSection({
 			};
 			const result = await onGrade(gradingToSubmit);
 
-			//reset
+			// Reset using controller
 			if (result) {
-				setGrading({
-					triageGrading: 5,
-					diagnosisGrading: 5,
-					treatmentGrading: 5,
-					diagnosisFeedback: "",
-					treatmentFeedback: "",
-					additionalNotes: "",
-					triageFeedback: "",
-					extras: {},
-					exclude: false,
-					public: false,
-					score: 0,
-					authorId: "",
-					scenarioId: "",
-					createdAt: new Date(Date.now()),
-					updatedAt: new Date(Date.now()),
-					id: "",
-					...initialGrading,
-				});
+				reset();
 			}
 		}
 	};
@@ -501,4 +519,6 @@ export default function GradingSection({
 			</Button>
 		</form>
 	);
-}
+});
+
+export default GradingSection;

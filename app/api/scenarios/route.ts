@@ -1,3 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+//
+// This file defines the API routes for handling scenarios in the TriageAssist application. It includes endpoints for creating new scenarios, fetching ungraded scenarios for a user, and submitting grading for scenarios. The API interacts with a Supabase database to store and retrieve scenario data, including scenario content and AI-generated responses. The code also includes placeholder functions for summarizing chief complaints, medical history, and labs using AI, as well as generating AI responses based on scenario content.
+
+//==== ignore typescript errors in this file since it's a server component and we can be more flexible with types here ====
+//
+//
+
 import { verifySession } from "@/lib/dal";
 import {
 	AIResponse,
@@ -438,55 +446,3 @@ async function handleAddGrading(data: any, userId: string) {
 		{ status: 200 },
 	);
 }
-
-// data?.map((item) => ({
-// 	id: item.id,
-// 	createdAt: item.createdAt,
-// 	updatedAt: item.updatedAt,
-// 	authorId: item.authorId,
-// 	metadata: item.metadata,
-// 	gradedBy: item.gradedBy,
-// 	editable: item.editable,
-// 	public: item.public,
-// 	content: {
-// 		chiefComplaint: {
-// 			title: item.content.chiefComplaint,
-// 			description: item.content.complaintDetails,
-// 		},
-// 		vitals: {
-// 			bloodPressure: item.content.bloodPressure,
-// 			glucose: item.content.glucoseLevel,
-// 			pulse: item.content.heartRate,
-// 			oxygenSaturation: item.content.oxygenSaturation,
-// 			respiratoryRate: item.content.respitoryRate,
-// 			temperature: item.content.temperature,
-// 			bhcg: item.content.bhcgLevel,
-// 			otherVitals: item.content.otherVitals,
-// 		},
-// 		medicalHistory: item.content.medicalHistorySummary,
-// 		age: item.content.age,
-// 		height: item.content.height,
-// 		weight: item.content.weight,
-// 		gender: item.content.gender,
-// 		extras: item.content.extras,
-// 		urinalysis: item.content.urinanalysis,
-// 	},
-
-// 	aiResponse: {
-// 		triageLevel: {
-// 			level: item.aiResponse.triageLevel,
-// 			confidence: item.aiResponse.triageConfidence,
-// 			reasoning: item.aiResponse.triageReason,
-// 		},
-// 		diagnosis: {
-// 			primary: item.aiResponse.diagnosis,
-// 			confidence: item.aiResponse.diagnosisConfidence,
-// 			reasoning: item.aiResponse.diagnosisReason,
-// 		},
-// 		treatment: {
-// 			reccommendations: item.aiResponse.reccommendations,
-// 			confidence: item.aiResponse.treatmentConfidence,
-// 			reasoning: item.aiResponse.treatmentReason,
-// 		},
-// 	},
-// })) as unknown as Scenario[];
