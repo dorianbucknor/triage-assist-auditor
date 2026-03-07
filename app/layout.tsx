@@ -38,7 +38,13 @@ export default async function RootLayout({
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
 				<QueryClientWrapper>
-					<StoreProvider userAuth={{ session, data: userData }}>
+					<StoreProvider
+						userAuth={{
+							session,
+							data: userData,
+							loggedIn: userData && session ? true : false,
+						}}
+					>
 						<ThemeProvider>
 							<ToasterClient />
 							<TooltipProvider> {children}</TooltipProvider>

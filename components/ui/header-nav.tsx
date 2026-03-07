@@ -28,7 +28,7 @@ export default function HeaderNav() {
 			<div className="flex gap-2 max-sm:hidden">
 				<ThemeToggle />
 				<div>
-					{user != null ? (
+					{user != null && user.loggedIn ? (
 						<AccountMenu />
 					) : (
 						<Button
@@ -41,7 +41,7 @@ export default function HeaderNav() {
 					)}
 				</div>
 				<div>
-					{user ? (
+					{user && user.loggedIn ? (
 						<SignOutTrigger />
 					) : (
 						<Button

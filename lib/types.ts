@@ -215,4 +215,5 @@ export interface UserData extends UserProfile {
 export interface User {
 	data: UserData | null;
 	session: Session | null;
+    loggedIn: boolean;
 }
