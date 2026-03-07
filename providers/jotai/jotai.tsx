@@ -61,6 +61,7 @@ function DataLoad({ children }: { children: React.ReactNode }) {
 					store.set(userAtom, {
 						data: profile,
 						session,
+                        loggedIn: profile && session ? true : false,
 					});
 				} catch (error) {
 					console.error("Failed to fetch profile:", error);

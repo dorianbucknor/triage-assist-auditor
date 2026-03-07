@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, getUserRole } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -101,11 +101,7 @@ export function LoginForm({
 		}
 	};
 
-	function getUserRole(session: Session) {
-		const cookie = decodeJwt(session.access_token);
-
-		return cookie["user_role"];
-	}
+	
 
 	return (
 		<div className={cn("flex flex-col gap-6", className)} {...props}>
