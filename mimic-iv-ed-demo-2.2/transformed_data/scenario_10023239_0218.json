@@ -1,0 +1,39 @@
+{
+  "subjectId": "10023239",
+  "inTime": "2140-09-14 14:43:00",
+  "outTime": "2140-09-14 20:02:00",
+  "triageDuration": 19140,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Dehydration, Nausea, Rash",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.39,
+    "pulse": 99,
+    "respiratoryRate": 16,
+    "bloodPressure": "126/81",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "WHITE"
+  },
+  "id": "c01bc911-8dfa-44b5-9552-16dcd2935216"
+}

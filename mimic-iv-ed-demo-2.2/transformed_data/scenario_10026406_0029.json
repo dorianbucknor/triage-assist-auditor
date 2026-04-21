@@ -1,0 +1,39 @@
+{
+  "subjectId": "10026406",
+  "inTime": "2129-11-25 19:02:00",
+  "outTime": "2129-11-26 00:46:00",
+  "triageDuration": 20640,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Lower back pain",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.06,
+    "pulse": 100,
+    "respiratoryRate": 18,
+    "bloodPressure": "124/76",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "WHITE"
+  },
+  "id": "c689e906-a432-45b3-bc2d-4b9647db3b6c"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10040025",
+  "inTime": "2147-08-07 19:16:00",
+  "outTime": "2147-08-08 01:01:00",
+  "triageDuration": 20700,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "L Foot swelling, L Foot pain",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.17,
+    "pulse": 83,
+    "respiratoryRate": 18,
+    "bloodPressure": "137/84",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 5,
+    "race": "WHITE"
+  },
+  "id": "cc3f4cd6-319b-4fc6-b41c-b44bfc898413"
+}

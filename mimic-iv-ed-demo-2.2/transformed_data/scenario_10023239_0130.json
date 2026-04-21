@@ -1,0 +1,40 @@
+{
+  "subjectId": "10023239",
+  "inTime": "2137-06-19 15:05:00",
+  "outTime": "2137-06-19 19:09:00",
+  "triageDuration": 14640,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "N/V, Hyperglycemia",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.39,
+    "pulse": 116,
+    "respiratoryRate": 24,
+    "bloodPressure": "137/70",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "1.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "5b9da820-0ff0-4b57-9263-4aaecd9ad6a1"
+}

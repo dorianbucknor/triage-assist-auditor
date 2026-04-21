@@ -1,0 +1,40 @@
+{
+  "subjectId": "10015272",
+  "inTime": "2137-06-12 16:54:00",
+  "outTime": "2137-06-12 18:37:22",
+  "triageDuration": 6202,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "PE",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.39,
+    "pulse": 125,
+    "respiratoryRate": 20,
+    "bloodPressure": "91/63",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "a3777ec2-7a11-4d3c-ab7f-5828d0bb5802"
+}

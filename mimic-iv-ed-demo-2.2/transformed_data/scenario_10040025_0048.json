@@ -1,0 +1,40 @@
+{
+  "subjectId": "10040025",
+  "inTime": "2145-02-24 12:37:00",
+  "outTime": "2145-02-24 14:25:00",
+  "triageDuration": 6480,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "EYE EVAL",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.11,
+    "pulse": 80,
+    "respiratoryRate": 19,
+    "bloodPressure": "182/74",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 1,
+    "race": "WHITE"
+  },
+  "id": "e765e2ea-6a8d-4dc2-ac2e-1c82358ddfdc"
+}

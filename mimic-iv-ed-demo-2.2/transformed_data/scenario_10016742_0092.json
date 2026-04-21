@@ -1,0 +1,39 @@
+{
+  "subjectId": "10016742",
+  "inTime": "2178-07-13 04:37:00",
+  "outTime": "2178-07-13 08:16:00",
+  "triageDuration": 13140,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Transfer, Abnormal EKG",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.33,
+    "pulse": 96,
+    "respiratoryRate": 20,
+    "bloodPressure": "94/48",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "28643bbd-3fbd-42d4-974b-ed9ae8d41c71"
+}

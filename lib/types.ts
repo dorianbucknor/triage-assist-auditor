@@ -3,6 +3,10 @@ import { Session } from "@supabase/supabase-js";
 export type UserRole = "admin" | "editor" | "viewer" | "user";
 
 export type TriageData = {
+	inTime?: Date;
+	outTime?: Date;
+	triageDuration?: number; // in seconds
+	subjectId: string;
 	// Demographics
 	age: number | null;
 	gender: string;
@@ -34,7 +38,7 @@ export type TriageData = {
 		bhcg: string;
 	};
 	// Urinalysis
-	urinalysis: {
+	urinanalysis: {
 		blood: string;
 		nitrites: string;
 		protein: string;
@@ -61,9 +65,9 @@ export type PatientScenario = TriageData & {
 
 export type Scenario = {
 	id: string;
-	authorId: string;
-	createdAt: Date;
-	updatedAt: Date;
+	authorId?: string;
+	createdAt?: Date;
+	updatedAt?: Date;
 	gradedBy: string[] | null;
 	public: boolean;
 	editable: boolean;
@@ -75,6 +79,7 @@ export type Scenario = {
 	} | null;
 };
 export type ScenarioContent = {
+	subjectId: string;
 	// Demographics
 	age?: number | null;
 	gender?: string;
@@ -82,8 +87,11 @@ export type ScenarioContent = {
 	weight?: number | null;
 	// Chief Complaint & History
 	chiefComplaint: ChiefComplaint;
+
+	labsSummary?: string;
+	currentMedication?: string[];
 	// Past Medical History
-	medicalHistory?: string[];
+	medicalHistorySummary?: string[];
 	// Vitals
 	vitals?: Vitals | null;
 	// Urinalysis
@@ -130,22 +138,28 @@ export interface Vitals {
 	} | null;
 }
 export interface AIResponse {
-	triage: {
-		level: "ESI-1" | "ESI-2" | "ESI-3" | "ESI-4" | "ESI-5";
-		reason: string;
-		confidence: number;
-	};
-	diagnosis: {
-		primary: string;
-		reason: string;
-		confidence: number;
-	};
-	treatment: {
-		reccommendations: string[];
-		reason: string;
-		confidence: number;
-	};
+	triage: AITriageResponse;
+	diagnosis: AIDiagnosisResponse;
+	treatment: AITreatmentResponse;
 }
+
+export type AITriageResponse = {
+	level: "1" | "2" | "3" | "4" | "5";
+	reason: string;
+	confidence: number;
+};
+
+export type AIDiagnosisResponse = {
+	primary: string;
+	reason: string;
+	confidence: number;
+};
+
+export type AITreatmentResponse = {
+	reccommendations: string[];
+	reason: string;
+	confidence: number;
+};
 
 export interface ClinicalGrading {
 	id: string;
@@ -215,5 +229,5 @@ export interface UserData extends UserProfile {
 export interface User {
 	data: UserData | null;
 	session: Session | null;
-    loggedIn: boolean;
+	loggedIn: boolean;
 }

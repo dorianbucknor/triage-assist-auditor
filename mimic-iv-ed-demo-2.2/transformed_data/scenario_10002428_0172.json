@@ -1,0 +1,40 @@
+{
+  "subjectId": "10002428",
+  "inTime": "2157-07-16 01:50:00",
+  "outTime": "2157-07-16 04:11:33",
+  "triageDuration": 8493,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "LEFT HIP FX",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.56,
+    "pulse": 83,
+    "respiratoryRate": 16,
+    "bloodPressure": "104/58",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 1,
+    "race": "WHITE"
+  },
+  "id": "7e9208d6-85cc-46f1-add2-50b02a018dc3"
+}

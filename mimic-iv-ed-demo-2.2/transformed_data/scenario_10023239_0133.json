@@ -1,0 +1,40 @@
+{
+  "subjectId": "10023239",
+  "inTime": "2140-09-17 11:35:00",
+  "outTime": "2140-09-17 15:00:00",
+  "triageDuration": 12300,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Back pain, Decreased PO intake, R Ear pain",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.11,
+    "pulse": 95,
+    "respiratoryRate": 16,
+    "bloodPressure": "124/76",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 1,
+    "race": "WHITE"
+  },
+  "id": "75159634-4cab-4645-9bc2-c58f51331b2f"
+}

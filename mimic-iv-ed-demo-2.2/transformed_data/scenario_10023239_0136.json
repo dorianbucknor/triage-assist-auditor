@@ -1,0 +1,40 @@
+{
+  "subjectId": "10023239",
+  "inTime": "2140-11-11 11:28:00",
+  "outTime": "2140-11-11 17:18:00",
+  "triageDuration": 21000,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Presyncope, Weakness",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.56,
+    "pulse": 82,
+    "respiratoryRate": 16,
+    "bloodPressure": "109/65",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "74d601b0-8997-4139-a54f-baf01c47f924"
+}

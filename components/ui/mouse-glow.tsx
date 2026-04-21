@@ -1,26 +1,24 @@
 "use client";
 import { usePointerLocation } from "@/hooks/use-pointer-location";
-import React, { useEffect } from "react";
+import React, { RefObject, useEffect, useRef } from "react";
+import useMouse from "@react-hook/mouse-position";
 
-export default function MouseGlow() {
-	const { x, y } = usePointerLocation();
-	const ref = React.useRef<HTMLDivElement>(null);
-
-	// useEffect(() => {
-	// 	if (!!ref?.current) {
-	// 		ref.current.style.transform = `translate(${x}px, ${y}px)`;
-	// 	}
-
-	// 	return () => {};
-	// }, [x, y]);
+export default function MouseGlow({
+	parentRef,
+}: {
+	parentRef: RefObject<HTMLElement> | null;
+}) {
+	
+	const ref = useRef<HTMLDivElement>(null);
+const { x, y } = useMouse(parentRef);
 
 	return (
 		<div
 			ref={ref}
 			className="ambient-glow pointer-events-none fixed  w-[800px] h-[500px] rounded-full blur-[60px]"
 			style={{
-				top: y,
-				left: x,
+				top: y || window.innerHeight / 2,
+				left: x || window.innerWidth / 2,
 			}}
 		/>
 	);

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10001217",
+  "inTime": "2157-11-18 17:38:00",
+  "outTime": "2157-11-19 01:24:00",
+  "triageDuration": 27960,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "LEFT HAND PAINS",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.67,
+    "pulse": 68,
+    "respiratoryRate": 16,
+    "bloodPressure": "146/96",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 2,
+    "race": "WHITE"
+  },
+  "id": "883e95a8-0369-4314-9728-5eb8794cc01e"
+}

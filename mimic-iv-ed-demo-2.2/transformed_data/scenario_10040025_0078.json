@@ -1,0 +1,40 @@
+{
+  "subjectId": "10040025",
+  "inTime": "2145-08-06 11:12:00",
+  "outTime": "2145-08-06 17:33:00",
+  "triageDuration": 22860,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Allergic reaction",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.61,
+    "pulse": 62,
+    "respiratoryRate": 18,
+    "bloodPressure": "140/62",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "d27edeb5-9f2f-4434-b9da-bd3fbc720d66"
+}

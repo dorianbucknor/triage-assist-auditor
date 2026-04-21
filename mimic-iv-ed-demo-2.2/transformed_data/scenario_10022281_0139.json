@@ -1,0 +1,40 @@
+{
+  "subjectId": "10022281",
+  "inTime": "2125-06-16 20:32:00",
+  "outTime": "2125-06-17 04:12:54",
+  "triageDuration": 27654,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "LOWER EXTREMITY PAIN",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.44,
+    "pulse": 64,
+    "respiratoryRate": 16,
+    "bloodPressure": "122/49",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "OTHER"
+  },
+  "id": "49a6d62e-f5fd-49c6-9426-c786441ee083"
+}

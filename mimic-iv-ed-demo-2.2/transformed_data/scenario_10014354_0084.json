@@ -1,0 +1,40 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2148-07-17 20:36:00",
+  "outTime": "2148-07-18 04:46:00",
+  "triageDuration": 29400,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Chest pain, Nausea",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.5,
+    "pulse": 70,
+    "respiratoryRate": 18,
+    "bloodPressure": "121/54",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 7,
+    "race": "WHITE"
+  },
+  "id": "3efbbe70-7064-45ac-af85-18fc8b0df927"
+}

@@ -12,3 +12,17 @@ export function getUserRole(session: Session) {
 
 	return cookie["user_role"];
 }
+
+export interface APIRequest<T> {
+    method: "GET" | "POST" | "PUT" | "DELETE";
+    action: string;
+    data?: T;
+
+}
+
+export interface APIResponse<T> {
+    success: boolean;
+    data?: T;
+    error?: string;
+    redirectUrl?: string;
+}

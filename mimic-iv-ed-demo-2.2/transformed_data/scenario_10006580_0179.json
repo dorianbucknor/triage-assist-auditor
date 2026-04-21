@@ -1,0 +1,39 @@
+{
+  "subjectId": "10006580",
+  "inTime": "2137-09-29 21:06:00",
+  "outTime": "2137-09-29 22:54:00",
+  "triageDuration": 6480,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Neck pain, Med refill",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.67,
+    "pulse": 84,
+    "respiratoryRate": 16,
+    "bloodPressure": "135/80",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "HISPANIC/LATINO - SALVADORAN"
+  },
+  "id": "1634cb12-e494-48d4-af5c-efc236d105da"
+}

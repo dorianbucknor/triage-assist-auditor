@@ -1,0 +1,39 @@
+{
+  "subjectId": "10007928",
+  "inTime": "2129-04-05 21:18:00",
+  "outTime": "2129-04-06 00:25:00",
+  "triageDuration": 11220,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "VOMITING BLOOD",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37,
+    "pulse": 82,
+    "respiratoryRate": 19,
+    "bloodPressure": "104/56",
+    "oxygenSaturation": null,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "WHITE"
+  },
+  "id": "ca0a6b72-1921-4fed-9afe-7847ff88f81d"
+}

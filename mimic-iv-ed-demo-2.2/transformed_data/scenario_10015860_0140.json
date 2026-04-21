@@ -1,0 +1,39 @@
+{
+  "subjectId": "10015860",
+  "inTime": "2193-11-23 12:38:00",
+  "outTime": "2193-11-23 19:16:36",
+  "triageDuration": 23916,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "L Arm pain, L Arm swelling",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.44,
+    "pulse": 82,
+    "respiratoryRate": 16,
+    "bloodPressure": "177/94",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "WHITE"
+  },
+  "id": "50572094-0672-449c-9321-6e69db35afac"
+}

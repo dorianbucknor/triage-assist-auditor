@@ -1,0 +1,40 @@
+{
+  "subjectId": "10002428",
+  "inTime": "2155-12-04 18:34:00",
+  "outTime": "2155-12-04 22:23:00",
+  "triageDuration": 13740,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "LARYNGITIS/SOB WITH TALKING",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.33,
+    "pulse": 82,
+    "respiratoryRate": 18,
+    "bloodPressure": "148/75",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "a05feecb-371e-459d-ac66-b863c287a73e"
+}

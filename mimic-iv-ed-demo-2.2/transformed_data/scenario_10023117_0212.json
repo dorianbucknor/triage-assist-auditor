@@ -1,0 +1,40 @@
+{
+  "subjectId": "10023117",
+  "inTime": "2173-04-16 17:00:00",
+  "outTime": "2173-04-16 23:18:00",
+  "triageDuration": 22680,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Dyspnea on exertion",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.28,
+    "pulse": 102,
+    "respiratoryRate": 18,
+    "bloodPressure": "102/84",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "9397e202-38ea-4eba-a73c-9a49558f61f4"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10037928",
+  "inTime": "2178-09-28 20:29:00",
+  "outTime": "2178-09-29 00:43:00",
+  "triageDuration": 15240,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "RIGHT EAR PAIN/DRAINAGE",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.72,
+    "pulse": 100,
+    "respiratoryRate": 16,
+    "bloodPressure": "154/67",
+    "oxygenSaturation": 96,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 4,
+    "race": "HISPANIC/LATINO - CUBAN"
+  },
+  "id": "e67aa460-f8f3-43d6-bd64-d2d05b84a4f6"
+}

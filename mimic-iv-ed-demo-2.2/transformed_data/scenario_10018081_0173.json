@@ -1,0 +1,40 @@
+{
+  "subjectId": "10018081",
+  "inTime": "2134-10-26 14:32:00",
+  "outTime": "2134-10-27 01:30:00",
+  "triageDuration": 39480,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "DISLODGED ABD TUBE",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.5,
+    "pulse": 79,
+    "respiratoryRate": 17,
+    "bloodPressure": "113/68",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "06ae29cb-47af-4da0-aa68-8f5a1d1f0e62"
+}

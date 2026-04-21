@@ -1,0 +1,40 @@
+{
+  "subjectId": "10018423",
+  "inTime": "2167-05-03 15:18:00",
+  "outTime": "2167-05-03 22:50:00",
+  "triageDuration": 27120,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Chest pain, Dizziness",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.5,
+    "pulse": 93,
+    "respiratoryRate": 27,
+    "bloodPressure": "139/82",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 3,
+    "race": "WHITE"
+  },
+  "id": "d318b9a0-44ab-4160-a499-c7327b760c8d"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10020306",
+  "inTime": "2132-07-25 11:06:00",
+  "outTime": "2132-07-25 18:09:00",
+  "triageDuration": 25380,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "L Eye pain",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.61,
+    "pulse": 81,
+    "respiratoryRate": 16,
+    "bloodPressure": "140/79",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "d657533a-69ad-4931-902e-a78393d08dd0"
+}

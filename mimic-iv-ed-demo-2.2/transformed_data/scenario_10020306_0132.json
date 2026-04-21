@@ -1,0 +1,40 @@
+{
+  "subjectId": "10020306",
+  "inTime": "2134-10-26 15:12:00",
+  "outTime": "2134-10-26 22:13:00",
+  "triageDuration": 25260,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Lower back pain, s/p Fall",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.5,
+    "pulse": 88,
+    "respiratoryRate": 16,
+    "bloodPressure": "146/72",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "4.0",
+    "pain": 5,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "8e0a894c-2dd3-420b-b91c-2bef174e655d"
+}

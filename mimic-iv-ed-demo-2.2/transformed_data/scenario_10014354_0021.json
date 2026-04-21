@@ -1,0 +1,40 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2147-11-25 19:39:00",
+  "outTime": "2147-11-26 01:30:00",
+  "triageDuration": 21060,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Fever, Neutropenia",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.06,
+    "pulse": 59,
+    "respiratoryRate": 18,
+    "bloodPressure": "165/64",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "07c77194-e4da-4762-8210-66aa4084c5f4"
+}

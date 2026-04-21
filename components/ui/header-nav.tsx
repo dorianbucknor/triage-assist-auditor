@@ -48,7 +48,7 @@ export default function HeaderNav() {
 							asChild
 							className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-sm rounded-sm px-5 glow-emerald"
 						>
-							<Link href="/auth/sign-up">Request Access →</Link>
+							<Link href="/auth/register">Request Access →</Link>
 						</Button>
 					)}
 				</div>

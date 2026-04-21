@@ -1,0 +1,40 @@
+{
+  "subjectId": "10039708",
+  "inTime": "2138-10-30 17:27:00",
+  "outTime": "2138-10-31 00:19:00",
+  "triageDuration": 24720,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Dizziness",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.5,
+    "pulse": 65,
+    "respiratoryRate": 18,
+    "bloodPressure": "100/52",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "040b2e52-00c5-49c1-a601-0fbb393f8f11"
+}

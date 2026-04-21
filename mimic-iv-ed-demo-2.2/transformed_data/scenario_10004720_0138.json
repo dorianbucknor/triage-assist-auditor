@@ -1,0 +1,39 @@
+{
+  "subjectId": "10004720",
+  "inTime": "2183-12-02 18:06:00",
+  "outTime": "2183-12-03 00:30:00",
+  "triageDuration": 23040,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "s/p Fall, R Wrist pain, R Wrist injury",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.28,
+    "pulse": 93,
+    "respiratoryRate": 16,
+    "bloodPressure": "139/83",
+    "oxygenSaturation": null,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "WHITE"
+  },
+  "id": "001b9773-3e47-48c7-89f1-0e4309f33151"
+}

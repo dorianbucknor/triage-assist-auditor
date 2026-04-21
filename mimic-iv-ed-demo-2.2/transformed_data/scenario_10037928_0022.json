@@ -1,0 +1,40 @@
+{
+  "subjectId": "10037928",
+  "inTime": "2178-01-24 21:23:00",
+  "outTime": "2178-01-24 23:59:00",
+  "triageDuration": 9360,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "S/P FALL",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.11,
+    "pulse": 81,
+    "respiratoryRate": 18,
+    "bloodPressure": "161/55",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "HISPANIC/LATINO - CUBAN"
+  },
+  "id": "aa8ff00c-1a64-4473-9721-866397ad6782"
+}

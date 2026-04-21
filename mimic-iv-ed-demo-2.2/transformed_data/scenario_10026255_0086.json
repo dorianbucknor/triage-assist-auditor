@@ -1,0 +1,40 @@
+{
+  "subjectId": "10026255",
+  "inTime": "2200-09-17 18:38:00",
+  "outTime": "2200-09-18 00:57:00",
+  "triageDuration": 22740,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "R RIB PAIN",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.39,
+    "pulse": 63,
+    "respiratoryRate": 21,
+    "bloodPressure": "149/106",
+    "oxygenSaturation": 96,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 8,
+    "race": "WHITE"
+  },
+  "id": "709f615c-72a0-4089-a72a-c37e00598b77"
+}

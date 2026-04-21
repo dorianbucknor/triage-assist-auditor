@@ -1,0 +1,40 @@
+{
+  "subjectId": "10040025",
+  "inTime": "2147-12-01 10:15:00",
+  "outTime": "2147-12-01 13:23:00",
+  "triageDuration": 11280,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "L Foot pain, Wound eval",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.44,
+    "pulse": 72,
+    "respiratoryRate": 18,
+    "bloodPressure": "147/70",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "c11d8ce0-f883-47a9-ae51-e607403c8309"
+}

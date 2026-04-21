@@ -1,0 +1,38 @@
+{
+  "subjectId": "10026354",
+  "inTime": "2119-10-26 06:00:00",
+  "outTime": "2119-10-26 07:12:05",
+  "triageDuration": 4325,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "SW",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": null,
+    "pulse": null,
+    "respiratoryRate": null,
+    "bloodPressure": null,
+    "oxygenSaturation": null,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "race": "WHITE"
+  },
+  "id": "1d954be2-14d9-4ac5-a85a-17e768dc71f2"
+}

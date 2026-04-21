@@ -1,0 +1,38 @@
+{
+  "subjectId": "10014078",
+  "inTime": "2166-08-21 21:39:00",
+  "outTime": "2166-08-22 00:36:00",
+  "triageDuration": 10620,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "SEIZURE",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": null,
+    "pulse": null,
+    "respiratoryRate": null,
+    "bloodPressure": null,
+    "oxygenSaturation": null,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "race": "UNABLE TO OBTAIN"
+  },
+  "id": "c8a132b4-2db4-43b7-93de-d144c1f585ff"
+}

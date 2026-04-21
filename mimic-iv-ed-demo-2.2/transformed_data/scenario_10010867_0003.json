@@ -1,0 +1,38 @@
+{
+  "subjectId": "10010867",
+  "inTime": "2147-12-30 06:45:00",
+  "outTime": "2147-12-30 09:33:00",
+  "triageDuration": 10080,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "MVC/INTUBATED TRAUMA",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.22,
+    "pulse": 89,
+    "respiratoryRate": 17,
+    "bloodPressure": "118/64",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "race": "WHITE - BRAZILIAN"
+  },
+  "id": "f0eff4ef-ec15-4e9d-9632-206ae5914753"
+}

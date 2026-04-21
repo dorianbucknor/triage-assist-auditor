@@ -1,0 +1,40 @@
+{
+  "subjectId": "10005866",
+  "inTime": "2146-06-05 22:26:00",
+  "outTime": "2146-06-06 01:45:00",
+  "triageDuration": 11940,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abd pain, LEAKING ASCITES",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.22,
+    "pulse": 82,
+    "respiratoryRate": 13,
+    "bloodPressure": "93/66",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "PORTUGUESE"
+  },
+  "id": "aded612e-1935-435a-8f93-7cb0a256a94d"
+}

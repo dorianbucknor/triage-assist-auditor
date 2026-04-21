@@ -1,0 +1,40 @@
+{
+  "subjectId": "10026406",
+  "inTime": "2133-03-01 16:42:00",
+  "outTime": "2133-03-04 17:05:00",
+  "triageDuration": 260580,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "ETOH, SI",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.72,
+    "pulse": 92,
+    "respiratoryRate": 16,
+    "bloodPressure": "120/71",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "0370074f-9130-4458-8df9-736d7f16da0e"
+}

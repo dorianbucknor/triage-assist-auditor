@@ -1,0 +1,40 @@
+{
+  "subjectId": "10003400",
+  "inTime": "2136-12-09 13:16:00",
+  "outTime": "2136-12-09 14:45:10",
+  "triageDuration": 5350,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Tachycardia, Hypoxia",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37,
+    "pulse": 119,
+    "respiratoryRate": 16,
+    "bloodPressure": "96/53",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "1.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "e1e2448e-fa4e-4c9a-a832-6e5ec36e4eb4"
+}

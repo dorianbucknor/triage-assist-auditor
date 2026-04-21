@@ -1,0 +1,39 @@
+{
+  "subjectId": "10038999",
+  "inTime": "2131-05-22 20:33:00",
+  "outTime": "2131-05-22 21:50:33",
+  "triageDuration": 4653,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Transfer",
+    "description": ""
+  },
+  "modeOfArrival": "UNKNOWN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.33,
+    "pulse": 124,
+    "respiratoryRate": 26,
+    "bloodPressure": "101/78",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "1.0",
+    "race": "WHITE"
+  },
+  "id": "901427af-98c4-4560-868e-07a27882299e"
+}

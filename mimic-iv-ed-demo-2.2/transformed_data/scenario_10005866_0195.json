@@ -1,0 +1,39 @@
+{
+  "subjectId": "10005866",
+  "inTime": "2149-09-12 15:31:00",
+  "outTime": "2149-09-13 09:02:00",
+  "triageDuration": 63060,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abd pain, Right sided abdominal pain",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.89,
+    "pulse": 76,
+    "respiratoryRate": 16,
+    "bloodPressure": "122/72",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "PORTUGUESE"
+  },
+  "id": "b3558d29-2d7d-4e20-9c4a-6c9c0be6d238"
+}

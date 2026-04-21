@@ -1,0 +1,40 @@
+{
+  "subjectId": "10037861",
+  "inTime": "2117-03-14 15:19:00",
+  "outTime": "2117-03-14 16:34:58",
+  "triageDuration": 4558,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "ICH",
+    "description": ""
+  },
+  "modeOfArrival": "UNKNOWN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.56,
+    "pulse": 59,
+    "respiratoryRate": 17,
+    "bloodPressure": null,
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "1.0",
+    "pain": 0,
+    "race": "UNKNOWN"
+  },
+  "id": "84be5689-2c99-4641-9f49-4237a1fc995b"
+}

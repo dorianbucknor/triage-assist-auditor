@@ -1,0 +1,39 @@
+{
+  "subjectId": "10002428",
+  "inTime": "2156-04-30 18:30:00",
+  "outTime": "2156-04-30 21:53:00",
+  "triageDuration": 12180,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "LETHARGY/SOB",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.89,
+    "pulse": 101,
+    "respiratoryRate": 28,
+    "bloodPressure": "102/51",
+    "oxygenSaturation": null,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "WHITE"
+  },
+  "id": "c3c4bed5-3fcb-42ed-b374-1a38a110dd45"
+}

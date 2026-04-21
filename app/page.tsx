@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import Header from "@/components/ui/header";
 import MouseGlow from "@/components/ui/mouse-glow";
+// import { useRef } from "react";
 
 const FEATURES = [
 	{
@@ -38,14 +39,17 @@ const STATS = [
 	{ value: "CDSS", unit: "Explainable AI", sub: "framework" },
 	{ value: "IRB", unit: "Aligned", sub: "data protocols" },
 ];
+// 
+export default function LandingPage() {
+	// const parentRef = useRef<HTMLDivElement>(null);
 
-export default async function LandingPage() {
 	return (
 		<div
+			// ref={parentRef}
 			className="min-h-screen bg-background text-foreground overflow-x-hidden transition-colors duration-300"
 			style={{ fontFamily: "'DM Sans', sans-serif" }}
 		>
-			<MouseGlow />
+			{/* <MouseGlow parentRef={parentRef} /> */}
 			{/* ── Grid texture overlay ─────────────────────────────────────────
           Uses CSS class from triage-theme.css which handles opacity per theme */}
 			<div className="grid-texture pointer-events-none fixed inset-0" />

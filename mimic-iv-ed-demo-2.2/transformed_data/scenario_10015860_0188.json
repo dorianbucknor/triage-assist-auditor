@@ -1,0 +1,40 @@
+{
+  "subjectId": "10015860",
+  "inTime": "2191-01-14 21:18:00",
+  "outTime": "2191-01-15 03:20:00",
+  "triageDuration": 21720,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "R Foot pain",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37,
+    "pulse": 104,
+    "respiratoryRate": 18,
+    "bloodPressure": "121/75",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "b3124d04-338c-4750-8342-4be65e1d963b"
+}

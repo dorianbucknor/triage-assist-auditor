@@ -1,0 +1,38 @@
+{
+  "subjectId": "10021487",
+  "inTime": "2116-12-02 22:57:00",
+  "outTime": "2116-12-03 01:02:00",
+  "triageDuration": 7500,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "CAR VS POLE",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": null,
+    "pulse": null,
+    "respiratoryRate": null,
+    "bloodPressure": null,
+    "oxygenSaturation": null,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "race": "WHITE"
+  },
+  "id": "ba8fce7d-4033-4362-8498-0fc19752fdee"
+}

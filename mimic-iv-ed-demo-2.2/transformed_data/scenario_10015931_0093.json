@@ -1,0 +1,39 @@
+{
+  "subjectId": "10015931",
+  "inTime": "2176-12-16 18:24:00",
+  "outTime": "2176-12-17 01:07:00",
+  "triageDuration": 24180,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Dyspnea, Transfer",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.39,
+    "pulse": 109,
+    "respiratoryRate": 20,
+    "bloodPressure": "126/82",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "WHITE"
+  },
+  "id": "2e5f418d-9011-4c29-b285-a3a6e6d43a61"
+}

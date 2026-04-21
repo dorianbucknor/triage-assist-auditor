@@ -1,0 +1,40 @@
+{
+  "subjectId": "10035631",
+  "inTime": "2112-09-17 18:46:00",
+  "outTime": "2112-09-17 19:50:00",
+  "triageDuration": 3840,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Dyspnea, ABNORMAL LAB VALUES",
+    "description": ""
+  },
+  "modeOfArrival": "UNKNOWN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.56,
+    "pulse": 59,
+    "respiratoryRate": 16,
+    "bloodPressure": "145/69",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 4,
+    "race": "UNKNOWN"
+  },
+  "id": "59ba0147-512a-4cc6-9edd-4a4ebb22e264"
+}

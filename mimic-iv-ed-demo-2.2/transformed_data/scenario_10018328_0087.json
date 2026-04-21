@@ -1,0 +1,40 @@
+{
+  "subjectId": "10018328",
+  "inTime": "2154-08-03 15:31:00",
+  "outTime": "2154-08-03 22:29:00",
+  "triageDuration": 25080,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "N/V, Tinnitus",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.78,
+    "pulse": 76,
+    "respiratoryRate": 16,
+    "bloodPressure": "149/83",
+    "oxygenSaturation": 96,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "15f25f01-41ce-437a-a7d9-7c1d95224ac6"
+}

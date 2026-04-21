@@ -1,0 +1,40 @@
+{
+  "subjectId": "10020740",
+  "inTime": "2151-01-25 11:39:00",
+  "outTime": "2151-01-26 01:07:00",
+  "triageDuration": 48480,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Psychiatric hold, Altered mental status",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.72,
+    "pulse": 90,
+    "respiratoryRate": 16,
+    "bloodPressure": "119/79",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "2b4ee59d-2f2e-4ff1-8cbb-338154111215"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10001217",
+  "inTime": "2157-11-29 19:28:00",
+  "outTime": "2157-11-29 21:22:00",
+  "triageDuration": 6840,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "PICC LINE INFECTION",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.67,
+    "pulse": 70,
+    "respiratoryRate": 14,
+    "bloodPressure": "130/82",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "5e8ab576-7d8e-4116-b343-c37ed7ef039d"
+}

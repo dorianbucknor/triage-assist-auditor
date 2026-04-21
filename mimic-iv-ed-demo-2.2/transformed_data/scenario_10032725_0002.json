@@ -1,0 +1,38 @@
+{
+  "subjectId": "10032725",
+  "inTime": "2143-03-22 01:19:00",
+  "outTime": "2143-03-22 06:42:00",
+  "triageDuration": 19380,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "FACIAL DROOP",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": null,
+    "pulse": null,
+    "respiratoryRate": null,
+    "bloodPressure": null,
+    "oxygenSaturation": null,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "25f4ec26-352d-4ee2-92aa-9630e83be1d7"
+}

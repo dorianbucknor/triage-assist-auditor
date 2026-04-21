@@ -1,0 +1,40 @@
+{
+  "subjectId": "10005866",
+  "inTime": "2149-02-11 08:52:00",
+  "outTime": "2149-02-11 23:09:00",
+  "triageDuration": 51420,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abd pain, Diarrhea, Vomiting",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.78,
+    "pulse": 70,
+    "respiratoryRate": 18,
+    "bloodPressure": "120/86",
+    "oxygenSaturation": 96,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 3,
+    "race": "PORTUGUESE"
+  },
+  "id": "f0dccd90-86bf-4c2c-8590-c604b8313014"
+}

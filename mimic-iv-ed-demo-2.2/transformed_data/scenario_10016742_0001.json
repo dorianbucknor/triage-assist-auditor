@@ -1,0 +1,38 @@
+{
+  "subjectId": "10016742",
+  "inTime": "2178-07-17 16:58:00",
+  "outTime": "2178-07-18 02:27:00",
+  "triageDuration": 34140,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "PICC EVAL",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": null,
+    "pulse": null,
+    "respiratoryRate": null,
+    "bloodPressure": null,
+    "oxygenSaturation": null,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "3fbbd064-880f-4ce5-92d9-51ad628fc83a"
+}

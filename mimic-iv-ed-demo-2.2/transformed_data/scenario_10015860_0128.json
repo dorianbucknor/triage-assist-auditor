@@ -1,0 +1,40 @@
+{
+  "subjectId": "10015860",
+  "inTime": "2189-05-22 23:18:00",
+  "outTime": "2189-05-23 03:38:00",
+  "triageDuration": 15600,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "N/V, Tachycardia",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 38.06,
+    "pulse": 107,
+    "respiratoryRate": 16,
+    "bloodPressure": "106/57",
+    "oxygenSaturation": 95,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "1.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "8e8b27ed-809d-402c-973e-7fb424ac2de4"
+}

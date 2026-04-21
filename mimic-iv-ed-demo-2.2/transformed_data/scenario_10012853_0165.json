@@ -1,0 +1,40 @@
+{
+  "subjectId": "10012853",
+  "inTime": "2176-08-11 08:36:00",
+  "outTime": "2176-08-11 17:35:00",
+  "triageDuration": 32340,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Hematuria",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.61,
+    "pulse": 65,
+    "respiratoryRate": 16,
+    "bloodPressure": "124/45",
+    "oxygenSaturation": 93,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "b862cc3a-cb79-4bc1-b770-c02c61e5397e"
+}
