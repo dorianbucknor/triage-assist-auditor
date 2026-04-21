@@ -1,0 +1,40 @@
+{
+  "subjectId": "10023117",
+  "inTime": "2171-10-12 11:33:00",
+  "outTime": "2171-10-12 14:33:00",
+  "triageDuration": 10800,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "SHORTNESS OF BREATH",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.33,
+    "pulse": 99,
+    "respiratoryRate": 18,
+    "bloodPressure": "110/73",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "020d5428-e334-4a0f-850b-a28090ee39f3"
+}

@@ -1,0 +1,39 @@
+{
+  "subjectId": "10003400",
+  "inTime": "2137-02-07 13:06:00",
+  "outTime": "2137-02-07 21:44:00",
+  "triageDuration": 31080,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Rectal pain",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.67,
+    "pulse": 112,
+    "respiratoryRate": 14,
+    "bloodPressure": "116/70",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "a26bca60-4237-47ed-a6ef-5087eb057c2e"
+}

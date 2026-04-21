@@ -1,0 +1,38 @@
+{
+  "subjectId": "10016810",
+  "inTime": "2185-07-08 11:55:00",
+  "outTime": "2185-07-08 11:59:00",
+  "triageDuration": 240,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "UNKNOWN-CC",
+    "description": ""
+  },
+  "modeOfArrival": "UNKNOWN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": null,
+    "pulse": null,
+    "respiratoryRate": null,
+    "bloodPressure": null,
+    "oxygenSaturation": null,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "race": "UNKNOWN"
+  },
+  "id": "d8876198-01e8-4dfb-bce0-fedd97c83e9f"
+}

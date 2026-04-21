@@ -1,0 +1,39 @@
+{
+  "subjectId": "10015860",
+  "inTime": "2187-12-14 12:49:00",
+  "outTime": "2187-12-14 17:48:00",
+  "triageDuration": 17940,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "R LEG CELLULITIS",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.72,
+    "pulse": 105,
+    "respiratoryRate": 16,
+    "bloodPressure": "148/90",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "WHITE"
+  },
+  "id": "541464ff-dc2a-4be7-9f99-65eb29d31677"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10014729",
+  "inTime": "2125-03-19 12:36:00",
+  "outTime": "2125-03-19 16:59:47",
+  "triageDuration": 15827,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "FEVER",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.17,
+    "pulse": 106,
+    "respiratoryRate": 18,
+    "bloodPressure": "115/70",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "1.0",
+    "pain": 5,
+    "race": "WHITE - OTHER EUROPEAN"
+  },
+  "id": "bebde4e5-c832-4bab-941a-df3f9933bcf2"
+}

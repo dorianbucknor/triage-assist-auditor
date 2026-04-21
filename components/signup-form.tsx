@@ -17,7 +17,7 @@ import {
 	SelectValue,
 } from "./ui/select";
 import { useTosDialog } from "./tos-privacy-controller";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
@@ -26,6 +26,7 @@ import { toast } from "sonner";
 import { Check, Mail, User, FileText, CheckCircle } from "lucide-react";
 import { InputOTPSeparator } from "./ui/input-otp";
 import { InputOTPWithSeparator } from "./otp-input";
+import { Turnstile, TurnstileInstance } from "@marsidev/react-turnstile";
 
 const validationSchema = z.object({
 	firstName: z.string().min(1, "First name is required"),
@@ -62,6 +63,8 @@ export function SignupForm({
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [otp, setOtp] = useState("");
 	const { show, Dialog } = useTosDialog();
+	const captchaRef = useRef<TurnstileInstance | null>(null);
+	const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
 	const form = useForm<FormData>({
 		resolver: zodResolver(validationSchema),
@@ -145,6 +148,12 @@ export function SignupForm({
 			const loadingToast = toast.loading(
 				"Submitting your access request...",
 			);
+
+			if (!captchaToken) {
+				toast.dismiss(loadingToast);
+				toast.error("Please complete the CAPTCHA challenge.");
+				return;
+			}
 
 			const res = await fetch("/api/access-request", {
 				method: "POST",
@@ -543,6 +552,27 @@ export function SignupForm({
 							{isSubmitting ? "Submitting..." : "Submit"}
 						</Button>
 					)}
+				</div>
+				<div className="w-full flex relative justify-center ">
+					<Turnstile
+						ref={captchaRef}
+						siteKey={
+							process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_KEY ||
+							""
+						}
+						onSuccess={(token: string) => {
+							setCaptchaToken(token);
+						}}
+						onTimeout={() => {
+							setCaptchaToken("");
+							captchaRef.current?.reset();
+						}}
+						onError={(error) => {
+							setCaptchaToken("");
+							captchaRef.current?.reset();
+						}}
+						className="relative"
+					/>
 				</div>
 			</div>
 

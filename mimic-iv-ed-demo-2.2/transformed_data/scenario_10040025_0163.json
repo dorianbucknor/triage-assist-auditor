@@ -1,0 +1,40 @@
+{
+  "subjectId": "10040025",
+  "inTime": "2145-07-03 20:02:00",
+  "outTime": "2145-07-03 23:46:44",
+  "triageDuration": 13484,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "LEFT EYE SWELLING, REDNESS",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.67,
+    "pulse": 80,
+    "respiratoryRate": 18,
+    "bloodPressure": "190/90",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 3,
+    "race": "WHITE"
+  },
+  "id": "1105362a-e196-4893-a240-dd186e7468a1"
+}

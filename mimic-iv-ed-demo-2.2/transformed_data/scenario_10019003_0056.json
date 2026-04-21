@@ -1,0 +1,39 @@
+{
+  "subjectId": "10019003",
+  "inTime": "2155-05-17 21:03:00",
+  "outTime": "2155-05-18 00:03:15",
+  "triageDuration": 10815,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abnormal CT, LUQ abd pain",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.33,
+    "pulse": 89,
+    "respiratoryRate": 20,
+    "bloodPressure": "116/44",
+    "oxygenSaturation": 95,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "WHITE"
+  },
+  "id": "255c3ba4-3200-42d9-a644-1406eceae933"
+}

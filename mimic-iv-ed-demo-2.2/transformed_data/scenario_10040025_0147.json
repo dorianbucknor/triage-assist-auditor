@@ -1,0 +1,40 @@
+{
+  "subjectId": "10040025",
+  "inTime": "2147-08-25 14:21:00",
+  "outTime": "2147-08-25 18:42:00",
+  "triageDuration": 15660,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "B Leg swelling",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.78,
+    "pulse": 83,
+    "respiratoryRate": 18,
+    "bloodPressure": "153/99",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "bb94428d-784e-4aa7-960b-d04188bc04ce"
+}

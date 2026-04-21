@@ -1,0 +1,39 @@
+{
+  "subjectId": "10000032",
+  "inTime": "2180-07-23 05:54:00",
+  "outTime": "2180-07-23 14:00:00",
+  "triageDuration": 29160,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abdominal distention, Abd pain, LETHAGIC",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.06,
+    "pulse": 96,
+    "respiratoryRate": 18,
+    "bloodPressure": "86/45",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "WHITE"
+  },
+  "id": "b208ba0d-3c01-4e9c-b857-bb824668a70b"
+}

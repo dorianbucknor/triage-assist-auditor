@@ -1,0 +1,40 @@
+{
+  "subjectId": "10026255",
+  "inTime": "2201-07-07 12:31:00",
+  "outTime": "2201-07-07 19:40:00",
+  "triageDuration": 25740,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "R Leg pain, Weakness",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.5,
+    "pulse": 98,
+    "respiratoryRate": 28,
+    "bloodPressure": "124/90",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 7,
+    "race": "WHITE"
+  },
+  "id": "ecde719a-e23c-45bb-8a0d-de2f83733798"
+}

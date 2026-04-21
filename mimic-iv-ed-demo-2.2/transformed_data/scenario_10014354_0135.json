@@ -1,0 +1,40 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2149-09-17 09:08:00",
+  "outTime": "2149-09-17 23:55:00",
+  "triageDuration": 53220,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Weakness",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.83,
+    "pulse": 71,
+    "respiratoryRate": 16,
+    "bloodPressure": "134/57",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 9,
+    "race": "WHITE"
+  },
+  "id": "6a9b8635-ab43-4a81-926f-262a56110427"
+}

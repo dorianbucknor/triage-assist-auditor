@@ -366,7 +366,7 @@ export default function TriageAssistantPage() {
 											Medical History Summary
 										</p>
 										<p className="text-sm text-foreground">
-											{currentScenario.content?.medicalHistory?.join(
+											{currentScenario.content?.medicalHistorySummary?.join(
 												", ",
 											)}
 										</p>

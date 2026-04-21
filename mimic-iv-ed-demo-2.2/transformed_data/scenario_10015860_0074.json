@@ -1,0 +1,39 @@
+{
+  "subjectId": "10015860",
+  "inTime": "2190-05-14 17:11:00",
+  "outTime": "2190-05-15 10:00:00",
+  "triageDuration": 60540,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abnormal labs, Hyperglycemia",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.61,
+    "pulse": 99,
+    "respiratoryRate": 16,
+    "bloodPressure": "142/95",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "WHITE"
+  },
+  "id": "b87fd4d1-942a-407a-b4ea-82df1391ef97"
+}

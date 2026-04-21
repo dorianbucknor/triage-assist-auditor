@@ -1,0 +1,40 @@
+{
+  "subjectId": "10015860",
+  "inTime": "2188-08-05 20:36:00",
+  "outTime": "2188-08-06 03:24:00",
+  "triageDuration": 24480,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "RIGHT FOOT INFECTION",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.83,
+    "pulse": 94,
+    "respiratoryRate": 17,
+    "bloodPressure": "132/82",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "f8da3a01-a416-4053-82f0-7ee72a1378a2"
+}

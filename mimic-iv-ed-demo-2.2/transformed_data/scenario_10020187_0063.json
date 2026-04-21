@@ -1,0 +1,39 @@
+{
+  "subjectId": "10020187",
+  "inTime": "2169-08-31 20:57:00",
+  "outTime": "2169-09-01 07:04:00",
+  "triageDuration": 36420,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Facial numbness",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.44,
+    "pulse": 75,
+    "respiratoryRate": 18,
+    "bloodPressure": "109/77",
+    "oxygenSaturation": 95,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "HISPANIC/LATINO - SALVADORAN"
+  },
+  "id": "de7ad4d8-bd60-491c-b67e-368ddc42ad33"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10015860",
+  "inTime": "2192-07-31 11:00:00",
+  "outTime": "2192-07-31 17:10:00",
+  "triageDuration": 22200,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abnormal labs",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.22,
+    "pulse": 100,
+    "respiratoryRate": 16,
+    "bloodPressure": "170/94",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "aeaaf09a-ce8e-47bd-92b4-6a333a30d640"
+}

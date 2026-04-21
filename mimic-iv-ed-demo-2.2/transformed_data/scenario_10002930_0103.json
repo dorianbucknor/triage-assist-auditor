@@ -1,0 +1,40 @@
+{
+  "subjectId": "10002930",
+  "inTime": "2200-06-04 16:38:00",
+  "outTime": "2200-06-05 10:26:00",
+  "triageDuration": 64080,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Hypoglycemia",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.28,
+    "pulse": 92,
+    "respiratoryRate": 16,
+    "bloodPressure": "126/74",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "1853ae1a-2ab5-4b46-8eeb-80d9b7edd276"
+}

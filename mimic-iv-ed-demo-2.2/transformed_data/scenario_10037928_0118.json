@@ -1,0 +1,39 @@
+{
+  "subjectId": "10037928",
+  "inTime": "2177-09-04 06:29:00",
+  "outTime": "2177-09-04 12:06:40",
+  "triageDuration": 20260,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "HYPOTHERMIA",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 2.11,
+    "pulse": 66,
+    "respiratoryRate": 16,
+    "bloodPressure": "114/46",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "1.0",
+    "race": "HISPANIC/LATINO - CUBAN"
+  },
+  "id": "fc0dd8b1-910a-4246-884a-dfe090ed491e"
+}

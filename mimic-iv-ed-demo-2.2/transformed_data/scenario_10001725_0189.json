@@ -1,0 +1,40 @@
+{
+  "subjectId": "10001725",
+  "inTime": "2113-12-13 11:03:00",
+  "outTime": "2113-12-13 15:07:00",
+  "triageDuration": 14640,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Eye pain",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.67,
+    "pulse": 70,
+    "respiratoryRate": 16,
+    "bloodPressure": "120/80",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "c0e0cded-3882-4932-80b1-60353c812073"
+}

@@ -1,0 +1,38 @@
+{
+  "subjectId": "10004235",
+  "inTime": "2196-02-24 12:15:00",
+  "outTime": "2196-02-24 17:07:00",
+  "triageDuration": 17520,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "S/P ARREST",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": null,
+    "pulse": null,
+    "respiratoryRate": null,
+    "bloodPressure": null,
+    "oxygenSaturation": null,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "race": "MULTIPLE RACE/ETHNICITY"
+  },
+  "id": "25381365-d5a2-4fd3-987c-9df198d8d998"
+}

@@ -1,0 +1,39 @@
+{
+  "subjectId": "10012853",
+  "inTime": "2175-04-05 06:22:00",
+  "outTime": "2175-04-05 17:10:00",
+  "triageDuration": 38880,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "SOB",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.78,
+    "pulse": 67,
+    "respiratoryRate": 18,
+    "bloodPressure": "128/52",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "b95745f3-2e25-4d46-b431-56dacbd3b76b"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10002930",
+  "inTime": "2201-03-23 12:04:00",
+  "outTime": "2201-03-26 14:24:00",
+  "triageDuration": 267600,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Head injury, Neck pain, s/p Fall",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.72,
+    "pulse": 72,
+    "respiratoryRate": 16,
+    "bloodPressure": "148/91",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "dfcb9203-eed8-4e44-9771-c7d49d097536"
+}

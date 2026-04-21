@@ -1,0 +1,39 @@
+{
+  "subjectId": "10019003",
+  "inTime": "2153-03-27 21:28:00",
+  "outTime": "2153-03-28 02:21:00",
+  "triageDuration": 17580,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Weakness, Hypotension",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.06,
+    "pulse": 96,
+    "respiratoryRate": 22,
+    "bloodPressure": "109/54",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "WHITE"
+  },
+  "id": "b6f0c7cb-092e-49a9-ada0-697e8284c225"
+}

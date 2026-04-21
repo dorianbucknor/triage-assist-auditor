@@ -1,0 +1,40 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2147-11-14 18:22:00",
+  "outTime": "2147-11-14 23:09:00",
+  "triageDuration": 17220,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Fatigue, s/p Fall",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.94,
+    "pulse": 82,
+    "respiratoryRate": 18,
+    "bloodPressure": "142/78",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 6,
+    "race": "WHITE"
+  },
+  "id": "5f31c5d9-c820-421f-ade7-76a2510dd8b8"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2148-06-29 21:06:00",
+  "outTime": "2148-06-30 02:27:00",
+  "triageDuration": 19260,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Chest pain, Transfer",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.39,
+    "pulse": 76,
+    "respiratoryRate": 20,
+    "bloodPressure": "116/79",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 8,
+    "race": "WHITE"
+  },
+  "id": "b10e5de6-18b1-483f-8e75-23559581d84d"
+}

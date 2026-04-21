@@ -1,0 +1,40 @@
+{
+  "subjectId": "10018081",
+  "inTime": "2133-12-18 12:09:00",
+  "outTime": "2133-12-18 17:10:00",
+  "triageDuration": 18060,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abd pain, n/v/d",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 35.67,
+    "pulse": 91,
+    "respiratoryRate": 28,
+    "bloodPressure": "89/70",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 5,
+    "race": "WHITE"
+  },
+  "id": "a8c16b88-2e34-44ba-b795-81d2f7419e8a"
+}

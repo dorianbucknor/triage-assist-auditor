@@ -1,0 +1,40 @@
+{
+  "subjectId": "10039708",
+  "inTime": "2142-05-15 10:47:00",
+  "outTime": "2142-05-15 18:21:00",
+  "triageDuration": 27240,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Hemodialysis",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.17,
+    "pulse": 60,
+    "respiratoryRate": 16,
+    "bloodPressure": "99/67",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "a5e3eece-e558-45a1-9773-19a8d3fbd5dc"
+}

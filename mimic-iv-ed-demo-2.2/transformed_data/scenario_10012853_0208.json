@@ -1,0 +1,40 @@
+{
+  "subjectId": "10012853",
+  "inTime": "2176-09-09 08:03:00",
+  "outTime": "2176-09-09 13:02:00",
+  "triageDuration": 17940,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Suprapubic pain",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.56,
+    "pulse": 79,
+    "respiratoryRate": 18,
+    "bloodPressure": "192/94",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 2,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "83e259c2-133b-46d2-a197-c88a421ec0c1"
+}

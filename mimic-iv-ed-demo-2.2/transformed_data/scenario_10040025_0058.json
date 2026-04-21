@@ -1,0 +1,40 @@
+{
+  "subjectId": "10040025",
+  "inTime": "2147-06-16 18:58:00",
+  "outTime": "2147-06-16 23:06:00",
+  "triageDuration": 14880,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Dyspnea, Productive cough",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.56,
+    "pulse": 64,
+    "respiratoryRate": 18,
+    "bloodPressure": "120/32",
+    "oxygenSaturation": 95,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "cfd71449-f68b-4492-940c-58c0fc3eb5be"
+}

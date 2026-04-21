@@ -1,0 +1,39 @@
+{
+  "subjectId": "10015860",
+  "inTime": "2187-09-15 14:14:00",
+  "outTime": "2187-09-15 20:49:00",
+  "triageDuration": 23700,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "R FOOT PAIN",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.83,
+    "pulse": 107,
+    "respiratoryRate": null,
+    "bloodPressure": "157/104",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "WHITE"
+  },
+  "id": "18c7743d-7499-4388-83ea-a887fa63c329"
+}

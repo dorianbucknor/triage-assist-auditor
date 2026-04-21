@@ -1,0 +1,39 @@
+{
+  "subjectId": "10000032",
+  "inTime": "2180-06-26 15:54:00",
+  "outTime": "2180-06-26 21:31:00",
+  "triageDuration": 20220,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abdominal distention",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.61,
+    "pulse": 86,
+    "respiratoryRate": 17,
+    "bloodPressure": "96/57",
+    "oxygenSaturation": 93,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "WHITE"
+  },
+  "id": "ac7ed870-416f-48f7-987a-fef0deb2541e"
+}

@@ -1,0 +1,38 @@
+{
+  "subjectId": "10002428",
+  "inTime": "2156-05-11 11:29:00",
+  "outTime": "2156-05-11 14:49:34",
+  "triageDuration": 12034,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "RESP ARREST",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.33,
+    "pulse": 66,
+    "respiratoryRate": 18,
+    "bloodPressure": "107/58",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "race": "WHITE"
+  },
+  "id": "14b107a5-f1f9-4d09-a606-42be90dd7299"
+}

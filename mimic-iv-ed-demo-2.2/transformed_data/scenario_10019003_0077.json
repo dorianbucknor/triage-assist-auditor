@@ -1,0 +1,40 @@
+{
+  "subjectId": "10019003",
+  "inTime": "2153-04-12 13:03:00",
+  "outTime": "2153-04-12 21:40:00",
+  "triageDuration": 31020,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Weakness, GI bleed",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.28,
+    "pulse": 92,
+    "respiratoryRate": 25,
+    "bloodPressure": "117/50",
+    "oxygenSaturation": 94,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "9e1f138b-8cb0-4712-94a7-ba71bc990957"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10009049",
+  "inTime": "2174-05-26 04:20:00",
+  "outTime": "2174-05-26 09:18:00",
+  "triageDuration": 17880,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Chest pain",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 38,
+    "pulse": 89,
+    "respiratoryRate": 31,
+    "bloodPressure": "106/64",
+    "oxygenSaturation": 94,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 2,
+    "race": "WHITE"
+  },
+  "id": "8238c2f6-6e72-4465-97b6-1a4b2b6e2881"
+}

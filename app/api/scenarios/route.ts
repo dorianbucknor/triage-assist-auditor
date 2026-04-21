@@ -9,6 +9,7 @@
 import { verifySession } from "@/lib/dal";
 import {
 	AIResponse,
+	APIResponse,
 	ChiefComplaint,
 	Scenario,
 	ScenarioContent,
@@ -19,6 +20,8 @@ import { createServerClient } from "@/providers/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 import camelize from "camelize-ts";
 import snakify from "snakify-ts";
+import { ca } from "zod/v4/locales";
+import { callHFInference } from "@/lib/hf-client";
 
 export async function GET(request: NextRequest) {
 	const { isAuth, userId } = await verifySession();
@@ -89,9 +92,11 @@ export async function POST(request: NextRequest) {
 
 	switch (action) {
 		case "ADD_SCENARIO":
-			return await handleAdd(data);
+			return await handleAdd(data, userId!);
 		case "ADD_GRADING":
 			return await handleAddGrading(data, userId!);
+		// case "ADD_MULTIPLE_SCENARIOS":
+		// 	return await handleAddMultipleScenarios(data, userId!);
 		default:
 			return new NextResponse(
 				JSON.stringify({ success: false, error: "Invalid action" }),
@@ -105,6 +110,91 @@ export async function POST(request: NextRequest) {
 	}
 }
 
+// async function handleAddMultipleScenarios(data: TriageData, userId: string) {
+// 	// const results = [];
+// 	// for (const scenarioData of data) {
+// 		try {
+// 			try {
+// 				//create summaries using AI
+// 				const complaintDetails = await summarizeChiefComplaint(
+// 					scenarioData.chiefComplaint,
+// 				);
+// 				const medicalHistorySummary =
+// 					await summarizeMedicalHistory(scenarioData);
+// 				const labsSummary = await summarizeLabs({
+// 					urinalysis: scenarioData.urinanalysis,
+// 					otherLabs: scenarioData.otherLabs,
+// 				});
+
+// 				//convert to scenario content
+// 				const scenarioContent = {
+// 					subjectId: scenarioData.subjectId,
+// 					age: scenarioData.age,
+// 					weight: scenarioData.weight,
+// 					height: scenarioData.height,
+// 					gender: scenarioData.gender,
+// 					chiefComplaint: {
+// 						...scenarioData.chiefComplaint,
+// 						details: complaintDetails,
+// 					},
+// 					medicalHistorySummary: medicalHistorySummary,
+// 					vitals: scenarioData.vitals,
+// 					urinanalysis: scenarioData.urinanalysis,
+// 					otherLabs: scenarioData.otherLabs,
+// 					labsSummary,
+// 				} as ScenarioContent;
+
+// 				//get AI response
+// 				const aiResponse = await getAIResponse(
+// 					scenarioData,
+// 					medicalHistorySummary,
+// 					labsSummary,
+// 				);
+
+// 				const scenario = {
+// 					aiResponse,
+// 					content: scenarioContent,
+// 					triageData: scenarioData,
+// 					authorId: userId!,
+// 					id: crypto.randomUUID(),
+// 					createdAt: new Date(),
+// 					updatedAt: new Date(),
+// 					gradedBy: [],
+// 					public: true,
+// 					editable: false,
+// 					metadata: null,
+// 				} as Scenario;
+
+// 				results.push({
+// 					scenarioId: scenario.id,
+// 					status: "success",
+// 					data: scenario,
+// 					error: null,
+// 				});
+// 			} catch (error) {
+// 				console.error("Error adding scenario: ", error);
+// 			}
+// 		} catch (error) {
+// 			console.error("Error adding scenario: ", error);
+// 			results.push({
+// 				scenarioId: null,
+// 				status: "failure",
+// 				data: null,
+// 				error: error instanceof Error ? error.message : "Unknown error",
+// 			});
+// 		}
+// 	}
+// 	return new NextResponse(
+// 		JSON.stringify({ success: true, error: null, data: results  }),
+// 		{
+// 			status: 200,
+// 			headers: {
+// 				"Content-Type": "application/json",
+// 			},
+// 		},
+// 	);
+// }
+
 //1. Use data as TriageData
 //2. Convert TriageData to ScenarioContent and AIResponse and store in DB by:
 //  a. Use AI (accessed by external api) to summarize the mode of arrival, mental status and respiratory status into a chief complaint details
@@ -114,7 +204,7 @@ export async function POST(request: NextRequest) {
 //4. Store the Scenario in DB with public = false and editable = true flags so that the creator can edit the scenario and make it public when ready for grading
 //5. Store the scenario contennt
 //6. Return success or failure response based on DB operation result
-async function handleAdd(data: TriageData) {
+async function handleAdd(data: TriageData, userId: string) {
 	try {
 		//create summaries using AI
 		const complaintDetails = await summarizeChiefComplaint(
@@ -122,12 +212,13 @@ async function handleAdd(data: TriageData) {
 		);
 		const medicalHistorySummary = await summarizeMedicalHistory(data);
 		const labsSummary = await summarizeLabs({
-			urinalysis: data.urinalysis,
+			urinalysis: data.urinanalysis,
 			otherLabs: data.otherLabs,
 		});
 
 		//convert to scenario content
 		const scenarioContent = {
+			subjectId: data.subjectId,
 			age: data.age,
 			weight: data.weight,
 			height: data.height,
@@ -136,9 +227,9 @@ async function handleAdd(data: TriageData) {
 				...data.chiefComplaint,
 				details: complaintDetails,
 			},
-			medicalHistory: medicalHistorySummary,
+			medicalHistorySummary: medicalHistorySummary,
 			vitals: data.vitals,
-			urinalysis: data.urinalysis,
+			urinanalysis: data.urinanalysis,
 			otherLabs: data.otherLabs,
 			labsSummary,
 		} as ScenarioContent;
@@ -150,16 +241,22 @@ async function handleAdd(data: TriageData) {
 			labsSummary,
 		);
 
-		const scenario = await addScenario();
+		// const scenario = await addScenario();
 
-		await addScenarioContent(scenario.id, scenarioContent);
-		await addAIResponse(scenario.id, aiResponse);
+		// await addScenarioContent(scenario.id, scenarioContent);
+		// await addAIResponse(scenario.id, aiResponse);
 
 		return new NextResponse(
 			JSON.stringify({
 				success: true,
 				error: null,
-				data: { scenarioId: scenario.id },
+				data: {
+					scenarioContent,
+					aiResponse,
+					triageData: data,
+					authorId: userId,
+                    date: new Date(),
+				},
 			}),
 			{
 				status: 200,
@@ -171,7 +268,10 @@ async function handleAdd(data: TriageData) {
 	} catch (error) {
 		console.error("Error adding scenario: ", error);
 		return new NextResponse(
-			JSON.stringify({ success: false, error: "Failed to add scenario" }),
+			JSON.stringify({
+				success: false,
+				error: "Failed to add scenario: " + error,
+			}),
 			{
 				status: 500,
 				headers: {
@@ -205,7 +305,7 @@ async function addScenario() {
 	const { error, data } = await supabase
 		.schema("ai_auditing")
 		.from("scenarios")
-		.upsert(scenario)
+		.upsert(snakify(scenario))
 		.select()
 		.limit(1)
 		.single();
@@ -299,24 +399,86 @@ async function addScenarioContent(
 
 async function addAIResponse(scenarioId: string, aiResponse: AIResponse) {
 	const supabase = await createServerClient();
+	const {
+		data: { session },
+	} = await supabase.auth.getSession();
 
-	const { error } = await supabase
+	if (!session) {
+		throw new Error("Unauthorized");
+	}
+
+	const transformedResponse = {
+		public: true,
+		author_id: session.user.id,
+		created_at: new Date(),
+		ai_model_used: "unsloth/medgemma-27b-it",
+	};
+
+	const { error, data } = await supabase
 		.schema("ai_auditing")
 		.from("ai_scenario_responses")
-		.insert({ id: scenarioId, ...aiResponse });
+		.insert({ id: scenarioId, ...transformedResponse })
+		.select()
+		.limit(1)
+		.single();
 
 	if (error) {
 		throw new Error("Failed to add AI response: " + error.message);
 	}
+
+	if (!data) {
+		throw new Error("Failed to add AI response: No data returned");
+	}
+
+	// const responseId = data.id;
+
+	const { error: terror } = await supabase
+		.schema("ai_auditing")
+		.from("ai_triage_responses")
+		.insert({ id: scenarioId, ...snakify(aiResponse.triage) });
+
+	if (terror) {
+		throw new Error("Failed to add AI triage response: " + terror.message);
+	}
+
+	const { error: derror } = await supabase
+		.schema("ai_auditing")
+		.from("ai_diagnosis_responses")
+		.insert({ id: scenarioId, ...snakify(aiResponse.diagnosis) });
+
+	if (derror) {
+		throw new Error(
+			"Failed to add AI diagnosis response: " + derror.message,
+		);
+	}
+
+	const { error: treason } = await supabase
+		.schema("ai_auditing")
+		.from("ai_treatment_responses")
+		.insert({ id: scenarioId, ...snakify(aiResponse.treatment) });
+
+	if (treason) {
+		throw new Error(
+			"Failed to add AI treatment response: " + treason.message,
+		);
+	}
+
+	return true;
 }
 
 async function summarizeChiefComplaint(data: ChiefComplaint): Promise<string> {
-	// TODO: Implement AI call to summarize chief complaint
-	return "";
+	return data.title + ": " + data.description;
 }
 
 async function summarizeMedicalHistory(data: TriageData): Promise<string[]> {
 	// TODO: Implement AI call to summarize medical history
+	const history = [
+		`Social History: Smoker - ${data.smoker}, Alcohol - ${data.alcohol}`,
+		`Allergies: ${data.allergies.join(", ")}`,
+		`Surgical History: ${data.surgicalHistory.join(", ")}`,
+		`Immunization: ${data.immunization.join(", ")}`,
+		`Medical History: ${data.medicalHistory.join(", ")}`,
+	];
 	return [];
 }
 
@@ -336,21 +498,20 @@ async function getAIResponse(
 	medicalHistorySummary: string[],
 	labsSummary: string,
 ): Promise<AIResponse> {
-	// TODO: Implement AI call to get triage response
-	return {} as AIResponse;
+	return await callHFInference(
+		JSON.stringify(data),
+		medicalHistorySummary,
+		labsSummary,
+	);
 }
 
 async function fetchUngradedByUser(
 	limit: number,
 	userId: string,
 	page: number,
-) {
+): Promise<NextResponse> {
 	const { data, error } = await getScenarios(limit, userId, page);
-
-	console.log(JSON.stringify(data));
-
 	const convertedData = camelize(data) as unknown as Scenario[];
-	console.log(convertedData);
 
 	if (error) {
 		console.log("Error fetching scenarios: ", error);

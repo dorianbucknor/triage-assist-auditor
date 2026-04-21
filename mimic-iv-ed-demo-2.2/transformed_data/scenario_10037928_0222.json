@@ -1,0 +1,40 @@
+{
+  "subjectId": "10037928",
+  "inTime": "2183-08-03 19:27:00",
+  "outTime": "2183-08-04 16:07:00",
+  "triageDuration": 74400,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Back pain",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.83,
+    "pulse": 79,
+    "respiratoryRate": 18,
+    "bloodPressure": "152/62",
+    "oxygenSaturation": 93,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "HISPANIC/LATINO - CUBAN"
+  },
+  "id": "cdd28012-2067-4051-8ae8-de10711e8f18"
+}

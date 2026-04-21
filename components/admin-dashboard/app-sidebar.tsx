@@ -23,6 +23,8 @@ import {
 	TrendingUpDown,
 	User,
 	Users,
+	Upload,
+	FileJson,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
@@ -104,6 +106,32 @@ export default function AppSidebar({
 							>
 								<Users className="mr-2 h-4 w-4" />
 								Access Requests
+							</SidebarMenuButton>
+						</SidebarMenuItem>
+						<SidebarMenuItem>
+							<SidebarMenuButton
+								className="cursor-pointer"
+								onClick={() => {
+									router.push("/admin/batch-scenarios");
+									sidebar.setOpenMobile(false);
+								}}
+								isActive={tab === "batch-scenarios"}
+							>
+								<Upload className="mr-2 h-4 w-4" />
+								Batch Upload
+							</SidebarMenuButton>
+						</SidebarMenuItem>
+						<SidebarMenuItem>
+							<SidebarMenuButton
+								className="cursor-pointer"
+								onClick={() => {
+									router.push("/admin/single-scenario");
+									sidebar.setOpenMobile(false);
+								}}
+								isActive={tab === "single-scenario"}
+							>
+								<FileJson className="mr-2 h-4 w-4" />
+								Single Scenario
 							</SidebarMenuButton>
 						</SidebarMenuItem>
 					</SidebarMenu>

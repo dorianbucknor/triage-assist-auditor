@@ -1,0 +1,39 @@
+{
+  "subjectId": "10012853",
+  "inTime": "2176-10-06 00:32:00",
+  "outTime": "2176-10-06 06:10:00",
+  "triageDuration": 20280,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abd pain",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.78,
+    "pulse": 62,
+    "respiratoryRate": 18,
+    "bloodPressure": "153/61",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "a27a11ef-2bc8-4b16-8e82-fc121c890387"
+}

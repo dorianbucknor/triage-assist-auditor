@@ -1,0 +1,39 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2149-06-19 17:01:00",
+  "outTime": "2149-06-20 13:48:00",
+  "triageDuration": 74820,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Hyperglycemia, Overdose",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37,
+    "pulse": 70,
+    "respiratoryRate": 16,
+    "bloodPressure": "136/70",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "WHITE"
+  },
+  "id": "4c6acead-b2f8-4b32-bcf5-f20dd984a51a"
+}

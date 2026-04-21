@@ -1,0 +1,40 @@
+{
+  "subjectId": "10005909",
+  "inTime": "2144-10-28 18:29:00",
+  "outTime": "2144-10-29 00:10:00",
+  "triageDuration": 20460,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "L Leg DVT",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37,
+    "pulse": 100,
+    "respiratoryRate": 17,
+    "bloodPressure": "120/67",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 5,
+    "race": "WHITE"
+  },
+  "id": "d6169f6b-a0fc-4e82-94af-be769d2325f0"
+}

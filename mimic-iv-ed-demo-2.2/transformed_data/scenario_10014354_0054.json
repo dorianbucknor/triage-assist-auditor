@@ -1,0 +1,39 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2149-03-04 20:24:00",
+  "outTime": "2149-03-05 14:59:00",
+  "triageDuration": 66900,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Confusion, s/p Fall",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.5,
+    "pulse": 71,
+    "respiratoryRate": 18,
+    "bloodPressure": "138/73",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "WHITE"
+  },
+  "id": "d3cf3f02-9617-448a-bb13-71e337fe042c"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10039708",
+  "inTime": "2142-07-06 07:21:00",
+  "outTime": "2142-07-06 09:09:11",
+  "triageDuration": 6491,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Wound eval",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.61,
+    "pulse": 76,
+    "respiratoryRate": 20,
+    "bloodPressure": "112/74",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "28ee14d0-944f-49e2-b198-382e7610c22a"
+}

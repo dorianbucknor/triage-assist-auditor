@@ -1,0 +1,40 @@
+{
+  "subjectId": "10019568",
+  "inTime": "2120-01-30 19:44:00",
+  "outTime": "2120-01-30 22:51:00",
+  "triageDuration": 11220,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Transfer, s/p Fall",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": null,
+    "pulse": 98,
+    "respiratoryRate": 22,
+    "bloodPressure": "148/90",
+    "oxygenSaturation": 95,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 8,
+    "race": "WHITE"
+  },
+  "id": "e9d4b214-2c38-45c4-be99-cb3f383c0ec3"
+}

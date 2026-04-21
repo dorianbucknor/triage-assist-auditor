@@ -1,0 +1,40 @@
+{
+  "subjectId": "10002428",
+  "inTime": "2160-07-15 17:34:00",
+  "outTime": "2160-07-16 18:49:00",
+  "triageDuration": 90900,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "s/p Fall, L Shoulder pain",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.39,
+    "pulse": 94,
+    "respiratoryRate": 23,
+    "bloodPressure": "145/83",
+    "oxygenSaturation": 94,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 3,
+    "race": "WHITE"
+  },
+  "id": "8a89dd12-6df2-40e5-81b1-1fe32e1f76f4"
+}

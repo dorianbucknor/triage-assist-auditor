@@ -1,0 +1,40 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2149-09-19 16:20:00",
+  "outTime": "2149-09-19 18:34:00",
+  "triageDuration": 8040,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abd pain, Back pain",
+    "description": ""
+  },
+  "modeOfArrival": "UNKNOWN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.11,
+    "pulse": 78,
+    "respiratoryRate": 19,
+    "bloodPressure": "151/75",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 9,
+    "race": "WHITE"
+  },
+  "id": "1a9947fa-1162-4ce1-ad89-f2b78a22683e"
+}

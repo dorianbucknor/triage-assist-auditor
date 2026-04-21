@@ -1,0 +1,40 @@
+{
+  "subjectId": "10018845",
+  "inTime": "2184-10-07 22:35:00",
+  "outTime": "2184-10-08 04:09:00",
+  "triageDuration": 20040,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "s/p Fall, SDH",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.67,
+    "pulse": 65,
+    "respiratoryRate": 15,
+    "bloodPressure": "123/70",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "1acd3508-6c41-4988-aeaa-c8055ce73348"
+}

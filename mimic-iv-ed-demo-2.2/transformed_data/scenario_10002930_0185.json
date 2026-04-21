@@ -1,0 +1,39 @@
+{
+  "subjectId": "10002930",
+  "inTime": "2196-04-14 05:55:00",
+  "outTime": "2196-04-14 13:40:00",
+  "triageDuration": 27900,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "ETOH, Hypoglycemia",
+    "description": ""
+  },
+  "modeOfArrival": "UNKNOWN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.67,
+    "pulse": 84,
+    "respiratoryRate": 12,
+    "bloodPressure": "110/65",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "552d0186-bafb-4e54-b9c4-3f0affe718df"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10002428",
+  "inTime": "2156-04-12 09:56:00",
+  "outTime": "2156-04-12 14:17:27",
+  "triageDuration": 15687,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "DIARRHEA,FEVER",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 38.33,
+    "pulse": 120,
+    "respiratoryRate": 28,
+    "bloodPressure": "108/55",
+    "oxygenSaturation": 96,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "d348383d-c128-4a5f-84db-81e7ad885be8"
+}

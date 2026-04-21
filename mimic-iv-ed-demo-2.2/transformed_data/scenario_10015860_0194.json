@@ -1,0 +1,39 @@
+{
+  "subjectId": "10015860",
+  "inTime": "2189-09-28 14:56:00",
+  "outTime": "2189-09-28 17:49:00",
+  "triageDuration": 10380,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Foot laceration",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.67,
+    "pulse": 100,
+    "respiratoryRate": 18,
+    "bloodPressure": "138/74",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "WHITE"
+  },
+  "id": "5c3d302c-81c6-446a-9cd9-f446c13ac80b"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10035631",
+  "inTime": "2115-11-08 12:02:00",
+  "outTime": "2115-11-08 15:43:00",
+  "triageDuration": 13260,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abnormal labs, Weakness",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.06,
+    "pulse": 89,
+    "respiratoryRate": 18,
+    "bloodPressure": "141/70",
+    "oxygenSaturation": 96,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 3,
+    "race": "WHITE"
+  },
+  "id": "2b1eb7e2-4026-4dc2-a3ce-ca92e818bb8b"
+}

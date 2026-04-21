@@ -1,0 +1,40 @@
+{
+  "subjectId": "10012853",
+  "inTime": "2175-05-29 07:49:00",
+  "outTime": "2175-05-29 12:49:00",
+  "triageDuration": 18000,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Urinary retention, Lower abdominal pain",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.06,
+    "pulse": 82,
+    "respiratoryRate": 18,
+    "bloodPressure": "167/92",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 4,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "d5263704-1fe3-4119-bfa4-5479a32dc7df"
+}

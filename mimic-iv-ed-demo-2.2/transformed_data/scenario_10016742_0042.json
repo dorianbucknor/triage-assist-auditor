@@ -1,0 +1,39 @@
+{
+  "subjectId": "10016742",
+  "inTime": "2178-07-22 05:41:00",
+  "outTime": "2178-07-22 08:19:00",
+  "triageDuration": 9480,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Dyspnea, Transfer",
+    "description": ""
+  },
+  "modeOfArrival": "UNKNOWN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.22,
+    "pulse": 94,
+    "respiratoryRate": 15,
+    "bloodPressure": "107/66",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "3cb436ae-3904-454f-a7a9-5e7078b198f9"
+}

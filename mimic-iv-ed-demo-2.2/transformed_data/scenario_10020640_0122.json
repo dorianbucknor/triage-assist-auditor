@@ -1,0 +1,39 @@
+{
+  "subjectId": "10020640",
+  "inTime": "2153-02-12 21:59:00",
+  "outTime": "2153-02-13 01:38:00",
+  "triageDuration": 13140,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "SOB/ABNL LABS",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.33,
+    "pulse": 110,
+    "respiratoryRate": 28,
+    "bloodPressure": "123/79",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "1.0",
+    "race": "WHITE"
+  },
+  "id": "be5421de-f538-4e51-babe-97b47d062204"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2148-12-01 23:00:00",
+  "outTime": "2148-12-02 09:29:00",
+  "triageDuration": 37740,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Epigastric pain",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.67,
+    "pulse": 72,
+    "respiratoryRate": 18,
+    "bloodPressure": "116/70",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 5,
+    "race": "WHITE"
+  },
+  "id": "187763aa-2496-4200-bda6-bc3de5fe546a"
+}

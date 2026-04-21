@@ -1,0 +1,40 @@
+{
+  "subjectId": "10039708",
+  "inTime": "2143-09-26 08:16:00",
+  "outTime": "2143-09-26 19:52:00",
+  "triageDuration": 41760,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Lethargy",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 35.61,
+    "pulse": 63,
+    "respiratoryRate": 20,
+    "bloodPressure": "111/82",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "845b0461-18ce-4e79-9409-c3021d58b6c4"
+}

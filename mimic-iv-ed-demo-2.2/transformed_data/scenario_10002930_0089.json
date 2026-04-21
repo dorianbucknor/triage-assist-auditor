@@ -1,0 +1,40 @@
+{
+  "subjectId": "10002930",
+  "inTime": "2197-04-07 03:20:00",
+  "outTime": "2197-04-07 06:56:40",
+  "triageDuration": 13000,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Psychiatric hold",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.67,
+    "pulse": 104,
+    "respiratoryRate": 18,
+    "bloodPressure": "121/83",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "900d24e3-4b60-415c-a0eb-635cd2633bfb"
+}
