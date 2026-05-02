@@ -23,16 +23,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import Link from "next/link";
 import { toast } from "sonner";
-import { Check, Mail, User, FileText, CheckCircle } from "lucide-react";
+import { Check, Mail, User, FileText } from "lucide-react";
 import {
 	InputOTP,
 	InputOTPGroup,
 	InputOTPSeparator,
 	InputOTPSlot,
 } from "./ui/input-otp";
-import { InputOTPWithSeparator } from "./otp-input";
 import { Turnstile, TurnstileInstance } from "@marsidev/react-turnstile";
-import { supabaseClient } from "@/providers/supabase/client";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 
 const validationSchema = z.object({
