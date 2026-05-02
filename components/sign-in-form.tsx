@@ -23,6 +23,8 @@ import z, { set } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useAtom } from "jotai";
+import { store, userAtom } from "@/providers/jotai/jotai";
 
 export function SignInForm({
 	className,
@@ -34,6 +36,7 @@ export function SignInForm({
 	const [pending, setPending] = useState(false);
 	const router = useRouter();
 	const [showTos, setShowTos] = useState(false);
+	const [user] = useAtom(userAtom, { store: store });
 	const validationSchema = z.object({
 		email: z.email("Please enter a valid email address"),
 		password: z.string(),
@@ -69,7 +72,7 @@ export function SignInForm({
 
 		try {
 			const {
-				data: { user, session },
+				data: { user: usr, session },
 				error,
 			} = await supabaseClient.auth.signInWithPassword({
 				email: email.trim().toLowerCase(),
@@ -88,14 +91,24 @@ export function SignInForm({
 				return;
 			}
 
-			if (user) {
+			if (usr) {
 				toast.dismiss(loadToast);
-				toast.info("Successfully signed in!");
+
+				if (user) {
+					toast.info(
+						"Successfully signed in " + user.data?.firstName + "!",
+					);
+				} else {
+					toast.info("Successfully signed in! Pleasing wait...");
+				}
+
 				if (getUserRole(session) === "user") {
 					router.push("/app");
+					window.location.reload();
 					setPending(false);
 				} else {
 					router.push("/admin");
+					window.location.reload();
 					setPending(false);
 				}
 			}
