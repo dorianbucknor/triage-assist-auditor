@@ -57,12 +57,13 @@ export const getUser = cache(async () => {
 	}
 });
 
-type SessionResponse = {
-	isAuth: boolean;
+export type SessionResponse = {
+	loggedIn: boolean;
 	userId: string | null;
 	session: Session | null;
 	userRole: string | null;
 	user: User | null;
+    userData?: UserData | null;
 };
 
 export const verifySession = cache(async () => {
@@ -78,7 +79,7 @@ export const verifySession = cache(async () => {
 		await (await supabaseClient()).auth.signOut();
 
 		return {
-			isAuth: false,
+			loggedIn: false,
 			userId: null,
 			session: null,
 			userRole: null,
@@ -91,7 +92,7 @@ export const verifySession = cache(async () => {
 		: { user_role: null };
 
 	return {
-		isAuth: session && user ? true : false,
+		loggedIn: session && user ? true : false,
 		userId: user.id,
 		session,
 		userRole: cookie["user_role"],

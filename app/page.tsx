@@ -39,7 +39,7 @@ const STATS = [
 	{ value: "CDSS", unit: "Explainable AI", sub: "framework" },
 	{ value: "IRB", unit: "Aligned", sub: "data protocols" },
 ];
-// 
+//
 export default function LandingPage() {
 	// const parentRef = useRef<HTMLDivElement>(null);
 

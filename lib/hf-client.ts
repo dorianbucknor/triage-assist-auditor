@@ -8,11 +8,7 @@ import { OpenAI } from "openai";
  * @param labsSummary - Summary of lab results
  * @returns Parsed AIResponse with diagnosis, triage, and treatment recommendations
  */
-export async function callHFInference(
-	data: string,
-	medicalHistorySummary: string[],
-	labsSummary: string,
-): Promise<AIResponse> {
+export async function callHFInference(data: string): Promise<AIResponse> {
 	const hfToken = process.env.HF_API_KEY;
 
 	if (!hfToken) {
@@ -30,7 +26,7 @@ export async function callHFInference(
 			{
 				role: "system",
 				content:
-					"You are a medical assistant. Analyze patient triage data and return ONLY a JSON response with the keys: diagnosis (primary, reason, confidence), triage (level (using ESI: 1 | 2 | 3 |  4 | 5 number only), reason, confidence), and treatment (recommendations, reason, confidence).",
+					'You are a clinical decision support system. Analyze structured patient vitals and triage data. Output must be a single JSON object. \n\nSTRICT OUTPUT RULES:\n1. Every key defined in the schema MUST be present with non-empty values.\n2. Input fields marked as \'unknown\' should be clinically inferred based on available vitals and chief complaints.\n3. \'triage.level\' must be an integer (1-5) following ESI protocols.\n4. \'confidence\' must be a float between 0.0 and 1.0.\n\nSCHEMA:\n{\n  "diagnosis": { "primary": "string", "reason": "string", "confidence": number },\n  "triage": { "level": number, "reason": "string", "confidence": number },\n  "treatment": { "recommendations": ["string"], "reason": "string", "confidence": number }\n}',
 			},
 			{
 				role: "user",
@@ -40,7 +36,7 @@ export async function callHFInference(
 		temperature: 0.1,
 		response_format: { type: "json_object" },
 		stream: false,
-		max_tokens: 1000,
+		max_tokens: 1500,
 	});
 
 	if (chatCompletion.choices && chatCompletion.choices.length > 0) {
@@ -62,42 +58,4 @@ export async function callHFInference(
 		console.error("No choices in HF response:", chatCompletion);
 		throw new Error("HuggingFace response has no choices");
 	}
-
-	// if (!hfResponse.ok) {
-	// 	const errorData = await hfResponse.json();
-	// 	console.error("HuggingFace API error:", errorData);
-	// 	throw new Error(
-	// 		`HuggingFace API failed: ${hfResponse.status} - ${JSON.stringify(errorData)}`,
-	// 	);
-	// }
-
-	// const responseData = await hfResponse.json();
-	// console.log("HF Raw response:", responseData);
-
-	// // HF returns an array with generated_text property
-	// let generatedText = "";
-
-	// if (Array.isArray(responseData)) {
-	// 	generatedText = responseData[0]?.generated_text || "";
-	// } else if (responseData.generated_text) {
-	// 	generatedText = responseData.generated_text;
-	// }
-
-	// // Extract JSON from the generated text
-	// // Remove the prompt from the response
-	// const jsonMatch = generatedText.match(/\{[\s\S]*\}/);
-
-	// if (!jsonMatch) {
-	// 	console.error("No JSON found in HF response:", generatedText);
-	// 	throw new Error("Failed to extract JSON from HuggingFace response");
-	// }
-
-	// try {
-	// 	const parsedResponse = JSON.parse(jsonMatch[0]);
-	// 	return parsedResponse as AIResponse;
-	// } catch (error) {
-	// 	console.error("Error parsing HF response JSON: ", error);
-	// 	console.error("Extracted JSON:", jsonMatch[0]);
-	// 	throw new Error("Failed to parse HuggingFace response as JSON");
-	// }
 }
