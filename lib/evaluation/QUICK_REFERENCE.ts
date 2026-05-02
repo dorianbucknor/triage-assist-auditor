@@ -3,7 +3,8 @@
 import { DiagnosisEvaluationService } from "@/lib/evaluation/evaluation-service";
 import { ResearchDataExporter } from "@/lib/evaluation/research-exporter";
 import { HFSemanticSimilarity } from "@/lib/evaluation/hf-semantic";
-import type { Scenario, DiagnosisEvaluationRecord } from "@/lib/types";
+import type { Scenario } from "@/lib/types";
+import { DiagnosisEvaluationRecord } from "./types";
 
 /**
  * QUICK START - Copy & Paste Examples
@@ -173,8 +174,9 @@ export function getKeyStats(evaluations: DiagnosisEvaluationRecord[]) {
 // ============================================
 // 7. INTEGRATION WITH YOUR PAGE
 // ============================================
-export function integrateMetricsIntoUI(scenario: Scenario) {
-	const evaluation = DiagnosisEvaluationService.evaluateScenario(scenario);
+export async function integrateMetricsIntoUI(scenario: Scenario) {
+	const evaluation =
+		await DiagnosisEvaluationService.evaluateScenario(scenario);
 
 	// This HTML shows how to display metrics
 	const metricsHTML = `
