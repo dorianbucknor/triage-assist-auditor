@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
 	Field,
 	FieldDescription,
+	FieldError,
 	FieldGroup,
 	FieldLabel,
 	FieldLegend,
@@ -23,15 +24,15 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { TriageData as TriageData } from "@/lib/types";
-import { Plus } from "lucide-react";
-import { ButtonGroup } from "../ui/button-group";
+import { TriageData } from "@/lib/types";
 import AddChipInput from "../ui/chip-add-input";
 import Chip from "../ui/chip";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import z from "zod";
+import z, { mime, set } from "zod";
 import NumberInput from "../ui/number-input";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const PMH_OPTIONS = [
 	"Diabetes",
@@ -54,68 +55,134 @@ function TriageForm({
 	onSubmit,
 	onClose,
 }: {
-	onSubmit?: (data: TriageData) => void;
+	onSubmit?: (data: TriageData) => Promise<boolean>;
 	onClose?: () => void;
 }) {
-	const schema = z.object({
-		age: z.string(),
-		gender: z.string(),
-		height: z.string(),
-		weight: z.string(),
+	const TriageFormSchema = z.object({
+		age: z.string().optional(),
+		gender: z.string("Gender is required"),
+		height: z.coerce
+			.number()
+			.min(0, "Height must be a positive number")
+			.optional(),
+		weight: z.coerce
+			.number()
+			.min(0, "Weight must be a positive number")
+			.optional(),
 		chiefComplaint: z.object({
-			title: z.string(),
-			description: z.string(),
+			title: z
+				.string("Chief complaint is required")
+				.min(2, "Chief complaint must be at least 2 characters"),
+			description: z
+				.string("Chief complaint description is required")
+				.min(
+					10,
+					"Chief complaint description must be at least 10 characters",
+				),
 		}),
-		modeOfArrival: z.string().nullish(),
-		mentalStatus: z.string().nullish(),
-		respiratoryStatus: z.string().nullish(),
-		medicalHistory: z.array(z.string()),
-		currentMedication: z.array(z.string()),
-		smoker: z.string(),
-		alcohol: z.string(),
-		allergies: z.array(z.string()),
-		surgicalHistory: z.array(z.string()),
-		immunization: z.array(z.string()),
+		modeOfArrival: z
+			.string("Mode of arrival is required")
+			.min(1, "Mode of arrival must be chosen"),
+		mentalStatus: z
+			.string("Mental status is required")
+			.min(1, "Mental status must be chosen"),
+		respiratoryStatus: z
+			.string("Respiratory status is required")
+			.min(1, "Respiratory status must be chosen"),
+		medicalHistory: z.array(z.string()).optional(),
+		currentMedication: z.array(z.string()).optional(),
+		smoker: z.string("Smoker status is required"),
+		alcohol: z.string("Alcohol use is required"),
+		allergies: z.array(z.string()).optional(),
+		surgicalHistory: z.array(z.string()).optional(),
+		immunization: z.array(z.string()).optional(),
 		vitals: z.object({
-			temperature: z.string(),
-			pulse: z.string(),
-			respiratoryRate: z.string(),
+			temperature: z.coerce
+				.number()
+				.min(0, "Temperature must be a positive number")
+				.optional(),
+			pulse: z.coerce
+				.number()
+				.min(0, "Pulse must be a non-negative number")
+				.optional(),
+			respiratoryRate: z.coerce
+				.number()
+				.min(0, "Respiratory rate must be a positive number")
+				.optional(),
 			bloodPressure: z
 				.string()
 				.regex(
-					/^\d{1,3}\/\d{1,3}$/,
+					/(^$|^\d{1,3}\/\d{1,3}$)/,
 					"Blood pressure must be in the format 'systolic/diastolic'",
-				),
-			oxygenSaturation: z.string(),
-			glucose: z.string(),
-			bhcg: z.string(),
+				)
+				.optional(),
+			oxygenSaturation: z.coerce
+				.number()
+				.min(0, "Oxygen saturation must be a positive number")
+				.max(100, "Oxygen saturation cannot be greater than 100")
+				.optional(),
+			glucose: z.coerce
+				.number()
+				.min(0, "Glucose must be a positive number")
+				.optional(),
+			bhcg: z.string().optional(),
 		}),
 		urinalysis: z
 			.object({
-				blood: z.string(),
-				nitrites: z.string(),
-				protein: z.string(),
-				bilirubin: z.string(),
-				glucose: z.string(),
-				pH: z.string(),
-				wbc: z.string(),
-				ketones: z.string(),
+				blood: z.string().optional(),
+				nitrites: z.string().optional(),
+				protein: z.string().optional(),
+				bilirubin: z.string().optional(),
+				glucose: z.string().optional(),
+				pH: z.coerce
+					.number()
+					.min(0, "pH must be a positive number")
+					.max(14, "pH cannot be greater than 14")
+					.optional(),
+				wbc: z.coerce
+					.number()
+					.min(0, "WBC must be a non-negative number")
+					.optional(),
+				ketones: z.coerce
+					.number()
+					.min(0, "Ketones must be a non-negative number")
+					.optional(),
 			})
-			.nullish(),
+			.optional(),
 	});
 
-	type Type = z.infer<typeof schema>;
+	type FormSchema = z.infer<typeof TriageFormSchema>;
 
-	const { control, setValue, reset } = useForm<Type>({
-		resolver: zodResolver(schema),
-		defaultValues: initialFormData,
+	const { control, setValue, reset, handleSubmit } = useForm<FormSchema>({
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		resolver: zodResolver(TriageFormSchema) as any,
+		defaultValues: initialFormData as any,
 	});
+
+	const [pending, setPending] = useState(false);
 
 	return (
 		<form
 			onSubmit={async (e) => {
 				e.preventDefault();
-				// handleSubmit(onFormSubmit)();
+
+				try {
+					setPending(true);
+					await handleSubmit(async (values) => {
+						if (onSubmit) {
+							const shouldReset = await onSubmit?.(values as any);
+
+							if (shouldReset) {
+								reset();
+							}
+						}
+					})();
+					setPending(false);
+				} catch (error) {
+					// console.error("Validation error:", error);
+					setPending(false);
+					toast.error("Please fix form errors before submitting.");
+				}
 			}}
 			onKeyDown={(e) => {
 				if (e.key === "Enter") {
@@ -140,11 +207,16 @@ function TriageForm({
 									<NumberInput
 										id="age"
 										placeholder="Years"
-										allowFloats
+										allowFloats={false}
 										data-invalid={fieldState.invalid}
 										{...field}
+										value={field.value}
 										min={1}
+										max={1900}
 									/>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -173,6 +245,9 @@ function TriageForm({
 											</SelectItem>
 										</SelectContent>
 									</Select>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -193,6 +268,9 @@ function TriageForm({
 										{...field}
 										min={1}
 									/>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -212,6 +290,9 @@ function TriageForm({
 										{...field}
 										min={1}
 									/>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -233,9 +314,13 @@ function TriageForm({
 								<Input
 									type="text"
 									placeholder="General description..."
+									min={2}
 									data-invalid={fieldState.invalid}
 									{...field}
 								/>
+								<FieldError>
+									{fieldState.error?.message}
+								</FieldError>
 							</Field>
 						)}
 					/>
@@ -256,6 +341,9 @@ function TriageForm({
 									}}
 									{...field}
 								/>
+								<FieldError>
+									{fieldState.error?.message}
+								</FieldError>
 							</Field>
 						)}
 					/>
@@ -267,7 +355,7 @@ function TriageForm({
 				<CardHeader>
 					<h2 className="text-lg font-semibold">Presentation</h2>
 				</CardHeader>
-				<CardContent className="space-y-6">
+				<CardContent className="space-y-6 flex justify-around flex-row! flex-wrap ">
 					<Controller
 						control={control}
 						name="modeOfArrival"
@@ -307,6 +395,9 @@ function TriageForm({
 										))}
 									</FieldGroup>
 								</RadioGroup>
+								<FieldError>
+									{fieldState.error?.message}
+								</FieldError>
 							</FieldSet>
 						)}
 					/>
@@ -350,6 +441,9 @@ function TriageForm({
 										))}
 									</FieldGroup>
 								</RadioGroup>
+								<FieldError>
+									{fieldState.error?.message}
+								</FieldError>
 							</FieldSet>
 						)}
 					/>
@@ -394,344 +488,14 @@ function TriageForm({
 										))}
 									</FieldGroup>
 								</RadioGroup>
+								<FieldError>
+									{fieldState.error?.message}
+								</FieldError>
 							</FieldSet>
 						)}
 					/>
-				</CardContent>
+				</CardContent>{" "}
 			</Card>
-
-			{/* Medical History Card */}
-			<Card>
-				<CardHeader>
-					<h2 className="text-lg font-semibold">Medical History</h2>
-				</CardHeader>
-				<CardContent className="space-y-6 px-8">
-					<Controller
-						control={control}
-						name="medicalHistory"
-						render={({ field, fieldState }) => (
-							<FieldSet data-invalid={fieldState.invalid}>
-								<FieldGroup className="px-4">
-									<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-										{PMH_OPTIONS.map((option, idx) => (
-											<Field
-												key={option}
-												orientation="horizontal"
-											>
-												<Checkbox
-													id={`pmh-${option}`}
-													checked={field.value?.includes(
-														option,
-													)}
-													onCheckedChange={(
-														checked,
-													) => {
-														if (checked) {
-															setValue(
-																"medicalHistory",
-																[
-																	...(field.value ||
-																		[]),
-																	option,
-																],
-															);
-														} else {
-															setValue(
-																"medicalHistory",
-																field.value.filter(
-																	(_, i) =>
-																		i !==
-																		idx,
-																),
-															);
-														}
-													}}
-												/>
-												<Label
-													htmlFor={`pmh-${option}`}
-												>
-													{option}
-												</Label>
-											</Field>
-										))}
-									</div>
-									<Field>
-										<FieldLabel htmlFor="other-pmh">
-											Other
-										</FieldLabel>
-
-										<AddChipInput
-											id="other-pmh"
-											placeholder="List other PMH..."
-											onAdd={(value) => {
-												setValue("medicalHistory", [
-													...field.value,
-													value,
-												]);
-											}}
-										/>
-										<div className="flex flex-row flex-wrap  mt-2">
-											{field.value.map((pmh, index) => (
-												<Chip
-													key={index}
-													label={pmh}
-													onDelete={() => {
-														setValue(
-															"medicalHistory",
-															field.value.filter(
-																(_, i) =>
-																	i !== index,
-															),
-														);
-													}}
-												/>
-											))}
-										</div>
-									</Field>
-								</FieldGroup>
-							</FieldSet>
-						)}
-					/>
-
-					<FieldSet>
-						<FieldLegend className="text-muted-foreground">
-							Social History
-						</FieldLegend>
-						<FieldGroup className="space-y-4 px-4">
-							<Controller
-								control={control}
-								name="smoker"
-								render={({ field, fieldState }) => (
-									<Field>
-										<FieldLabel htmlFor="smoker">
-											Smoking
-										</FieldLabel>
-										<Select
-											data-invalid={fieldState.invalid}
-											{...field}
-											onValueChange={(value) =>
-												setValue("smoker", value)
-											}
-										>
-											<SelectTrigger id="smoker">
-												<SelectValue placeholder="Select..." />
-											</SelectTrigger>
-											<SelectContent>
-												<SelectItem value="Yes">
-													Yes
-												</SelectItem>
-												<SelectItem value="No">
-													No
-												</SelectItem>
-												<SelectItem value="Former">
-													Former
-												</SelectItem>
-											</SelectContent>
-										</Select>
-									</Field>
-								)}
-							/>
-							<Controller
-								control={control}
-								name="alcohol"
-								render={({ field, fieldState }) => (
-									<Field>
-										<FieldLabel htmlFor="alcohol">
-											Alcohol Use
-										</FieldLabel>
-										<Select
-											data-invalid={fieldState.invalid}
-											{...field}
-											onValueChange={(value) =>
-												setValue("alcohol", value)
-											}
-										>
-											<SelectTrigger id="alcohol">
-												<SelectValue placeholder="Select..." />
-											</SelectTrigger>
-											<SelectContent>
-												<SelectItem value="Yes">
-													Yes
-												</SelectItem>
-												<SelectItem value="No">
-													No
-												</SelectItem>
-												<SelectItem value="Former">
-													Former
-												</SelectItem>
-											</SelectContent>
-										</Select>
-									</Field>
-								)}
-							/>
-						</FieldGroup>
-					</FieldSet>
-
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-						<Controller
-							control={control}
-							name="allergies"
-							render={({ field, fieldState }) => (
-								<Field>
-									<FieldLabel htmlFor="allergies">
-										Allergies
-									</FieldLabel>
-
-									<AddChipInput
-										placeholder="List any allergies..."
-										onAdd={(value) => {
-											setValue("allergies", [
-												...field.value,
-												value,
-											]);
-										}}
-										data-invalid={fieldState.invalid}
-									/>
-									<div className="flex flex-row flex-wrap  mt-2">
-										{field.value.map((allergy, index) => (
-											<Chip
-												key={index}
-												label={allergy}
-												onDelete={() => {
-													setValue(
-														"allergies",
-														field.value.filter(
-															(_, i) =>
-																i !== index,
-														),
-													);
-												}}
-											/>
-										))}
-									</div>
-								</Field>
-							)}
-						/>
-						<Controller
-							control={control}
-							name="surgicalHistory"
-							render={({ field, fieldState }) => (
-								<Field>
-									<FieldLabel htmlFor="surgicalHistory">
-										Past Surgical History
-									</FieldLabel>
-
-									<AddChipInput
-										id="surgicalHistory"
-										placeholder="List any surgeries..."
-										onAdd={(value) => {
-											setValue("surgicalHistory", [
-												...field.value,
-												value,
-											]);
-										}}
-										data-invalid={fieldState.invalid}
-									/>
-									<div className="flex flex-row flex-wrap  mt-2">
-										{field.value.map((value, index) => (
-											<Chip
-												key={index}
-												label={value}
-												onDelete={() => {
-													setValue(
-														"surgicalHistory",
-														field.value.filter(
-															(_, i) =>
-																i !== index,
-														),
-													);
-												}}
-											/>
-										))}
-									</div>
-								</Field>
-							)}
-						/>
-					</div>
-
-					<Controller
-						control={control}
-						name="immunization"
-						render={({ field, fieldState }) => (
-							<Field>
-								<FieldLabel htmlFor="immunization">
-									Immunization eg. (Tetanus - 2019)
-								</FieldLabel>
-
-								<AddChipInput
-									id="immunization"
-									placeholder="List any immunizations..."
-									onAdd={(value) => {
-										setValue("immunization", [
-											...field.value,
-											value,
-										]);
-									}}
-									data-invalid={fieldState.invalid}
-								/>
-								<div className="flex flex-row flex-wrap  mt-2">
-									{field.value.map((value, index) => (
-										<Chip
-											key={index}
-											label={value}
-											onDelete={() => {
-												setValue(
-													"immunization",
-													field.value.filter(
-														(_, i) => i !== index,
-													),
-												);
-											}}
-										/>
-									))}
-								</div>
-							</Field>
-						)}
-					/>
-					<Controller
-						control={control}
-						name="currentMedication"
-						render={({ field, fieldState }) => (
-							<Field>
-								<FieldLabel htmlFor="currentMedication">
-									Current Medication
-								</FieldLabel>
-								<FieldDescription>
-									Format: Drug - Occurence (e.g. Acetaminophen
-									- twice daily)
-								</FieldDescription>
-								<AddChipInput
-									placeholder="List any current medications..."
-									onAdd={(value) => {
-										setValue("currentMedication", [
-											...field.value,
-											value,
-										]);
-									}}
-									data-invalid={fieldState.invalid}
-								/>
-								<div className="flex flex-row flex-wrap  mt-2">
-									{field.value.map((meds, index) => (
-										<Chip
-											key={index}
-											label={meds}
-											onDelete={() => {
-												setValue(
-													"currentMedication",
-													field.value.filter(
-														(_, i) => i !== index,
-													),
-												);
-											}}
-										/>
-									))}
-								</div>
-							</Field>
-						)}
-					/>
-				</CardContent>
-			</Card>
-
 			{/* Vital Signs Card */}
 			<Card>
 				<CardHeader>
@@ -750,12 +514,15 @@ function TriageForm({
 									<NumberInput
 										id="temperature"
 										placeholder="36.5"
-										allowFloats
+										allowFloats={true}
 										data-invalid={fieldState.invalid}
 										{...field}
 										min={0}
 										max={45}
 									/>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -775,6 +542,9 @@ function TriageForm({
 										min={0}
 										{...field}
 									/>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -794,6 +564,9 @@ function TriageForm({
 										{...field}
 										min={0}
 									/>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -812,6 +585,9 @@ function TriageForm({
 										placeholder="120/80"
 										{...field}
 									/>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -831,6 +607,9 @@ function TriageForm({
 										{...field}
 										min={0}
 									/>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -850,6 +629,9 @@ function TriageForm({
 										{...field}
 										min={0}
 									/>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -878,6 +660,9 @@ function TriageForm({
 											</SelectItem>
 										</SelectContent>
 									</Select>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -925,6 +710,9 @@ function TriageForm({
 											</SelectItem>
 										</SelectContent>
 									</Select>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -962,6 +750,9 @@ function TriageForm({
 											</SelectItem>
 										</SelectContent>
 									</Select>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -1002,6 +793,9 @@ function TriageForm({
 											</SelectItem>
 										</SelectContent>
 									</Select>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -1042,6 +836,9 @@ function TriageForm({
 											</SelectItem>
 										</SelectContent>
 									</Select>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -1082,6 +879,9 @@ function TriageForm({
 											</SelectItem>
 										</SelectContent>
 									</Select>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -1102,6 +902,9 @@ function TriageForm({
 										{...field}
 										min={0}
 									/>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -1122,6 +925,9 @@ function TriageForm({
 										{...field}
 										min={0}
 									/>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -1142,6 +948,9 @@ function TriageForm({
 										{...field}
 										min={0}
 									/>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
 								</Field>
 							)}
 						/>
@@ -1149,12 +958,380 @@ function TriageForm({
 				</CardContent>
 			</Card>
 
+			{/* Medical History Card */}
+			<Card>
+				<CardHeader>
+					<h2 className="text-lg font-semibold">Medical History</h2>
+				</CardHeader>
+				<CardContent className="space-y-6 px-8">
+					<Controller
+						control={control}
+						name="medicalHistory"
+						render={({ field, fieldState }) => (
+							<FieldSet data-invalid={fieldState.invalid}>
+								<FieldGroup className="px-4">
+									<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+										{PMH_OPTIONS.map((option, idx) => (
+											<Field
+												key={option}
+												orientation="horizontal"
+											>
+												<Checkbox
+													id={`pmh-${option}`}
+													checked={field.value?.includes(
+														option,
+													)}
+													onCheckedChange={(
+														checked,
+													) => {
+														if (checked) {
+															setValue(
+																"medicalHistory",
+																[
+																	...(field.value ||
+																		[]),
+																	option,
+																],
+															);
+														} else {
+															setValue(
+																"medicalHistory",
+																field?.value?.filter(
+																	(_, i) =>
+																		i !==
+																		idx,
+																),
+															);
+														}
+													}}
+												/>
+												<Label
+													htmlFor={`pmh-${option}`}
+												>
+													{option}
+												</Label>
+											</Field>
+										))}
+									</div>
+									<Field>
+										<FieldLabel htmlFor="other-pmh">
+											Other
+										</FieldLabel>
+
+										<AddChipInput
+											id="other-pmh"
+											placeholder="List other PMH..."
+											onAdd={(value) => {
+												setValue("medicalHistory", [
+													...(field?.value || []),
+													value,
+												]);
+											}}
+										/>
+										<div className="flex flex-row flex-wrap  mt-2">
+											{field?.value?.map((pmh, index) => (
+												<Chip
+													key={index}
+													label={pmh}
+													onDelete={() => {
+														setValue(
+															"medicalHistory",
+															field?.value?.filter(
+																(_, i) =>
+																	i !== index,
+															),
+														);
+													}}
+												/>
+											))}
+										</div>
+										<FieldError>
+											{fieldState.error?.message}
+										</FieldError>
+									</Field>
+								</FieldGroup>
+							</FieldSet>
+						)}
+					/>
+
+					<FieldSet>
+						<FieldLegend className="text-muted-foreground">
+							Social History
+						</FieldLegend>
+						<FieldGroup className="space-y-4 px-4">
+							<Controller
+								control={control}
+								name="smoker"
+								render={({ field, fieldState }) => (
+									<Field>
+										<FieldLabel htmlFor="smoker">
+											Smoking
+										</FieldLabel>
+										<Select
+											data-invalid={fieldState.invalid}
+											{...field}
+											onValueChange={(value) =>
+												setValue("smoker", value)
+											}
+										>
+											<SelectTrigger id="smoker">
+												<SelectValue placeholder="Select..." />
+											</SelectTrigger>
+											<SelectContent>
+												<SelectItem value="Yes">
+													Yes
+												</SelectItem>
+												<SelectItem value="No">
+													No
+												</SelectItem>
+												<SelectItem value="Former">
+													Former
+												</SelectItem>
+											</SelectContent>
+										</Select>
+										<FieldError>
+											{fieldState.error?.message}
+										</FieldError>
+									</Field>
+								)}
+							/>
+							<Controller
+								control={control}
+								name="alcohol"
+								render={({ field, fieldState }) => (
+									<Field>
+										<FieldLabel htmlFor="alcohol">
+											Alcohol Use
+										</FieldLabel>
+										<Select
+											data-invalid={fieldState.invalid}
+											{...field}
+											onValueChange={(value) =>
+												setValue("alcohol", value)
+											}
+										>
+											<SelectTrigger id="alcohol">
+												<SelectValue placeholder="Select..." />
+											</SelectTrigger>
+											<SelectContent>
+												<SelectItem value="Yes">
+													Yes
+												</SelectItem>
+												<SelectItem value="No">
+													No
+												</SelectItem>
+												<SelectItem value="Former">
+													Former
+												</SelectItem>
+											</SelectContent>
+										</Select>
+										<FieldError>
+											{fieldState.error?.message}
+										</FieldError>
+									</Field>
+								)}
+							/>
+						</FieldGroup>
+					</FieldSet>
+
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+						<Controller
+							control={control}
+							name="allergies"
+							render={({ field, fieldState }) => (
+								<Field>
+									<FieldLabel htmlFor="allergies">
+										Allergies
+									</FieldLabel>
+
+									<AddChipInput
+										placeholder="List any allergies..."
+										onAdd={(value) => {
+											setValue("allergies", [
+												...(field?.value || []),
+												value,
+											]);
+										}}
+										data-invalid={fieldState.invalid}
+									/>
+									<div className="flex flex-row flex-wrap  mt-2">
+										{field?.value?.map((allergy, index) => (
+											<Chip
+												key={index}
+												label={allergy}
+												onDelete={() => {
+													setValue(
+														"allergies",
+														field?.value?.filter(
+															(_, i) =>
+																i !== index,
+														),
+													);
+												}}
+											/>
+										))}
+									</div>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
+								</Field>
+							)}
+						/>
+						<Controller
+							control={control}
+							name="surgicalHistory"
+							render={({ field, fieldState }) => (
+								<Field>
+									<FieldLabel htmlFor="surgicalHistory">
+										Past Surgical History
+									</FieldLabel>
+
+									<AddChipInput
+										id="surgicalHistory"
+										placeholder="List any surgeries..."
+										onAdd={(value) => {
+											setValue("surgicalHistory", [
+												...(field?.value || []),
+												value,
+											]);
+										}}
+										data-invalid={fieldState.invalid}
+									/>
+									<div className="flex flex-row flex-wrap  mt-2">
+										{field?.value?.map((value, index) => (
+											<Chip
+												key={index}
+												label={value}
+												onDelete={() => {
+													setValue(
+														"surgicalHistory",
+														field?.value?.filter(
+															(_, i) =>
+																i !== index,
+														),
+													);
+												}}
+											/>
+										))}
+									</div>
+									<FieldError>
+										{fieldState.error?.message}
+									</FieldError>
+								</Field>
+							)}
+						/>
+					</div>
+
+					<Controller
+						control={control}
+						name="immunization"
+						render={({ field, fieldState }) => (
+							<Field>
+								<FieldLabel htmlFor="immunization">
+									Immunization eg. (Tetanus - 2019)
+								</FieldLabel>
+
+								<AddChipInput
+									id="immunization"
+									placeholder="List any immunizations..."
+									onAdd={(value) => {
+										setValue("immunization", [
+											...(field?.value || []),
+											value,
+										]);
+									}}
+									data-invalid={fieldState.invalid}
+								/>
+								<div className="flex flex-row flex-wrap  mt-2">
+									{field?.value?.map((value, index) => (
+										<Chip
+											key={index}
+											label={value}
+											onDelete={() => {
+												setValue(
+													"immunization",
+													field?.value?.filter(
+														(_, i) => i !== index,
+													),
+												);
+											}}
+										/>
+									))}
+								</div>
+								<FieldError>
+									{fieldState.error?.message}
+								</FieldError>
+							</Field>
+						)}
+					/>
+					<Controller
+						control={control}
+						name="currentMedication"
+						render={({ field, fieldState }) => (
+							<Field>
+								<FieldLabel htmlFor="currentMedication">
+									Current Medication
+								</FieldLabel>
+								<FieldDescription>
+									Format: Drug - Occurence (e.g. Acetaminophen
+									- twice daily)
+								</FieldDescription>
+								<AddChipInput
+									placeholder="List any current medications..."
+									onAdd={(value) => {
+										setValue("currentMedication", [
+											...(field?.value || []),
+											value,
+										]);
+									}}
+									data-invalid={fieldState.invalid}
+								/>
+								<div className="flex flex-row flex-wrap  mt-2">
+									{field?.value?.map((meds, index) => (
+										<Chip
+											key={index}
+											label={meds}
+											onDelete={() => {
+												setValue(
+													"currentMedication",
+													field?.value?.filter(
+														(_, i) => i !== index,
+													),
+												);
+											}}
+										/>
+									))}
+								</div>
+								<FieldError>
+									{fieldState.error?.message}
+								</FieldError>
+							</Field>
+						)}
+					/>
+				</CardContent>
+			</Card>
+
 			{/* Form Actions */}
 			<div className="flex gap-3 justify-end pt-4">
-				<Button type="button" variant="outline" onClick={() => reset()}>
+				<Button
+					type="button"
+					disabled={pending}
+					variant="outline"
+					onClick={() => {
+						reset();
+					}}
+				>
 					Clear
 				</Button>
-				<Button type="submit">Save</Button>
+				<Button
+					disabled={pending}
+					type="submit"
+					onClick={() => {
+						console.log("submit form");
+					}}
+				>
+					Save
+				</Button>
 			</div>
 		</form>
 	);

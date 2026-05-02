@@ -8,7 +8,7 @@ export default function ResponseCard({
 	icon: Icon,
 }: {
 	title: string;
-	level?: string;
+	level?: number | string;
 	reasoning: string;
 	confidence: number;
 	icon: React.ComponentType<{ className?: string }>;
@@ -40,9 +40,9 @@ export default function ResponseCard({
 				<div className="flex items-center justify-between">
 					<span className="text-sm font-medium">Confidence</span>
 					<span
-						className={`px-3 py-1 rounded-full text-sm font-semibold ${getConfidenceColor(confidence)}`}
+						className={`px-3 py-1 rounded-full text-sm font-semibold ${getConfidenceColor(confidence * 100)}`}
 					>
-						{confidence}%
+						{Math.round(confidence * 100)}%
 					</span>
 				</div>
 			</CardContent>
