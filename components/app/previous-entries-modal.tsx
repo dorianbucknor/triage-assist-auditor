@@ -97,6 +97,7 @@ export default function PreviousEntriesModal({
 
 	useEffect(() => {
 		if (open) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect
 			fetchUserScenarios();
 		}
 	}, [open]);
@@ -116,6 +117,7 @@ export default function PreviousEntriesModal({
 			);
 		});
 
+		// eslint-disable-next-line react-hooks/set-state-in-effect
 		setFilteredScenarios(filtered);
 	}, [searchQuery, scenarios]);
 
