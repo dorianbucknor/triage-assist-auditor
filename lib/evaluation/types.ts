@@ -2,6 +2,8 @@
  * Types for research evaluation and reporting
  */
 
+import { Vitals } from "../types";
+
 export interface EvaluationMetrics {
 	// Diagnosis accuracy
 	diagnosisExactMatch: boolean;
@@ -39,19 +41,13 @@ export interface DiagnosisEvaluationRecord {
 		triageDuration: number; // seconds
 		modeOfArrival: string;
 		gender?: string;
-		vitals?: {
-			temperature?: number;
-			pulse?: number;
-			respiratoryRate?: number;
-			bloodPressure?: string;
-			oxygenSaturation?: number;
-		};
+		vitals?: Vitals;
 	};
 
 	// AI Prediction
 	aiPrediction: {
 		diagnosis: string;
-		triageLevel: string;
+		triageLevel: number;
 		treatment: string;
 		confidence: number;
 		reasoningExplanation?: string;

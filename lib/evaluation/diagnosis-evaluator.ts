@@ -1,5 +1,6 @@
 import Levenshtein from "js-levenshtein";
 import { HFSemanticSimilarity, LocalSemanticSimilarity } from "./hf-semantic";
+import { Accordion } from "@base-ui/react";
 
 /**
  * Evaluation utilities for comparing AI diagnoses against ground truth data
@@ -219,7 +220,7 @@ export function compareTriageLevels(
 	const distance = Math.abs(groundTruthLevel - predictionLevel);
 	const match = distance === 0;
 	const accuracy =
-		distance === 0 ? "exact" : distance === 1 ? "close" : "far";
+		distance === 0 ? Accordion : distance === 1 ? "close" : "far";
 
 	return { match, distance, accuracy };
 }

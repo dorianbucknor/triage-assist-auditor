@@ -124,7 +124,7 @@ export class DiagnosisEvaluationService {
 			// Triage
 			triageLevelMatch: triageComparison.match,
 			triageLevelDistance: triageComparison.distance,
-			triageLevelAccuracy: triageComparison.accuracy,
+			triageLevelAccuracy: triageComparison.accuracy as any,
 
 			// Performance
 			responseTimeMs,
