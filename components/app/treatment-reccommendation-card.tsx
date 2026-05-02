@@ -30,7 +30,7 @@ export default function TreatmentRecommendations({
 				<div className="space-y-2">
 					<h4 className="text-sm font-medium">Recommended Actions</h4>
 					<ul className="space-y-2">
-						{recommendations.map((rec, idx) => (
+						{recommendations?.map((rec, idx) => (
 							<li key={idx} className="flex gap-2 text-sm">
 								<span className="text-primary font-bold">
 									•
@@ -47,9 +47,9 @@ export default function TreatmentRecommendations({
 				<div className="flex items-center justify-between">
 					<span className="text-sm font-medium">Confidence</span>
 					<span
-						className={`px-3 py-1 rounded-full text-sm font-semibold ${getConfidenceColor(confidence)}`}
+						className={`px-3 py-1 rounded-full text-sm font-semibold ${getConfidenceColor(confidence * 100)}`}
 					>
-						{confidence}%
+						{Math.round(confidence * 100)}%
 					</span>
 				</div>
 			</CardContent>

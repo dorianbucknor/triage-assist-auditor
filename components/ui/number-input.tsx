@@ -8,18 +8,17 @@ import { cn } from "@/lib/utils";
 
 export default function NumberInput({
 	increment = 1,
-	allowFloats = false,
+	allowFloats = true,
 	onChange = () => {},
 	onBlur = () => {},
 	placeholder,
-	// value,
+	value,
 	...props
 }: {
 	allowFloats?: boolean;
 	increment?: number;
-	// value?: number;
-	onChange: (value?: number) => void;
-	onBlur: (value?: number) => void;
+	onChange: (value?: string | number) => void;
+	onBlur: (value?: string | number) => void;
 	placeholder?: string;
 } & React.DetailedHTMLProps<
 	React.InputHTMLAttributes<HTMLInputElement>,
@@ -27,6 +26,18 @@ export default function NumberInput({
 >) {
 	const ref = React.useRef<HTMLInputElement>(null);
 
+	const isNumber = (value: string) => {
+		return /^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/.test(value.trim());
+	};
+
+	const isValidInput = (value: string) => {
+		return (
+			value.trim() === "." ||
+			value.trim() === "" ||
+			value.trim() === "-" ||
+			isNumber(value)
+		);
+	};
 	const min = allowFloats
 		? parseFloat(props?.min as string)
 		: parseInt(props?.min as string, 10);
@@ -38,7 +49,6 @@ export default function NumberInput({
 	function handleIncrement(increment: number) {
 		if (!ref.current) return;
 		const input = ref.current;
-
 		if (input) {
 			const val = allowFloats
 				? parseFloat(input.value.trim())
@@ -46,49 +56,39 @@ export default function NumberInput({
 
 			if (isNaN(val)) {
 				input.value = min ? min.toString() : "0";
-
 				onChange(undefined);
 				onBlur(undefined);
 			} else {
 				let newVal = val + increment;
-
 				if (props?.min !== undefined && !isNaN(min) && newVal < min) {
 					newVal = min;
 				}
 				if (props?.max !== undefined && !isNaN(max) && newVal > max) {
 					newVal = max;
 				}
-
-				input.value = newVal.toString();
-				onChange(newVal);
-				onBlur(newVal);
+				input.value = newVal.toFixed(1);
+				onChange(newVal.toFixed(1));
+				onBlur(newVal.toFixed(1));
 			}
 		}
 	}
 
-	function handleInputChange(e: EventTarget) {
+	function handleInputChange(e: EventTarget, isBlur: boolean = false) {
 		const input = e as HTMLInputElement;
 
-		if (input && input.value.trim() !== "") {
-			let val = allowFloats
-				? parseFloat(input.value.trim())
-				: parseInt(input.value.trim(), 10);
+		if (!input) return;
+		const inputString = input.value.trim();
 
-			if (isNaN(val)) {
-				input.value = "";
-				onChange(undefined);
-				onBlur(undefined);
-			} else {
-				if (props?.min !== undefined && !isNaN(min) && val < min) {
-					val = min;
-				}
-				if (props?.max !== undefined && !isNaN(max) && val > max) {
-					val = max;
-				}
-				input.value = val.toString();
-				onChange(val);
-				onBlur(val);
+		if (isValidInput(inputString) && onChange) {
+			let newValue = inputString;
+
+			if (inputString.trim() === ".") {
+				newValue = "0.";
 			}
+
+			onChange(newValue);
+		} else {
+			input.value = "";
 		}
 	}
 
@@ -110,22 +110,38 @@ export default function NumberInput({
 				{...props}
 				className={cn("no-outer-arrows ", props.className)}
 				ref={ref}
+				value={value}
 				type="text"
 				onKeyDown={(e) => {
-					if (e.key === "Enter") {
-						e.preventDefault();
-						e.stopPropagation();
-
-						handleInputChange(e.target);
+					switch (e.key) {
+						case "Enter":
+							e.preventDefault();
+							e.stopPropagation();
+							handleInputChange(e.target, true);
+							break;
+						case "ArrowUp":
+							e.preventDefault();
+							handleIncrement(increment);
+							break;
+						case "ArrowDown":
+							e.preventDefault();
+							handleIncrement(-increment);
+							break;
 					}
-
 					props.onKeyDown?.(e);
 				}}
 				onChange={(e) => {
-					handleInputChange(e.target);
+					handleInputChange(e.target, false);
 				}}
 				onBlur={(e) => {
-					handleInputChange(e.target);
+					handleInputChange(e.target, true);
+					// Ensure floats display with at least one decimal place
+					// if (allowFloats && ref.current && ref.current.value) {
+					// 	const val = parseFloat(ref.current.value);
+					// 	if (!isNaN(val) && !ref.current.value.includes(".")) {
+					// 		ref.current.value = val.toFixed(1);
+					// 	}
+					// }
 				}}
 			/>
 			<Button

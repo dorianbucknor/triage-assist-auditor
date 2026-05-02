@@ -1,4 +1,4 @@
-import { ClinicalGrading } from "@/lib/types";
+import { AIResponse, ClinicalGrading } from "@/lib/types";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { Label } from "../ui/label";
@@ -26,8 +26,9 @@ const GradingSection = forwardRef<
 	{
 		onGrade?: (grading: ClinicalGrading) => Promise<boolean>;
 		initialGrading?: ClinicalGrading;
+		aiResposnse?: AIResponse;
 	}
->(function GradingSection({ onGrade, initialGrading }, ref) {
+>(function GradingSection({ onGrade, initialGrading, aiResposnse }, ref) {
 	const [grading, setGrading] = useState<ClinicalGrading>({
 		triageGrading: 5,
 		diagnosisGrading: 5,
@@ -144,7 +145,12 @@ const GradingSection = forwardRef<
 				</CardHeader>
 				<CardContent className="space-y-4">
 					<div className="space-y-3">
-						<Label className="text-base">AI assigned: ESI-2</Label>
+						<Label className="text-base">
+							AI assigned:{" "}
+							{aiResposnse?.triage?.level
+								? "ESI-" + aiResposnse.triage.level
+								: "Unknown"}
+						</Label>
 						<div className="flex gap-2">
 							{[1, 2, 3, 4, 5].map((scale) => (
 								<Button
@@ -251,7 +257,8 @@ const GradingSection = forwardRef<
 				<CardContent className="space-y-4">
 					<div className="space-y-3">
 						<Label className="text-base">
-							AI assigned: Acute Coronary Syndrome (ACS)
+							AI assigned:{" "}
+							{aiResposnse?.diagnosis?.primary || "Unknown"}
 						</Label>
 						<div className="flex gap-2">
 							{[1, 2, 3, 4, 5].map((scale) => (

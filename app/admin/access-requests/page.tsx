@@ -5,6 +5,12 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
+	ColumnDef,
+	flexRender,
+	getCoreRowModel,
+	useReactTable,
+} from "@tanstack/react-table";
+import {
 	Select,
 	SelectContent,
 	SelectItem,
@@ -37,18 +43,10 @@ import {
 } from "@/components/ui/sheet";
 import { toast } from "sonner";
 import { AccessRequest, UserRole } from "@/lib/types";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 export default function AccessRequestsPage() {
-	const [requests, setUsers] = useState<AccessRequest[]>([]);
-
-	// Add form state
-	const [firstName, setFirstName] = useState("");
-	const [lastName, setLastName] = useState("");
-	const [email, setEmail] = useState("");
-	const [tempPassword, setTempPassword] = useState("");
-	const [role, setRole] = useState<UserRole>("user");
-	const [clinicianPosition, setClinicianPosition] = useState("");
-	const [registrationNumber, setRegistrationNumber] = useState("");
+	// const [requests, setUsers] = useState<AccessRequest[]>([]);
 
 	// Edit sheet state
 	const [editingRequest, setEditingUser] = useState<AccessRequest | null>(
@@ -64,7 +62,7 @@ export default function AccessRequestsPage() {
 	const [showAddSheet, setShowAddSheet] = useState(false);
 
 	const removeRequest = (id: string) => {
-		setUsers((s) => s.filter((u) => u.id !== id));
+		// setUsers((s) => s.filter((u) => u.id !== id));
 		toast.success("User removed");
 	};
 
@@ -75,13 +73,13 @@ export default function AccessRequestsPage() {
 
 	const saveEdit = () => {
 		if (!editingRequest) return;
-		setUsers((s) =>
-			s.map((u) =>
-				u.id === editingRequest.id
-					? { ...u, ...(editForm as AccessRequest) }
-					: u,
-			),
-		);
+		// setUsers((s) =>
+		// 	s.map((u) =>
+		// 		u.id === editingRequest.id
+		// 			? { ...u, ...(editForm as AccessRequest) }
+		// 			: u,
+		// 	),
+		// );
 		setEditingUser(null);
 		setEditForm({});
 
@@ -90,10 +88,36 @@ export default function AccessRequestsPage() {
 		);
 	};
 
-	// const handleAddSubmit = () => {
-	// 	addUser();
-	// 	setShowAddSheet(false);
-	// };
+	const PAGE_SIZE = 10;
+
+	const {
+		data: requests,
+		isLoading,
+		error,
+	} = useInfiniteQuery({
+		queryKey: ["access-requests", PAGE_SIZE],
+		queryFn: ({ pageParam = 0 }) => getAccessRequests(pageParam, PAGE_SIZE),
+		getNextPageParam: (lastPage, pages) =>
+			lastPage.length < PAGE_SIZE ? undefined : pages.length,
+		initialPageParam: 0,
+		retry: (failureCount, error) => {
+			if (failureCount >= 3) {
+				console.log("Error prefeching scenarios: " + error);
+				toast.error(
+					"Failed to prefetch access requests after multiple attempts. Please check your connection.",
+				);
+				return false; // Stop retrying after 3 attempts
+			}
+			return true; // Retry on other errors
+		},
+		retryDelay(failureCount, error) {
+			const delay = Math.min(1000 * 4 * failureCount, 30000); // Exponential backoff with max delay
+			console.log(
+				`Retrying fetch access requests in ${delay}ms... (Attempt ${failureCount})`,
+			);
+			return delay;
+		},
+	});
 
 	return (
 		<div className="space-y-6">
@@ -101,10 +125,10 @@ export default function AccessRequestsPage() {
 				<CardHeader>
 					<div className="flex items-center justify-between">
 						<h2 className="text-lg font-semibold">
-							User Management
+							Clinician Access Requests
 						</h2>
 						<Button onClick={() => setShowAddSheet(true)}>
-							Add User
+							Add Request
 						</Button>
 					</div>
 				</CardHeader>
@@ -117,110 +141,129 @@ export default function AccessRequestsPage() {
 								<TableHead>Prof. Role</TableHead>
 								<TableHead>Reg #</TableHead>
 								<TableHead>Institution</TableHead>
-								<TableHead>Status</TableHead>
-								<TableHead>Role</TableHead>
-								<TableHead>Role</TableHead>
-								<TableHead>Disabled</TableHead>
+								<TableHead>Account Status</TableHead>
 								<TableHead>Actions</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{requests.map((request) => (
-								<TableRow key={request.id}>
-									<TableCell>
-										{`${request.firstName || ""} ${request.lastName || ""}`.trim() ||
-											"-"}
-									</TableCell>
-									<TableCell>{request.email}</TableCell>
-									<TableCell>
-										{request.professionalRole}
-									</TableCell>
-									<TableCell>
-										{request.institution || "-"}
-									</TableCell>
-									<TableCell>
-										{request.registrationNumber || "-"}
-									</TableCell>
-									<TableCell>
-										{request.denied ? "Yes" : "No"}
-									</TableCell>
-									<TableCell>
-										<div className="flex gap-2">
-											<Button
-												size="sm"
-												variant="outline"
-												onClick={() =>
-													openEditor(request)
-												}
-											>
-												Edit
-											</Button>
-											<Button
-												size="sm"
-												variant="destructive"
-												onClick={() =>
-													setRemoveCandidate(request)
-												}
-											>
-												Remove
-											</Button>
-											<Dialog
-												open={
-													!!removeCandidate &&
-													removeCandidate.id ===
-														request.id
-												}
-												onOpenChange={() =>
-													setRemoveCandidate(null)
-												}
-											>
-												<DialogContent>
-													<DialogHeader>
-														<DialogTitle>
-															Confirm removal
-														</DialogTitle>
-														<DialogDescription>
-															Remove user{" "}
-															{removeCandidate?.email ||
-																""}
-															?
-														</DialogDescription>
-													</DialogHeader>
-													<div className="pt-4 flex gap-2">
-														<Button
-															variant="destructive"
-															onClick={() => {
-																if (
-																	removeCandidate
-																) {
-																	// removeUser(
-																	// 	removeCandidate.id,
-																	// );
+							{requests?.pages
+								.flatMap((page) => page)
+								.map((request) => (
+									<TableRow key={request.id}>
+										<TableCell>
+											{`${request.firstName || ""} ${request.lastName || ""}`.trim() ||
+												"-"}
+										</TableCell>
+										<TableCell>{request.email}</TableCell>
+										<TableCell>
+											{request.professionalRole}
+										</TableCell>
+
+										<TableCell>
+											{request.registrationNumber || "-"}
+										</TableCell>
+										<TableCell>
+											{request.institution?.toUpperCase() ||
+												"-"}
+										</TableCell>
+										<TableCell>
+											{request.registrationStatus}
+										</TableCell>
+										{/* <TableCell>
+											{request.denied
+												? "Disabled"
+												: "Active"}
+										</TableCell> */}
+										<TableCell>
+											<div className="flex gap-2">
+												<Button
+													size="sm"
+													variant="outline"
+													onClick={() =>
+														openEditor(request)
+													}
+												>
+													Edit
+												</Button>{" "}
+												<Button
+													size="sm"
+													variant="outline"
+													onClick={() => {
+														//todo
+													}}
+												>
+													{request.disabled
+														? "Enable"
+														: "Disable"}
+												</Button>
+												<Button
+													size="sm"
+													variant="destructive"
+													onClick={() =>
+														setRemoveCandidate(
+															request,
+														)
+													}
+												>
+													Delete
+												</Button>
+												<Dialog
+													open={
+														!!removeCandidate &&
+														removeCandidate.id ===
+															request.id
+													}
+													onOpenChange={() =>
+														setRemoveCandidate(null)
+													}
+												>
+													<DialogContent>
+														<DialogHeader>
+															<DialogTitle>
+																Confirm removal
+															</DialogTitle>
+															<DialogDescription>
+																Delete request{" "}
+																{removeCandidate?.email ||
+																	""}
+																?
+															</DialogDescription>
+														</DialogHeader>
+														<div className="pt-4 flex gap-2">
+															<Button
+																variant="destructive"
+																onClick={() => {
+																	if (
+																		removeCandidate
+																	) {
+																		// removeUser(
+																		// 	removeCandidate.id,
+																		// );
+																		setRemoveCandidate(
+																			null,
+																		);
+																	}
+																}}
+															>
+																Delete
+															</Button>
+															<Button
+																variant="outline"
+																onClick={() =>
 																	setRemoveCandidate(
 																		null,
-																	);
+																	)
 																}
-															}}
-														>
-															Remove
-														</Button>
-														<Button
-															variant="outline"
-															onClick={() =>
-																setRemoveCandidate(
-																	null,
-																)
-															}
-														>
-															Cancel
-														</Button>
-													</div>
-												</DialogContent>
-											</Dialog>
-										</div>
-									</TableCell>
-								</TableRow>
-							))}
+															>
+																Cancel
+															</Button>
+														</div>
+													</DialogContent>
+												</Dialog>
+											</div>
+										</TableCell>
+									</TableRow>
+								))}
 						</TableBody>
 					</Table>
 				</CardContent>
@@ -280,13 +323,11 @@ export default function AccessRequestsPage() {
 							}
 						>
 							<SelectTrigger>
-								<SelectValue placeholder="Select role" />
+								<SelectValue placeholder="Select Professional Role" />
 							</SelectTrigger>
 							<SelectContent>
-								<SelectItem value="admin">admin</SelectItem>
-								<SelectItem value="editor">editor</SelectItem>
-								<SelectItem value="viewer">viewer</SelectItem>
-								<SelectItem value="user">user</SelectItem>
+								<SelectItem value="doctor">doctor</SelectItem>
+								<SelectItem value="nurse">nurse</SelectItem>
 							</SelectContent>
 						</Select>
 						{((editForm.professionalRole as UserRole) || "user") ===
@@ -339,11 +380,11 @@ export default function AccessRequestsPage() {
 								if (!editingRequest) return;
 								setEditForm((s) => ({
 									...s,
-									disabled: !s.denied,
+									disabled: !s.disabled,
 								}));
 							}}
 						>
-							{editForm.denied ? "Enable" : "Disable"}
+							{editForm.disabled ? "Enable" : "Disable"}
 						</Button>
 					</div>
 					<SheetFooter>
@@ -361,4 +402,34 @@ export default function AccessRequestsPage() {
 			</Sheet>
 		</div>
 	);
+}
+async function getAccessRequests(
+	pageParam: number,
+	PAGE_SIZE: number,
+): Promise<AccessRequest[]> {
+	const results = await fetch(
+		`/api/access-request?action=GET_REQUESTS&page=${pageParam}&size=${PAGE_SIZE}`,
+		{
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		},
+	);
+
+	if (!results.ok) {
+		toast.error("Failed to fetch access requests. Please try again.");
+		throw new Error("Failed to fetch access requests");
+	}
+
+	const { data, success, error } = await results.json();
+
+	if (error || !success) {
+		toast.error("Failed to fetch access requests. Please try again.");
+		throw new Error(error || "Failed to fetch access requests");
+	}
+
+	console.log(data);
+
+	return data as AccessRequest[];
 }

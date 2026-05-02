@@ -36,6 +36,8 @@ import {
 	SheetFooter,
 } from "@/components/ui/sheet";
 import { toast } from "sonner";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { UserData } from "@/lib/types";
 
 type Role = "admin" | "editor" | "viewer" | "user";
 
@@ -56,43 +58,8 @@ interface UserRecord {
 	registrationNumber?: string;
 }
 
-const initialUsers: UserRecord[] = [
-	{
-		id: "u-001",
-		firstName: "Alice",
-		lastName: "Admin",
-		email: "alice@example.com",
-		role: "admin",
-		tempPassword: undefined,
-		disabled: false,
-		metrics: { logins: 12, scenariosGraded: 34, scenariosAdded: 4 },
-	},
-	{
-		id: "u-002",
-		firstName: "Bob",
-		lastName: "Clinician",
-		email: "bob@example.com",
-		role: "user",
-		tempPassword: undefined,
-		disabled: false,
-		metrics: { logins: 6, scenariosGraded: 8, scenariosAdded: 1 },
-		clinicianPosition: "nurse",
-		registrationNumber: "MOH-123456",
-	},
-	{
-		id: "u-003",
-		firstName: "Carol",
-		lastName: "Editor",
-		email: "carol@example.com",
-		role: "editor",
-		tempPassword: undefined,
-		disabled: true,
-		metrics: { logins: 2, scenariosGraded: 1, scenariosAdded: 0 },
-	},
-];
-
 export default function UserManagementPage() {
-	const [users, setUsers] = useState<UserRecord[]>(initialUsers);
+	// const [users, setUsers] = useState<UserRecord[]>([]);
 
 	// Add form state
 	const [firstName, setFirstName] = useState("");
@@ -104,11 +71,11 @@ export default function UserManagementPage() {
 	const [registrationNumber, setRegistrationNumber] = useState("");
 
 	// Edit sheet state
-	const [editingUser, setEditingUser] = useState<UserRecord | null>(null);
-	const [editForm, setEditForm] = useState<Partial<UserRecord>>({});
+	const [editingUser, setEditingUser] = useState<UserData | null>(null);
+	const [editForm, setEditForm] = useState<Partial<UserData>>({});
 
 	// Removal confirmation state
-	const [removeCandidate, setRemoveCandidate] = useState<UserRecord | null>(
+	const [removeCandidate, setRemoveCandidate] = useState<UserData | null>(
 		null,
 	);
 
@@ -116,53 +83,52 @@ export default function UserManagementPage() {
 	const [showAddSheet, setShowAddSheet] = useState(false);
 
 	const addUser = () => {
-		if (!email) return;
-		const id = `u-${String(users.length + 1).padStart(3, "0")}`;
-		const newUser: UserRecord = {
-			id,
-			firstName: firstName || undefined,
-			lastName: lastName || undefined,
-			email,
-			role,
-			tempPassword: tempPassword || undefined,
-			disabled: false,
-			metrics: { logins: 0, scenariosGraded: 0, scenariosAdded: 0 },
-			clinicianPosition:
-				role === "user" ? clinicianPosition || undefined : undefined,
-			registrationNumber:
-				role === "user" ? registrationNumber || undefined : undefined,
-		};
-		setUsers((s) => [...s, newUser]);
-		setFirstName("");
-		setLastName("");
-		setEmail("");
-		setTempPassword("");
-		setRole("user");
-		setClinicianPosition("");
-		setRegistrationNumber("");
-
-		toast.success(`Added user ${newUser.firstName || newUser.email}`);
+		// if (!email) return;
+		// const id = `u-${String(users.length + 1).padStart(3, "0")}`;
+		// const newUser: UserData = {
+		// 	id,
+		// 	firstName: firstName || undefined,
+		// 	lastName: lastName || undefined,
+		// 	email,
+		// 	role,
+		// 	tempPassword: tempPassword || undefined,
+		// 	disabled: false,
+		// 	metrics: { logIns: 0, scenariosGraded: 0, scenariosAdded: 0 },
+		// 	clinicianProfile: {
+		// 		professionalRole: role === "user" ? clinicianPosition || undefined : undefined,
+		// 		registrationNumber: role === "user" ? registrationNumber || undefined : undefined,
+		// 	},
+		// 	registrationNumber:
+		// 		role === "user" ? registrationNumber || undefined : undefined,
+		// };
+		// setFirstName("");
+		// setLastName("");
+		// setEmail("");
+		// setTempPassword("");
+		// setRole("user");
+		// setClinicianPosition("");
+		// setRegistrationNumber("");
+		// toast.success(`Added user ${newUser.firstName || newUser.email}`);
 	};
 
 	const removeUser = (id: string) => {
-		setUsers((s) => s.filter((u) => u.id !== id));
 		toast.success("User removed");
 	};
 
-	const openEditor = (u: UserRecord) => {
+	const openEditor = (u: UserData) => {
 		setEditingUser(u);
 		setEditForm({ ...u });
 	};
 
 	const saveEdit = () => {
 		if (!editingUser) return;
-		setUsers((s) =>
-			s.map((u) =>
-				u.id === editingUser.id
-					? { ...u, ...(editForm as UserRecord) }
-					: u,
-			),
-		);
+		// setUsers((s) =>
+		// 	s.map((u) =>
+		// 		u.id === editingUser.id
+		// 			? { ...u, ...(editForm as UserRecord) }
+		// 			: u,
+		// 	),
+		// );
 		setEditingUser(null);
 		setEditForm({});
 
@@ -175,6 +141,37 @@ export default function UserManagementPage() {
 		addUser();
 		setShowAddSheet(false);
 	};
+
+	const PAGE_SIZE = 10;
+
+	const {
+		data: users,
+		isLoading,
+		error,
+	} = useInfiniteQuery({
+		queryKey: ["users", PAGE_SIZE],
+		queryFn: ({ pageParam = 0 }) => getUsers(pageParam, PAGE_SIZE),
+		getNextPageParam: (lastPage, pages) =>
+			lastPage.length < PAGE_SIZE ? undefined : pages.length,
+		initialPageParam: 0,
+		retry: (failureCount, error) => {
+			if (failureCount >= 3) {
+				console.log("Error prefeching users: " + error);
+				toast.error(
+					"Failed to prefetch users after multiple attempts. Please check your connection.",
+				);
+				return false; // Stop retrying after 3 attempts
+			}
+			return true; // Retry on other errors
+		},
+		retryDelay(failureCount, error) {
+			const delay = Math.min(1000 * 4 * failureCount, 30000); // Exponential backoff with max delay
+			console.log(
+				`Retrying fetch users in ${delay}ms... (Attempt ${failureCount})`,
+			);
+			return delay;
+		},
+	});
 
 	return (
 		<div className="space-y-6">
@@ -195,105 +192,127 @@ export default function UserManagementPage() {
 							<TableRow>
 								<TableHead>Name</TableHead>
 								<TableHead>Email</TableHead>
-								<TableHead>Role</TableHead>
+								<TableHead>Email Verified</TableHead>
+								<TableHead>App Role</TableHead>
+								<TableHead>Disabled</TableHead>
+								<TableHead>Institution</TableHead>
 								<TableHead>Position</TableHead>
 								<TableHead>Reg #</TableHead>
-								<TableHead>Disabled</TableHead>
+								<TableHead>Reg Status</TableHead>
 								<TableHead>Actions</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{users.map((u) => (
-								<TableRow key={u.id}>
-									<TableCell>
-										{`${u.firstName || ""} ${u.lastName || ""}`.trim() ||
-											"-"}
-									</TableCell>
-									<TableCell>{u.email}</TableCell>
-									<TableCell>{u.role}</TableCell>
-									<TableCell>
-										{u.clinicianPosition || "-"}
-									</TableCell>
-									<TableCell>
-										{u.registrationNumber || "-"}
-									</TableCell>
-									<TableCell>
-										{u.disabled ? "Yes" : "No"}
-									</TableCell>
-									<TableCell>
-										<div className="flex gap-2">
-											<Button
-												size="sm"
-												variant="outline"
-												onClick={() => openEditor(u)}
-											>
-												Edit
-											</Button>
-											<Button
-												size="sm"
-												variant="destructive"
-												onClick={() =>
-													setRemoveCandidate(u)
-												}
-											>
-												Remove
-											</Button>
-											<Dialog
-												open={
-													!!removeCandidate &&
-													removeCandidate.id === u.id
-												}
-												onOpenChange={() =>
-													setRemoveCandidate(null)
-												}
-											>
-												<DialogContent>
-													<DialogHeader>
-														<DialogTitle>
-															Confirm removal
-														</DialogTitle>
-														<DialogDescription>
-															Remove user{" "}
-															{removeCandidate?.email ||
-																""}
-															?
-														</DialogDescription>
-													</DialogHeader>
-													<div className="pt-4 flex gap-2">
-														<Button
-															variant="destructive"
-															onClick={() => {
-																if (
-																	removeCandidate
-																) {
-																	removeUser(
-																		removeCandidate.id,
-																	);
+							{users?.pages
+								.flatMap((page) => page)
+								.map((u) => (
+									<TableRow key={u.id}>
+										<TableCell>
+											{`${u.firstName || ""} ${u.lastName || ""}`.trim() ||
+												"-"}
+										</TableCell>
+										<TableCell>{u.email}</TableCell>
+										<TableCell>
+											{u.emailVerified ? "Yes" : "No"}
+										</TableCell>
+										<TableCell>{u.role || "-"}</TableCell>
+										<TableCell>
+											{u.disabled ? "Yes" : "No"}
+										</TableCell>
+										<TableCell>
+											{u.clinicianProfile?.institution ||
+												"-"}
+										</TableCell>
+										<TableCell>
+											{u.clinicianProfile
+												?.professionalRole || "-"}
+										</TableCell>
+										<TableCell>
+											{u.clinicianProfile
+												?.registrationNumber || "-"}
+										</TableCell>
+										<TableCell>
+											{u.clinicianProfile
+												?.registrationStatus || "-"}
+										</TableCell>
+										<TableCell>
+											<div className="flex gap-2">
+												<Button
+													size="sm"
+													variant="outline"
+													onClick={() => {
+														openEditor(u);
+													}}
+												>
+													Edit
+												</Button>
+												<Button
+													size="sm"
+													variant="destructive"
+													onClick={
+														() => {}
+														// setRemoveCandidate(u)
+													}
+												>
+													Remove
+												</Button>
+												<Dialog
+													open={
+														!!removeCandidate &&
+														removeCandidate.id ===
+															u.id
+													}
+													onOpenChange={() =>
+														setRemoveCandidate(null)
+													}
+												>
+													<DialogContent>
+														<DialogHeader>
+															<DialogTitle>
+																Confirm removal
+															</DialogTitle>
+															<DialogDescription>
+																Remove user{" "}
+																{removeCandidate?.email ||
+																	""}
+																?
+															</DialogDescription>
+														</DialogHeader>
+														<div className="pt-4 flex gap-2">
+															<Button
+																variant="destructive"
+																onClick={() => {
+																	if (
+																		removeCandidate
+																	) {
+																		removeUser(
+																			removeCandidate.id,
+																		);
+																		setRemoveCandidate(
+																			null,
+																		);
+																	}
+																}}
+															>
+																Remove
+															</Button>
+															<Button
+																variant="outline"
+																onClick={() =>
 																	setRemoveCandidate(
 																		null,
-																	);
+																	)
 																}
-															}}
-														>
-															Remove
-														</Button>
-														<Button
-															variant="outline"
-															onClick={() =>
-																setRemoveCandidate(
-																	null,
-																)
-															}
-														>
-															Cancel
-														</Button>
-													</div>
-												</DialogContent>
-											</Dialog>
-										</div>
-									</TableCell>
-								</TableRow>
-							))}
+															>
+																Cancel
+															</Button>
+														</div>
+													</DialogContent>
+												</Dialog>
+											</div>
+										</TableCell>
+									</TableRow>
+								))}
 						</TableBody>
 					</Table>
 				</CardContent>
@@ -459,7 +478,7 @@ export default function UserManagementPage() {
 						/>
 						<Label>Role</Label>
 						<Select
-							value={(editForm.role as Role) || "user"}
+							// value={(editForm.role as Role) || "user"}
 							onValueChange={(v) =>
 								setEditForm((s) => ({
 									...s,
@@ -477,13 +496,13 @@ export default function UserManagementPage() {
 								<SelectItem value="user">user</SelectItem>
 							</SelectContent>
 						</Select>
-						{((editForm.role as Role) || "user") === "user" && (
+						{editForm?.clinicianProfile && (
 							<>
 								<Label>Clinician Position</Label>
 								<Select
 									value={
-										(editForm.clinicianPosition as string) ||
-										""
+										(editForm.clinicianProfile
+											.professionalRole as string) || ""
 									}
 									onValueChange={(v) =>
 										setEditForm((s) => ({
@@ -507,7 +526,8 @@ export default function UserManagementPage() {
 								<Label>MOH Registration #</Label>
 								<Input
 									value={
-										(editForm.registrationNumber as string) ||
+										(editForm.clinicianProfile
+											?.registrationNumber as string) ||
 										""
 									}
 									onChange={(e) =>
@@ -548,4 +568,34 @@ export default function UserManagementPage() {
 			</Sheet>
 		</div>
 	);
+}
+async function getUsers(
+	pageParam: number,
+	PAGE_SIZE: number,
+): Promise<UserData[]> {
+	const results = await fetch(
+		`/api/users?action=GET_USERS&page=${pageParam}&size=${PAGE_SIZE}`,
+		{
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		},
+	);
+
+	if (!results.ok) {
+		toast.error("Failed to fetch users. Please try again.");
+		throw new Error("Failed to fetch users");
+	}
+
+	const { data, success, error } = await results.json();
+
+	if (error || !success) {
+		toast.error("Failed to fetch users. Please try again.");
+		throw new Error(error || "Failed to fetch users");
+	}
+
+	console.log(data);
+
+	return data as UserData[];
 }

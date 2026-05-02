@@ -19,21 +19,19 @@ import Image from "next/image";
 import squareStock from "@/public/square-stock.jpg";
 import { Turnstile, TurnstileInstance } from "@marsidev/react-turnstile";
 import { Controller, useForm } from "react-hook-form";
-import z from "zod";
+import z, { set } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { useToastManager } from "@base-ui/react";
-import { Session } from "@supabase/supabase-js";
-import { decodeJwt } from "jose";
 
-export function LoginForm({
+export function SignInForm({
 	className,
 	...props
 }: React.ComponentProps<"div">) {
 	const [error, setError] = useState<string | null>(null);
 	const [captchaToken, setCaptchaToken] = useState<string>("");
 	const captchaRef = useRef<TurnstileInstance | null>(null);
+	const [pending, setPending] = useState(false);
 	const router = useRouter();
 	const [showTos, setShowTos] = useState(false);
 	const validationSchema = z.object({
@@ -51,12 +49,18 @@ export function LoginForm({
 	});
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		setPending(true);
 		const loadToast = toast.loading("Signing in...");
 
 		event.preventDefault();
 		form.trigger();
 
-		if (!captchaRef.current) return;
+		if (!captchaRef.current) {
+			setError("Captcha not loaded. Please try again later.");
+			setPending(false);
+			toast.dismiss(loadToast);
+			return;
+		}
 
 		// captchaRef.current.getResponse
 
@@ -77,6 +81,7 @@ export function LoginForm({
 			});
 
 			if (error) {
+				setPending(false);
 				toast.dismiss(loadToast);
 				setError(error.message);
 				captchaRef.current.reset();
@@ -88,8 +93,10 @@ export function LoginForm({
 				toast.info("Successfully signed in!");
 				if (getUserRole(session) === "user") {
 					router.push("/app");
+					setPending(false);
 				} else {
 					router.push("/admin");
+					setPending(false);
 				}
 			}
 		} catch (error) {
@@ -98,10 +105,9 @@ export function LoginForm({
 			toast.error(
 				"An unexpected error occurred. Please try again later.",
 			);
+			setPending(false);
 		}
 	};
-
-	
 
 	return (
 		<div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -170,7 +176,9 @@ export function LoginForm({
 								)}
 							/>
 							<Field>
-								<Button type="submit">Login</Button>
+								<Button disabled={pending} type="submit">
+									Login
+								</Button>
 							</Field>
 							<FieldDescription className="text-center">
 								Don&apos;t have an account?{" "}

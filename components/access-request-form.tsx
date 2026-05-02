@@ -23,16 +23,24 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import Link from "next/link";
 import { toast } from "sonner";
-import { Check, Mail, User, FileText, CheckCircle } from "lucide-react";
-import { InputOTPSeparator } from "./ui/input-otp";
-import { InputOTPWithSeparator } from "./otp-input";
+import { Check, Mail, User, FileText } from "lucide-react";
+import {
+	InputOTP,
+	InputOTPGroup,
+	InputOTPSeparator,
+	InputOTPSlot,
+} from "./ui/input-otp";
 import { Turnstile, TurnstileInstance } from "@marsidev/react-turnstile";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
 
 const validationSchema = z.object({
 	firstName: z.string().min(1, "First name is required"),
 	lastName: z.string().min(1, "Last name is required"),
 	email: z.email("Invalid email address"),
-	// otp: z.string().min(6, "OTP must be 6 digits").optional().or(z.literal("")),
+	otp: z
+		.string()
+		.min(8, "OTP must be 8 digits")
+		.refine((val) => /^\d+$/.test(val), "OTP must contain only digits"),
 	role: z.string().min(1, "Role is required"),
 	registrationNumber: z.string().min(5, "Registration number is required"),
 	institution: z.string().min(1, "Institution is required"),
@@ -55,13 +63,12 @@ const steps: StepConfig[] = [
 	{ id: 3, title: "Clinician Info", icon: FileText },
 ];
 
-export function SignupForm({
+export function AccessRequestForm({
 	className,
 	...props
 }: React.ComponentProps<"form">) {
 	const [currentStep, setCurrentStep] = useState(1);
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [otp, setOtp] = useState("");
 	const { show, Dialog } = useTosDialog();
 	const captchaRef = useRef<TurnstileInstance | null>(null);
 	const [captchaToken, setCaptchaToken] = useState<string | null>(null);
@@ -71,7 +78,7 @@ export function SignupForm({
 		mode: "onBlur",
 		defaultValues: {
 			tosAccepted: false,
-			// otp: "",
+			otp: "",
 			email: "",
 			institution: "",
 			registrationNumber: "",
@@ -86,10 +93,10 @@ export function SignupForm({
 		setValue,
 		control,
 		formState: { errors },
-		watch,
+		getValues,
 	} = form;
 
-	const formValues = watch();
+	const formValues = getValues();
 
 	// Validate step 1
 	const isStep1Valid =
@@ -116,28 +123,98 @@ export function SignupForm({
 				? isStep3Valid
 				: currentStep === 2;
 
-	const handleNext = async () => {
-		if (currentStep === 1) {
-			// Validate step 1 fields
-			const result = await form.trigger([
-				"firstName",
-				"lastName",
-				"email",
-			]);
-			if (result) {
+	async function handleNext() {
+		try {
+			if (currentStep === 1) {
+				// Validate step 1 fields
+				const result = await form.trigger([
+					"firstName",
+					"lastName",
+					"email",
+				]);
+				if (result) {
+					await sendEmailOTP();
+					setCurrentStep(currentStep + 1);
+				}
+			} else if (currentStep === 2) {
+				await verifyEmailOTP();
+				// Move to step 3
 				setCurrentStep(currentStep + 1);
 			}
-		} else if (currentStep === 2) {
-			// Move to step 3
-			setCurrentStep(currentStep + 1);
+		} catch (error) {
+			toast.error("An unexpected error occurred. Error: " + error);
 		}
-	};
+	}
 
 	const handlePrev = () => {
 		if (currentStep > 1) {
 			setCurrentStep(currentStep - 1);
 		}
 	};
+
+	async function sendEmailOTP() {
+		if (!form.trigger("otp")) {
+			toast.error("Please enter a valid email before requesting OTP.");
+			return;
+		}
+
+		const response = await fetch("/api/auth", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				action: "SEND_EMAIL_OTP",
+				data: { email: formValues.email, captchaToken },
+			}),
+		});
+
+		if (!response.ok) {
+			toast.error("Failed to send verification code. Please try again.");
+			return;
+		}
+
+		const { success, data, error } = await response.json();
+
+		if (error) {
+			throw new Error("Failed to send verification code: " + error);
+		}
+
+		toast.dismiss();
+		toast.success("Verification code sent to " + formValues.email);
+	}
+
+	async function verifyEmailOTP(): Promise<void> {
+		const response = await fetch("/api/auth", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				action: "VERIFY_EMAIL_OTP",
+				data: {
+					email: formValues.email,
+					otp: formValues.otp,
+					// tokenHash: captchaRef.current.p, // For demo purposes; in production, use a secure hash
+				},
+			}),
+		});
+
+		if (!response.ok) {
+			toast.error("Failed to verify OTP. Please try again.");
+			return Promise.reject(new Error("Failed to verify OTP"));
+		}
+
+		const { data, error } = await response.json();
+
+		if (error) {
+			toast.error("Failed to verify OTP: " + error);
+			return Promise.reject(new Error("Failed to verify OTP: " + error));
+		}
+
+		toast.success("Email verified successfully!");
+		return Promise.resolve();
+	}
 
 	// Dialog is controlled via `useTosDialog` hook; show() returns a promise
 
@@ -162,7 +239,7 @@ export function SignupForm({
 				},
 				body: JSON.stringify({
 					data: { ...data },
-					action: "submit_access_request",
+					action: "NEW_REQUEST",
 				}),
 			});
 
@@ -349,20 +426,30 @@ export function SignupForm({
 								)}
 							/>
 						</FieldGroup>
-						<Field>
-							<FieldLabel htmlFor="email">Email</FieldLabel>
-							<Input
-								type="email"
-								placeholder="m@example.com"
-								{...register("email")}
-							/>
-							{!errors.email && (
-								<FieldDescription>
-									Please use your personal email only.
-								</FieldDescription>
+						<Controller
+							control={control}
+							name="email"
+							render={({ field, fieldState }) => (
+								<Field>
+									<FieldLabel htmlFor="email">
+										Email
+									</FieldLabel>
+									<Input
+										type="email"
+										placeholder="m@example.com"
+										{...field}
+									/>
+									{!errors.email && (
+										<FieldDescription>
+											Please use your personal email only.
+										</FieldDescription>
+									)}
+									<FieldError>
+										{errors.email?.message}
+									</FieldError>
+								</Field>
 							)}
-							<FieldError>{errors.email?.message}</FieldError>
-						</Field>
+						/>
 					</div>
 				)}
 			</div>
@@ -381,26 +468,64 @@ export function SignupForm({
 						</p>
 					</div>
 
-					<Field className="flex items-center justify-center w-full py-4">
-						<label htmlFor="otp" className="text-center w-full">
-							Verification Code
-						</label>
-						<InputOTPWithSeparator value={otp} onChange={setOtp} />
-						<span className="text-center text-xs">
-							Enter the 6-digit code sent to your email.
-						</span>
-						{/* <FieldError>{errors.otp?.message}</FieldError> */}
-					</Field>
+					<Controller
+						control={form.control}
+						name="otp"
+						render={({ field, fieldState }) => (
+							<Field className="flex items-center justify-center w-full py-4">
+								<FieldLabel
+									htmlFor="otp"
+									className="text-center w-full"
+								>
+									Verification Code
+								</FieldLabel>
+
+								<InputOTP
+									{...field}
+									maxLength={8}
+									onComplete={async () => {
+										await verifyEmailOTP();
+									}}
+									pattern={REGEXP_ONLY_DIGITS}
+									containerClassName="w-full flex items-center justify-center"
+								>
+									<InputOTPGroup>
+										<InputOTPSlot index={0} />
+										<InputOTPSlot index={1} />
+									</InputOTPGroup>
+									<InputOTPSeparator />
+									<InputOTPGroup>
+										<InputOTPSlot index={2} />
+										<InputOTPSlot index={3} />
+									</InputOTPGroup>
+									<InputOTPSeparator />
+									<InputOTPGroup>
+										<InputOTPSlot index={4} />
+										<InputOTPSlot index={5} />
+									</InputOTPGroup>
+									<InputOTPSeparator />
+									<InputOTPGroup>
+										<InputOTPSlot index={6} />
+										<InputOTPSlot index={7} />
+									</InputOTPGroup>
+								</InputOTP>
+								<FieldDescription className="text-center text-xs">
+									Enter the 8-digit code sent to your email.
+								</FieldDescription>
+								<FieldError>{errors.otp?.message}</FieldError>
+							</Field>
+						)}
+					/>
+
 					<p className="text-xs text-muted-foreground text-center">
 						Didn&apos;t receive the code?{" "}
 						<button
 							type="button"
 							className="text-blue-600 hover:underline"
-							onClick={
-								() =>
-									toast.info("Resending verification code...")
-								//todo: implement resend logic
-							}
+							onClick={async () => {
+								toast.info("Resending verification code...");
+								await sendEmailOTP();
+							}}
 						>
 							Resend
 						</button>
@@ -536,10 +661,10 @@ export function SignupForm({
 					{currentStep < 3 && (
 						<Button
 							type="button"
-							onClick={handleNext}
+							onClick={(e) => handleNext()}
 							className="px-8"
 						>
-							Continue
+							Next
 						</Button>
 					)}
 
@@ -547,35 +672,34 @@ export function SignupForm({
 						<Button
 							type="submit"
 							disabled={isSubmitting}
+							// onClick={hand}
 							className="px-8"
 						>
 							{isSubmitting ? "Submitting..." : "Submit"}
 						</Button>
 					)}
 				</div>
-				<div className="w-full flex relative justify-center ">
-					<Turnstile
-						ref={captchaRef}
-						siteKey={
-							process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_KEY ||
-							""
-						}
-						onSuccess={(token: string) => {
-							setCaptchaToken(token);
-						}}
-						onTimeout={() => {
-							setCaptchaToken("");
-							captchaRef.current?.reset();
-						}}
-						onError={(error) => {
-							setCaptchaToken("");
-							captchaRef.current?.reset();
-						}}
-						className="relative"
-					/>
-				</div>
 			</div>
-
+			<div className="w-full flex relative mt-8 justify-center ">
+				<Turnstile
+					ref={captchaRef}
+					siteKey={
+						process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_KEY || ""
+					}
+					onSuccess={(token: string) => {
+						setCaptchaToken(token);
+					}}
+					onTimeout={() => {
+						setCaptchaToken("");
+						captchaRef.current?.reset();
+					}}
+					onError={(error) => {
+						setCaptchaToken("");
+						captchaRef.current?.reset();
+					}}
+					className="relative"
+				/>
+			</div>
 			{/* TOS Dialog */}
 			<Dialog />
 		</form>

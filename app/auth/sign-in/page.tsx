@@ -1,13 +1,24 @@
 import { verifySession } from "@/lib/dal";
-import { LoginForm } from "@/components/login-form";
+import { SignInForm } from "@/components/sign-in-form";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { HeartPulse } from "lucide-react";
 import { redirect } from "next/navigation";
 
-export default async function LoginPage() {
-	const { isAuth, userRole } = await verifySession();
+export default async function SignInPage({
+	params,
+	searchParams,
+}: {
+	params: Promise<{ slug: string }>;
+	searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+	const { loggedIn, userRole } = await verifySession();
+	const query = await searchParams;
 
-	if (isAuth) {
+	if (loggedIn) {
+		if (query.redirect) {
+			redirect(query.redirect as string);
+		}
+
 		if (userRole === "user") {
 			redirect("/app");
 		} else {
@@ -30,7 +41,7 @@ export default async function LoginPage() {
 				</div>
 			</div>
 			<div className="w-full max-w-sm md:max-w-4xl">
-				<LoginForm />
+				<SignInForm />
 				<div className="ambient-glow pointer-events-none fixed bottom-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full blur-[120px]" />
 				<div className="ambient-glow pointer-events-none fixed top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full blur-[120px]" />
 			</div>

@@ -1,0 +1,37 @@
+TRIAGEASSIST RESEARCH EVALUATION REPORT
+Report ID,report-1776808736128
+Generated,2026-04-21T21:58:56.128Z
+Project,MIMIC-IV ED Triage AI Evaluation
+
+EVALUATION OVERVIEW
+Total Scenarios Evaluated,212
+Scenarios Included,212
+Scenarios Excluded,0
+
+DIAGNOSIS ACCURACY
+Exact Match,56,26.42%
+Keyword Match Average,0.503
+Levenshtein Similarity Average,0.551
+Overall Score Average,0.496
+Overall Score Median,0.405
+
+TRIAGE ACCURACY
+Exact Match,93,43.87%
+Within One Level,190,89.62%
+
+PERFORMANCE METRICS
+Average Response Time (ms),4568.36
+Median Response Time (ms),4426.50
+Min Response Time (ms),2653.00
+Max Response Time (ms),7009.00
+
+CONFIDENCE ANALYSIS
+Average AI Confidence,0.858
+High Confidence Accuracy,0.478
+Medium Confidence Accuracy,0.478
+Low Confidence Accuracy,0.424
+
+AREAS FOR IMPROVEMENT
+- Diagnosis accuracy could be improved
+- Triage level assignment accuracy needs improvement
+- Some scenarios have very high response times
