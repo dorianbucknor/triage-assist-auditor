@@ -1,6 +1,6 @@
 import { HeartPulse } from "lucide-react";
 
-import { SignupForm } from "@/components/signup-form";
+import { AccessRequestForm } from "@/components/access-request-form";
 import Image from "next/image";
 import image from "@/public/2x3-stock.jpg";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -19,7 +19,7 @@ export default function SignupPage() {
 				</div>
 				<div className="flex flex-1 items-center justify-center ">
 					<div className="w-full max-w-lg p-4 rounded-lg border bg-card  shadow-2xl">
-						<SignupForm className=" " />
+						<AccessRequestForm className=" " />
 						<div className="ambient-glow pointer-events-none fixed bottom-[-20%] right-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full blur-[120px]" />
 						<div className="ambient-glow pointer-events-none fixed top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full blur-[120px]" />
 					</div>
