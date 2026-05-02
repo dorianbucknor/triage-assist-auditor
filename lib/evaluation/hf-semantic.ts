@@ -136,17 +136,16 @@ export class HFSemanticSimilarity {
 		// 	this.getEmbeddings(text2),
 		// ]);
 
-        const client = new InferenceClient(process.env.HF_TOKEN);
+		const client = new InferenceClient(process.env.HF_TOKEN);
 
 		const output = await client.sentenceSimilarity({
 			model: "sentence-transformers/all-mpnet-base-v2",
 			inputs: {
 				source_sentence: text1,
-				sentences:  [text2],
+				sentences: [text2],
 			},
 			provider: "hf-inference",
 		});
-
 
 		if (output.length === 0) {
 			// Fallback: if semantic similarity fails, return 0
@@ -239,7 +238,7 @@ export class LocalSemanticSimilarity {
 			const result = await this.pipeline(text, { pooling: "mean" });
 			// Transformers.js returns { data: [...] }
 			const embedding = Array.from(result.data);
-			return embedding;
+			return embedding as any[];
 		} catch (error) {
 			console.error("Error getting local embeddings:", error);
 			return [];
