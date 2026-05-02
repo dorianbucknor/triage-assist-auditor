@@ -1,0 +1,40 @@
+{
+  "subjectId": "10020306",
+  "inTime": "2135-01-15 16:12:00",
+  "outTime": "2135-01-15 22:38:00",
+  "triageDuration": 23160,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Dehydration, Fatigue",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.56,
+    "pulse": 92,
+    "respiratoryRate": 18,
+    "bloodPressure": "126/78",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "f3bfdade-e99b-46ae-8065-a89692b36f62"
+}

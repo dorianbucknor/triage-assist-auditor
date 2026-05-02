@@ -1,0 +1,39 @@
+{
+  "subjectId": "10019777",
+  "inTime": "2187-02-10 15:11:00",
+  "outTime": "2187-02-10 20:34:00",
+  "triageDuration": 19380,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Hematemesis",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.72,
+    "pulse": 88,
+    "respiratoryRate": 19,
+    "bloodPressure": "108/56",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "WHITE"
+  },
+  "id": "66fdd66f-399c-4505-a914-421c1a748e48"
+}

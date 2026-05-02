@@ -1,0 +1,40 @@
+{
+  "subjectId": "10029484",
+  "inTime": "2160-11-07 19:15:00",
+  "outTime": "2160-11-08 05:23:00",
+  "triageDuration": 36480,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Syncope",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37,
+    "pulse": 92,
+    "respiratoryRate": 16,
+    "bloodPressure": "118/55",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 5,
+    "race": "WHITE"
+  },
+  "id": "4bb331f5-a418-4d2c-87b6-7f707459b990"
+}

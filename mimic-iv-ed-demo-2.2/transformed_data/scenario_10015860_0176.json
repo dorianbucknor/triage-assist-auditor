@@ -1,0 +1,39 @@
+{
+  "subjectId": "10015860",
+  "inTime": "2186-09-15 12:56:00",
+  "outTime": "2186-09-15 17:15:00",
+  "triageDuration": 15540,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "R FOOT ULCER/CELLULITIS",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.78,
+    "pulse": 121,
+    "respiratoryRate": 16,
+    "bloodPressure": "142/87",
+    "oxygenSaturation": null,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "WHITE"
+  },
+  "id": "4b51272c-d0c4-43f0-a111-d34c6d62d8e1"
+}

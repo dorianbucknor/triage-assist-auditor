@@ -1,0 +1,40 @@
+{
+  "subjectId": "10023239",
+  "inTime": "2140-10-22 18:05:00",
+  "outTime": "2140-10-23 17:01:00",
+  "triageDuration": 82560,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abnormal labs",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.61,
+    "pulse": 90,
+    "respiratoryRate": 18,
+    "bloodPressure": "141/70",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "2d829dc6-df5d-4c59-9816-1df20482dd80"
+}

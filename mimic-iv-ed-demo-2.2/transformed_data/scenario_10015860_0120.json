@@ -1,0 +1,40 @@
+{
+  "subjectId": "10015860",
+  "inTime": "2189-06-05 13:25:00",
+  "outTime": "2189-06-05 18:06:00",
+  "triageDuration": 16860,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Dizziness",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.61,
+    "pulse": 86,
+    "respiratoryRate": 18,
+    "bloodPressure": "118/78",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "1.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "005135b5-55af-4e4e-8521-48f48a9f553e"
+}

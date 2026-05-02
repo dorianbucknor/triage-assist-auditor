@@ -2,6 +2,7 @@
 "use client";
 
 import {
+	atomWithRefresh,
 	atomWithStorage,
 	loadable,
 	unwrap,
@@ -13,6 +14,8 @@ import React, { useEffect } from "react";
 import { ClinicalGrading, Scenario, User, UserData } from "@/lib/types";
 import { supabaseClient } from "../supabase/client";
 import { Session } from "@supabase/supabase-js";
+import { SessionResponse, verifySession } from "@/lib/dal";
+import { decodeJwt } from "jose";
 
 //creates global atom of currentScenarioGrading with local storage
 const currentScenarioGradingAtom = atomWithStorage<ClinicalGrading | null>(
@@ -25,9 +28,21 @@ const currentScenarioAtom = atomWithStorage<Scenario | null>(
 	null,
 );
 
-
+const asyncUser = atom(async (get) => {
+	const response = await supabaseClient.auth.getUser();
+	const sessionResponse = (await supabaseClient.auth.getSession()).data
+		.session;
+	return {
+		loggedIn: !!response.data.user,
+		data: await getUserData(response.data.user?.id || ""),
+		session: sessionResponse,
+		appRole: sessionResponse
+			? (decodeJwt(sessionResponse.access_token)["user_role"] as string)
+			: null,
+	} as User;
+});
 //creates global atom of user
-const userAtom = atom<User | null>(null);
+const userAtom = unwrap(asyncUser);
 
 //default stirage location
 export const store = createStore();
@@ -39,7 +54,7 @@ export default function StoreProvider({
 	children: React.ReactNode;
 	userAuth: User | null;
 }) {
-	useHydrateAtoms([[userAtom, userAuth]], { store });
+	// useHydrateAtoms([[userAtom, userAuth]], { store });
 
 	return (
 		<Provider>
@@ -52,56 +67,53 @@ function DataLoad({ children }: { children: React.ReactNode }) {
 	// const store = useStore({store});
 	// const [user] = useAtom(userAtom, { store });
 
-	useEffect(() => {
-		// 1. Define the update logic in a reusable function
-		const updateUserData = async (session: Session) => {
-			if (session) {
-				try {
-					const profile = await getUserData(session.user.id);
-					store.set(userAtom, {
-						data: profile,
-						session,
-					});
-				} catch (error) {
-					console.error("Failed to fetch profile:", error);
-					// Handle error: maybe set user to null or show a toast
-				}
-			} else {
-				store.set(userAtom, null);
-			}
-		};
+	// useEffect(() => {
+	// 	// 1. Define the update logic in a reusable function
+	// 	const updateUserData = async (session: Session) => {
+	// 		if (session) {
+	// 			try {
+	// 				const profile = await getUserData(session.user.id);
+	// 				store.set(userAtom, {
+	// 					data: profile,
+	// 					session,
+	// 					loggedIn: profile && session ? true : false,
+	// 				});
+	// 			} catch (error) {
+	// 				console.error("Failed to fetch profile:", error);
+	// 				// Handle error: maybe set user to null or show a toast
+	// 			}
+	// 		} else {
+	// 			store.set(userAtom, null);
+	// 		}
+	// 	};
 
-		// 3. Listen for all relevant state changes
-		const {
-			data: { subscription },
-		} = supabaseClient.auth.onAuthStateChange(async (event, session) => {
-			switch (event) {
-				case "INITIAL_SESSION":
-				case "SIGNED_IN":
-				case "TOKEN_REFRESHED":
-					if (!session) return;
-					await updateUserData(session);
-					break;
-				case "SIGNED_OUT":
-				case "USER_UPDATED": // Good to handle if they change email/pass
-					store.set(userAtom, null);
-					break;
-			}
-		});
+	// 	// 3. Listen for all relevant state changes
+	// 	const {
+	// 		data: { subscription },
+	// 	} = supabaseClient.auth.onAuthStateChange(async (event, session) => {
+	// 		switch (event) {
+	// 			case "INITIAL_SESSION":
+	// 			case "SIGNED_IN":
+	// 			case "TOKEN_REFRESHED":
+	// 				if (!session) return;
+	// 				await updateUserData(session);
+	// 				break;
+	// 			case "SIGNED_OUT":
+	// 			case "USER_UPDATED": // Good to handle if they change email/pass
+	// 				store.set(userAtom, null);
+	// 				break;
+	// 		}
+	// 	});
 
-		return () => {
-			subscription.unsubscribe();
-		};
-	}, []);
+	// 	return () => {
+	// 		subscription.unsubscribe();
+	// 	};
+	// }, []);
 
 	return <>{children}</>;
 }
 
-export {
-	currentScenarioGradingAtom,
-	currentScenarioAtom,
-	userAtom,
-};
+export { currentScenarioGradingAtom, currentScenarioAtom, userAtom };
 
 export const getUserData = async (id: string) => {
 	try {

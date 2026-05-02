@@ -1,0 +1,39 @@
+{
+  "subjectId": "10039997",
+  "inTime": "2134-09-26 12:39:00",
+  "outTime": "2134-09-26 16:06:00",
+  "triageDuration": 12420,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Leg weakness, Abnormal CT",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.33,
+    "pulse": 59,
+    "respiratoryRate": 17,
+    "bloodPressure": "161/75",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "92b3cd63-6fc3-452c-9e52-e9c077874829"
+}

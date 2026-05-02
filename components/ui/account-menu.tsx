@@ -12,8 +12,11 @@ import {
 } from "./dropdown-menu";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 import Link from "next/link";
+import { useAtom } from "jotai";
+import { store, userAtom } from "@/providers/jotai/jotai";
 
 export default function AccountMenu() {
+	const [user] = useAtom(userAtom, { store: store });
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -32,10 +35,15 @@ export default function AccountMenu() {
 			<DropdownMenuContent>
 				<DropdownMenuGroup>
 					<DropdownMenuItem asChild>
-						<Link href="/app">Scenarios</Link>
+						<Link href="/app">Dashboard</Link>
 					</DropdownMenuItem>
 					<DropdownMenuItem asChild>
-						<Link href="/profile">Profile</Link>
+						<Link href="/app/ai-evaluator">AI Evaluator</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem asChild>
+						<Link href={`/profile?u=${user?.data?.id}`}>
+							Profile
+						</Link>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator />

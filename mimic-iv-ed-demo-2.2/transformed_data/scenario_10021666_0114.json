@@ -1,0 +1,39 @@
+{
+  "subjectId": "10021666",
+  "inTime": "2172-03-12 20:52:00",
+  "outTime": "2172-03-13 01:46:00",
+  "triageDuration": 17640,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "SDH/SAH",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": null,
+    "pulse": 69,
+    "respiratoryRate": 20,
+    "bloodPressure": "133/74",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "1.0",
+    "race": "WHITE"
+  },
+  "id": "147a81cc-e2b4-47db-990b-54471747b192"
+}

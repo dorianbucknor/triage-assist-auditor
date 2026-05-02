@@ -1,0 +1,39 @@
+{
+  "subjectId": "10018081",
+  "inTime": "2134-09-05 16:14:00",
+  "outTime": "2134-09-06 15:57:55",
+  "triageDuration": 85435,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Dyspnea",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.72,
+    "pulse": 86,
+    "respiratoryRate": 16,
+    "bloodPressure": "142/82",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "WHITE"
+  },
+  "id": "c102931c-677d-4934-a2b1-a9edd08c8e13"
+}

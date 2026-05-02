@@ -1,0 +1,40 @@
+{
+  "subjectId": "10012853",
+  "inTime": "2175-04-26 11:38:00",
+  "outTime": "2175-04-26 15:01:00",
+  "triageDuration": 12180,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Hypertension",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.67,
+    "pulse": 57,
+    "respiratoryRate": 16,
+    "bloodPressure": "179/51",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "d5afe1ea-0f8d-4303-b998-695f99485039"
+}

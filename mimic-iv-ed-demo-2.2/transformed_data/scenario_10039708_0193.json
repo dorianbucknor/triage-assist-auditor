@@ -1,0 +1,39 @@
+{
+  "subjectId": "10039708",
+  "inTime": "2142-08-23 16:28:00",
+  "outTime": "2142-08-23 23:34:00",
+  "triageDuration": 25560,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "L Knee pain",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.72,
+    "pulse": 86,
+    "respiratoryRate": 18,
+    "bloodPressure": "113/69",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "0eb9f27d-e4f7-4de7-b81b-a5e330696344"
+}

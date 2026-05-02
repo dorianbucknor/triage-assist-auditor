@@ -1,0 +1,39 @@
+{
+  "subjectId": "10039708",
+  "inTime": "2140-09-24 21:17:00",
+  "outTime": "2140-09-25 05:57:00",
+  "triageDuration": 31200,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abnormal labs, ETOH, Hypotension",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.89,
+    "pulse": 75,
+    "respiratoryRate": 17,
+    "bloodPressure": "117/69",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "1.0",
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "592a75c5-a656-40f0-af36-4da7314f055d"
+}

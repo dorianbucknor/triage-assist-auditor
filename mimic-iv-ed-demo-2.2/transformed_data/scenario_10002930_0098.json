@@ -1,0 +1,40 @@
+{
+  "subjectId": "10002930",
+  "inTime": "2199-02-17 14:32:00",
+  "outTime": "2199-02-19 13:38:00",
+  "triageDuration": 169560,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "SI",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.78,
+    "pulse": 82,
+    "respiratoryRate": 16,
+    "bloodPressure": "140/64",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "abc9ba50-8c34-40e2-b89e-472463066755"
+}

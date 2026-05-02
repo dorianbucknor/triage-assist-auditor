@@ -1,0 +1,40 @@
+{
+  "subjectId": "10039708",
+  "inTime": "2142-03-25 22:22:00",
+  "outTime": "2142-03-26 08:08:00",
+  "triageDuration": 35160,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abd pain, Transfer",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37,
+    "pulse": 95,
+    "respiratoryRate": 18,
+    "bloodPressure": "138/86",
+    "oxygenSaturation": 96,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 8,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "eec71bee-695c-412e-82e8-33770221260d"
+}

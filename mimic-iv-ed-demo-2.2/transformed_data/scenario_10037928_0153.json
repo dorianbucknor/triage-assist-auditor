@@ -1,0 +1,40 @@
+{
+  "subjectId": "10037928",
+  "inTime": "2177-12-21 16:49:00",
+  "outTime": "2177-12-21 22:26:00",
+  "triageDuration": 20220,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Cough, Dyspnea",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.17,
+    "pulse": 112,
+    "respiratoryRate": 22,
+    "bloodPressure": "156/57",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "HISPANIC/LATINO - CUBAN"
+  },
+  "id": "d29d4b6b-38a2-4fe8-b6ba-bf37a2d73997"
+}

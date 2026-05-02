@@ -1,0 +1,40 @@
+{
+  "subjectId": "10003400",
+  "inTime": "2136-11-04 16:08:00",
+  "outTime": "2136-11-04 22:12:00",
+  "triageDuration": 21840,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Hematuria, Dysuria",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.39,
+    "pulse": 107,
+    "respiratoryRate": 21,
+    "bloodPressure": "100/65",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 5,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "752b358c-b7f0-411a-b876-0b321c758e4b"
+}

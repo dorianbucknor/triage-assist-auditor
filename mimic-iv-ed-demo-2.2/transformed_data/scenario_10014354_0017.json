@@ -1,0 +1,40 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2150-02-04 14:50:00",
+  "outTime": "2150-02-04 20:13:49",
+  "triageDuration": 19429,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Dizziness, Diplopia",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": null,
+    "pulse": 73,
+    "respiratoryRate": 16,
+    "bloodPressure": "136/65",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 5,
+    "race": "WHITE"
+  },
+  "id": "2827dbb1-c3dd-4a76-8a40-c32d33d75da6"
+}

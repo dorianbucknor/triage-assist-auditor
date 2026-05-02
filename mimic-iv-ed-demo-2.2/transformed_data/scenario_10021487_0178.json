@@ -1,0 +1,40 @@
+{
+  "subjectId": "10021487",
+  "inTime": "2117-10-25 15:49:00",
+  "outTime": "2117-10-25 22:53:00",
+  "triageDuration": 25440,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "ABDOMINAL MASS, FEVER",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.22,
+    "pulse": 100,
+    "respiratoryRate": 20,
+    "bloodPressure": "116/66",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 7,
+    "race": "WHITE"
+  },
+  "id": "e32d1662-7477-47b1-8f55-9d9c3597fa6b"
+}

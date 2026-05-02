@@ -1,0 +1,38 @@
+{
+  "subjectId": "10027602",
+  "inTime": "2201-10-30 10:48:00",
+  "outTime": "2201-10-30 12:25:00",
+  "triageDuration": 5820,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "HEAD BLEED",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": null,
+    "pulse": null,
+    "respiratoryRate": null,
+    "bloodPressure": null,
+    "oxygenSaturation": null,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "race": "WHITE"
+  },
+  "id": "ff7bd7d4-2cac-48ac-aaf6-417b8a752c0d"
+}

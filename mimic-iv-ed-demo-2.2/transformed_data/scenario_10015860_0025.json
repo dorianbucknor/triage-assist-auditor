@@ -1,0 +1,40 @@
+{
+  "subjectId": "10015860",
+  "inTime": "2192-05-11 16:26:00",
+  "outTime": "2192-05-12 09:31:00",
+  "triageDuration": 61500,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Coffee ground emesis",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.28,
+    "pulse": 118,
+    "respiratoryRate": 22,
+    "bloodPressure": "143/76",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 5,
+    "race": "WHITE"
+  },
+  "id": "431da0db-5511-4606-9346-ed9d080e48b9"
+}

@@ -1,0 +1,39 @@
+{
+  "subjectId": "10037928",
+  "inTime": "2177-07-14 14:52:00",
+  "outTime": "2177-07-14 20:38:00",
+  "triageDuration": 20760,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "HYPERGLYCEMIA",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.78,
+    "pulse": 84,
+    "respiratoryRate": 18,
+    "bloodPressure": "115/41",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "HISPANIC/LATINO - CUBAN"
+  },
+  "id": "491d024f-39c9-4262-9953-b739a29c1e17"
+}

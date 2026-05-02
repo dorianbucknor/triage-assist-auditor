@@ -1,0 +1,40 @@
+{
+  "subjectId": "10000032",
+  "inTime": "2180-07-22 16:24:00",
+  "outTime": "2180-07-23 05:54:00",
+  "triageDuration": 48600,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Hypotension",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.78,
+    "pulse": 85,
+    "respiratoryRate": 18,
+    "bloodPressure": "81/38",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "0c84b787-0612-4fe0-a7f9-fa56624e6d85"
+}

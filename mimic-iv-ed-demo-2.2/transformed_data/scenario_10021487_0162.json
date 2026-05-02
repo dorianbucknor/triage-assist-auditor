@@ -1,0 +1,40 @@
+{
+  "subjectId": "10021487",
+  "inTime": "2117-01-27 18:19:00",
+  "outTime": "2117-01-28 01:23:00",
+  "triageDuration": 25440,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "ABD PAIN",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.89,
+    "pulse": 116,
+    "respiratoryRate": 16,
+    "bloodPressure": "117/80",
+    "oxygenSaturation": 94,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 4,
+    "race": "WHITE"
+  },
+  "id": "6aeb1a51-0505-4f87-a66e-ba72bb1b929f"
+}

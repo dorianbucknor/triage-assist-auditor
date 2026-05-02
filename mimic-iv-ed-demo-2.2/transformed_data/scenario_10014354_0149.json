@@ -1,0 +1,40 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2150-05-08 22:30:00",
+  "outTime": "2150-05-09 19:09:00",
+  "triageDuration": 74340,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abd pain, Dysuria",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.72,
+    "pulse": 69,
+    "respiratoryRate": 18,
+    "bloodPressure": "118/64",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "0cb8989a-4f83-497f-8626-f147070354e5"
+}

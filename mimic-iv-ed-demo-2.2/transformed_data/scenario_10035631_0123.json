@@ -1,0 +1,40 @@
+{
+  "subjectId": "10035631",
+  "inTime": "2116-02-27 15:33:00",
+  "outTime": "2116-02-27 22:03:00",
+  "triageDuration": 23400,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Dyspnea, Hypoxia",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.11,
+    "pulse": 101,
+    "respiratoryRate": 23,
+    "bloodPressure": "110/87",
+    "oxygenSaturation": 94,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "1.0",
+    "pain": 3,
+    "race": "WHITE"
+  },
+  "id": "8920c6a4-f479-4fec-bef1-f8a7271b8c5d"
+}

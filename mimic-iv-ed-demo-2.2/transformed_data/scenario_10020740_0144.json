@@ -1,0 +1,40 @@
+{
+  "subjectId": "10020740",
+  "inTime": "2150-09-15 09:31:00",
+  "outTime": "2150-09-15 17:09:00",
+  "triageDuration": 27480,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Insomnia",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.89,
+    "pulse": 71,
+    "respiratoryRate": 18,
+    "bloodPressure": "129/79",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "2905aff6-05e7-4293-a3e3-a453f9db2b75"
+}

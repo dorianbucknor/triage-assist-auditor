@@ -1,0 +1,39 @@
+{
+  "subjectId": "10021938",
+  "inTime": "2181-09-02 19:21:00",
+  "outTime": "2181-09-03 01:49:00",
+  "triageDuration": 23280,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Confusion",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37,
+    "pulse": 81,
+    "respiratoryRate": 18,
+    "bloodPressure": "124/89",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "6c50ee13-1410-4cd4-bd4d-48c22681d012"
+}

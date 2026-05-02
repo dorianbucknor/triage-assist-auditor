@@ -1,0 +1,40 @@
+{
+  "subjectId": "10018328",
+  "inTime": "2154-02-05 17:09:00",
+  "outTime": "2154-02-05 22:54:00",
+  "triageDuration": 20700,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Syncope, Transfer",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.5,
+    "pulse": 65,
+    "respiratoryRate": 18,
+    "bloodPressure": "147/53",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "9ab6cb56-21de-4027-91aa-d0deb59ca9b7"
+}

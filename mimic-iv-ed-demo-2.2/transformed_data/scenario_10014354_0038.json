@@ -1,0 +1,40 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2148-05-10 20:25:00",
+  "outTime": "2148-05-11 01:22:00",
+  "triageDuration": 17820,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "BRBPR",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.39,
+    "pulse": 67,
+    "respiratoryRate": 18,
+    "bloodPressure": "149/60",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 2,
+    "race": "WHITE"
+  },
+  "id": "fde4d498-32e7-452b-b815-d3ba5a92e1b4"
+}

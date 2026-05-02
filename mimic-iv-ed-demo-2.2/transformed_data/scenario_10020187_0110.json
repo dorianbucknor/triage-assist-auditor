@@ -1,0 +1,40 @@
+{
+  "subjectId": "10020187",
+  "inTime": "2169-01-14 23:26:00",
+  "outTime": "2169-01-15 04:56:00",
+  "triageDuration": 19800,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Headache, SAH, Transfer",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.56,
+    "pulse": 75,
+    "respiratoryRate": 17,
+    "bloodPressure": "116/67",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 4,
+    "race": "HISPANIC/LATINO - SALVADORAN"
+  },
+  "id": "08972aa6-a26d-483f-bfed-adf49fd801d5"
+}

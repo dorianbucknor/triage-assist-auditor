@@ -1,0 +1,39 @@
+{
+  "subjectId": "10012853",
+  "inTime": "2177-07-11 00:39:00",
+  "outTime": "2177-07-11 10:19:00",
+  "triageDuration": 34800,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Clogged foley",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.56,
+    "pulse": 52,
+    "respiratoryRate": 16,
+    "bloodPressure": "152/60",
+    "oxygenSaturation": 96,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "4.0",
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "e0d0f973-b6e6-471b-be3c-bccc0418c9c0"
+}

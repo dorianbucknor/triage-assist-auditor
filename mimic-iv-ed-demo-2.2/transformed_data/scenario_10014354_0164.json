@@ -1,0 +1,39 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2149-03-13 21:20:00",
+  "outTime": "2149-03-14 02:23:00",
+  "triageDuration": 18180,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "R Leg pain, R Leg swelling",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.33,
+    "pulse": 77,
+    "respiratoryRate": 16,
+    "bloodPressure": "131/64",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "WHITE"
+  },
+  "id": "8cb04fce-4a6e-4d80-b361-9716698342c5"
+}

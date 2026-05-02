@@ -1,0 +1,39 @@
+{
+  "subjectId": "10015860",
+  "inTime": "2192-09-23 22:43:00",
+  "outTime": "2192-09-24 09:38:00",
+  "triageDuration": 39300,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "L Leg pain, s/p Fall",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.78,
+    "pulse": 107,
+    "respiratoryRate": 16,
+    "bloodPressure": "159/88",
+    "oxygenSaturation": 96,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "WHITE"
+  },
+  "id": "d9e4bd97-ba0d-4696-8ce2-31941c0bc366"
+}

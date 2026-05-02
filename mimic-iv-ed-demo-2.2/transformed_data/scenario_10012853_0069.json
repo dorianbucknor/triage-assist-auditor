@@ -1,0 +1,40 @@
+{
+  "subjectId": "10012853",
+  "inTime": "2176-11-25 18:34:00",
+  "outTime": "2176-11-25 23:51:00",
+  "triageDuration": 19020,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "DVT, Transfer",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.89,
+    "pulse": 77,
+    "respiratoryRate": 25,
+    "bloodPressure": "164/48",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "8fc6b536-5db7-422d-9b34-a1ad4d6175e8"
+}

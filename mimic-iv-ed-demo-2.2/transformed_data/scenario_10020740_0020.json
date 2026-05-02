@@ -1,0 +1,39 @@
+{
+  "subjectId": "10020740",
+  "inTime": "2151-01-15 11:47:00",
+  "outTime": "2151-01-16 02:38:00",
+  "triageDuration": 53460,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Psych eval",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.78,
+    "pulse": 98,
+    "respiratoryRate": 16,
+    "bloodPressure": "109/71",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "WHITE"
+  },
+  "id": "0a99e04e-03fd-4220-a670-79020c28ed94"
+}

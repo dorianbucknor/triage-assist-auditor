@@ -1,0 +1,40 @@
+{
+  "subjectId": "10039708",
+  "inTime": "2144-01-18 11:53:00",
+  "outTime": "2144-01-19 13:59:00",
+  "triageDuration": 93960,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Altered mental status",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.44,
+    "pulse": 74,
+    "respiratoryRate": 16,
+    "bloodPressure": "110/63",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "ee640512-61ee-4e99-b950-0097eada6113"
+}

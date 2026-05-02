@@ -1,0 +1,40 @@
+{
+  "subjectId": "10040025",
+  "inTime": "2145-10-19 19:23:00",
+  "outTime": "2145-10-20 00:54:00",
+  "triageDuration": 19860,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Dyspnea, Foot swelling",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.72,
+    "pulse": 86,
+    "respiratoryRate": 19,
+    "bloodPressure": "123/89",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "e51d1c73-dd45-420a-95f8-56af762f40ce"
+}

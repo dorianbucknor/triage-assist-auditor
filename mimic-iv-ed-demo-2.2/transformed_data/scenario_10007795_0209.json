@@ -1,0 +1,40 @@
+{
+  "subjectId": "10007795",
+  "inTime": "2136-08-04 16:26:00",
+  "outTime": "2136-08-05 00:17:00",
+  "triageDuration": 28260,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "?INFECTION",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.17,
+    "pulse": 99,
+    "respiratoryRate": 16,
+    "bloodPressure": "121/63",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 2,
+    "race": "WHITE"
+  },
+  "id": "82ca7417-d4d7-4254-a15b-0be2ec01e334"
+}

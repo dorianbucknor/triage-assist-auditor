@@ -29,7 +29,13 @@ export async function proxy(request: NextRequest) {
 	}
 
 	//get current session and user app role
-	const { isAuth, userId, userRole, session, user } = await verifySession();
+	const {
+		loggedIn: isAuth,
+		userId,
+		userRole,
+		session,
+		user,
+	} = await verifySession();
 
 	//Block any unauthenticated user from protected routes
 	if (!isAuth) {

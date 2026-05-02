@@ -1,0 +1,40 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2147-12-19 19:24:00",
+  "outTime": "2147-12-20 01:03:00",
+  "triageDuration": 20340,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Toe pain",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.94,
+    "pulse": 81,
+    "respiratoryRate": 18,
+    "bloodPressure": "157/80",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 8,
+    "race": "WHITE"
+  },
+  "id": "00f03b8c-c899-4bb2-a5a7-92ac881d5a11"
+}

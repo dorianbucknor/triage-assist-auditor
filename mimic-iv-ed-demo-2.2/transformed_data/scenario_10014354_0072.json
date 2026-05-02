@@ -1,0 +1,40 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2146-10-08 21:27:00",
+  "outTime": "2146-10-09 01:08:00",
+  "triageDuration": 13260,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Transfer, CVA",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.78,
+    "pulse": 58,
+    "respiratoryRate": 15,
+    "bloodPressure": "153/55",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 7,
+    "race": "WHITE"
+  },
+  "id": "a25238f5-d7bc-45f5-8918-f73a24806c40"
+}

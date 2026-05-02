@@ -57,39 +57,42 @@ export const getUser = cache(async () => {
 	}
 });
 
-type SessionResponse = {
-	isAuth: boolean;
+export type SessionResponse = {
+	loggedIn: boolean;
 	userId: string | null;
 	session: Session | null;
 	userRole: string | null;
 	user: User | null;
+    userData?: UserData | null;
 };
 
 export const verifySession = cache(async () => {
 	const {
 		data: { session },
 	} = await (await supabaseClient()).auth.getSession();
+
 	const {
 		data: { user },
 	} = await (await supabaseClient()).auth.getUser();
 
 	if (!user) {
+		await (await supabaseClient()).auth.signOut();
+
 		return {
-			isAuth: !!session && !!user,
+			loggedIn: false,
 			userId: null,
-			session,
+			session: null,
 			userRole: null,
+			user: null,
 		} as SessionResponse;
 	}
-
-	// const key = new TextEncoder().encode(process.env.NEXT_PUBLIC_SUPABASE_KEY);
 
 	const cookie = session
 		? decodeJwt(session.access_token)
 		: { user_role: null };
 
 	return {
-		isAuth: !!session && !!user,
+		loggedIn: session && user ? true : false,
 		userId: user.id,
 		session,
 		userRole: cookie["user_role"],

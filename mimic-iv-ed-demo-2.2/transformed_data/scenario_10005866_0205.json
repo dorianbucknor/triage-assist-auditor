@@ -1,0 +1,39 @@
+{
+  "subjectId": "10005866",
+  "inTime": "2149-09-28 01:53:00",
+  "outTime": "2149-09-28 16:26:00",
+  "triageDuration": 52380,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abd pain, N/V",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.22,
+    "pulse": 76,
+    "respiratoryRate": 18,
+    "bloodPressure": "148/66",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "PORTUGUESE"
+  },
+  "id": "06f410d2-cc63-435d-a45f-0379e7d9d372"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10037928",
+  "inTime": "2178-12-21 03:17:00",
+  "outTime": "2178-12-21 05:30:41",
+  "triageDuration": 8021,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "UNKNOWN-CC",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.17,
+    "pulse": 120,
+    "respiratoryRate": 20,
+    "bloodPressure": "145/58",
+    "oxygenSaturation": 96,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "HISPANIC/LATINO - CUBAN"
+  },
+  "id": "3d1cb2cb-c0ab-459f-9d6a-c4cf23abc9a5"
+}

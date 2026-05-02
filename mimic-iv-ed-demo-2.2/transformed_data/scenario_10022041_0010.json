@@ -1,0 +1,38 @@
+{
+  "subjectId": "10022041",
+  "inTime": "2187-05-18 14:59:00",
+  "outTime": "2187-05-18 18:39:00",
+  "triageDuration": 13200,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "SEIZURE",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": null,
+    "pulse": null,
+    "respiratoryRate": null,
+    "bloodPressure": null,
+    "oxygenSaturation": null,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "race": "OTHER"
+  },
+  "id": "e8381854-b4ac-418a-951f-254279f39df2"
+}

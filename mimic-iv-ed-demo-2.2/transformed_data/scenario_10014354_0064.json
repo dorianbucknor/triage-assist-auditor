@@ -1,0 +1,40 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2147-09-12 02:01:00",
+  "outTime": "2147-09-12 06:37:00",
+  "triageDuration": 16560,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Chest pain, NSTEMI, Transfer",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.72,
+    "pulse": 66,
+    "respiratoryRate": 21,
+    "bloodPressure": "137/51",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 6,
+    "race": "WHITE"
+  },
+  "id": "201a22e4-4a61-42a0-a145-172f6281b60a"
+}

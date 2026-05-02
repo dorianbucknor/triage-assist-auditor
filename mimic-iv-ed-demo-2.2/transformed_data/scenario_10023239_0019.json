@@ -1,0 +1,40 @@
+{
+  "subjectId": "10023239",
+  "inTime": "2140-10-03 06:20:00",
+  "outTime": "2140-10-03 09:07:56",
+  "triageDuration": 10076,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "DKA, Transfer",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.72,
+    "pulse": 112,
+    "respiratoryRate": null,
+    "bloodPressure": "101/41",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "6b004769-be54-4b32-8ba4-6ec9c3828c57"
+}

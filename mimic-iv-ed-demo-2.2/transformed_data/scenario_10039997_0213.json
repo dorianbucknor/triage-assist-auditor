@@ -1,0 +1,39 @@
+{
+  "subjectId": "10039997",
+  "inTime": "2135-11-06 21:44:00",
+  "outTime": "2135-11-07 06:27:00",
+  "triageDuration": 31380,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Depression, Anxiety",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37,
+    "pulse": 103,
+    "respiratoryRate": 16,
+    "bloodPressure": "160/100",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "7b3174f0-bd03-4fa4-bdbc-230fe4583bbc"
+}

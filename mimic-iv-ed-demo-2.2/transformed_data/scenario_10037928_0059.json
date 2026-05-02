@@ -1,0 +1,40 @@
+{
+  "subjectId": "10037928",
+  "inTime": "2179-03-27 14:15:00",
+  "outTime": "2179-03-27 19:48:00",
+  "triageDuration": 19980,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "ILI",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.56,
+    "pulse": 93,
+    "respiratoryRate": 16,
+    "bloodPressure": "155/65",
+    "oxygenSaturation": 96,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "HISPANIC/LATINO - CUBAN"
+  },
+  "id": "a9d7e5ee-26bb-4b9e-8e80-36d0936ebc0f"
+}

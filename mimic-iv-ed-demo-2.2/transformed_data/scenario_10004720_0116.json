@@ -1,0 +1,39 @@
+{
+  "subjectId": "10004720",
+  "inTime": "2186-11-12 16:09:00",
+  "outTime": "2186-11-12 19:55:00",
+  "triageDuration": 13560,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Cardiac arrest, Transfer",
+    "description": ""
+  },
+  "modeOfArrival": "UNKNOWN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 1.83,
+    "pulse": 85,
+    "respiratoryRate": 20,
+    "bloodPressure": "130/74",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "1.0",
+    "race": "WHITE"
+  },
+  "id": "b2f7c7bb-f46f-44d9-a190-41c5727f061a"
+}

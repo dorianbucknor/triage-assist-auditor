@@ -1,0 +1,40 @@
+{
+  "subjectId": "10019003",
+  "inTime": "2155-06-10 20:37:00",
+  "outTime": "2155-06-10 23:10:36",
+  "triageDuration": 9216,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Anemia",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.5,
+    "pulse": 86,
+    "respiratoryRate": 18,
+    "bloodPressure": "109/53",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "375b41fa-e4b5-4095-afe8-fbfe4a390bcd"
+}

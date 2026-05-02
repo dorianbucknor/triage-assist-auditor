@@ -1,0 +1,40 @@
+{
+  "subjectId": "10019385",
+  "inTime": "2180-03-03 20:26:00",
+  "outTime": "2180-03-04 02:24:00",
+  "triageDuration": 21480,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Chest pain, Jaw pain, L Arm pain",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.89,
+    "pulse": 58,
+    "respiratoryRate": 15,
+    "bloodPressure": "130/62",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 3,
+    "race": "WHITE"
+  },
+  "id": "f1be87c4-2917-4323-8731-fe0d86925ee5"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10021938",
+  "inTime": "2181-10-12 20:17:00",
+  "outTime": "2181-10-13 02:52:00",
+  "triageDuration": 23700,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Tachycardia",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.17,
+    "pulse": 77,
+    "respiratoryRate": 20,
+    "bloodPressure": "168/74",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "4c6feffc-bab0-450a-bfac-e9854d2c7c34"
+}

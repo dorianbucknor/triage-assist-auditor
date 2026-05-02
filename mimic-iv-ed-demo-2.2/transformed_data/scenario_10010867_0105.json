@@ -1,0 +1,39 @@
+{
+  "subjectId": "10010867",
+  "inTime": "2148-01-25 18:46:00",
+  "outTime": "2148-01-26 01:27:00",
+  "triageDuration": 24060,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "T-SPINE FX DISPLACEMENT",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.5,
+    "pulse": 85,
+    "respiratoryRate": 18,
+    "bloodPressure": "145/71",
+    "oxygenSaturation": 97,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "race": "WHITE - BRAZILIAN"
+  },
+  "id": "d212fefb-dc35-4d40-90fa-a0fbe98ec31c"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10000032",
+  "inTime": "2180-05-06 19:17:00",
+  "outTime": "2180-05-06 23:30:00",
+  "triageDuration": 15180,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Abd pain, Abdominal distention",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.5,
+    "pulse": 79,
+    "respiratoryRate": 16,
+    "bloodPressure": "107/60",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "f3acb83f-c8f9-4be8-a06f-80ce0acb73e2"
+}

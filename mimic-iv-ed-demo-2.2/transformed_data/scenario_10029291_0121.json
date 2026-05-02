@@ -1,0 +1,39 @@
+{
+  "subjectId": "10029291",
+  "inTime": "2123-02-19 23:57:00",
+  "outTime": "2123-02-20 04:13:00",
+  "triageDuration": 15360,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Transfer, PE",
+    "description": ""
+  },
+  "modeOfArrival": "UNKNOWN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": null,
+    "pulse": 109,
+    "respiratoryRate": 14,
+    "bloodPressure": "71/50",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "1.0",
+    "race": "UNKNOWN"
+  },
+  "id": "a595762f-ff30-4873-bc44-6042c0cc00b7"
+}

@@ -2,12 +2,24 @@
 import { Session } from "@supabase/supabase-js";
 export type UserRole = "admin" | "editor" | "viewer" | "user";
 
-export interface TriageData {
+export type Authoring = {
+	createdAt?: Date;
+	updatedAt?: Date;
+	// updatedBy: Date;
+	authorId?: string;
+};
+
+export type TriageData = Authoring & {
+	id: string;
+	inTime?: Date | null;
+	outTime?: Date | null;
+	triageDuration?: number | null; // in seconds
+	subjectId: string;
 	// Demographics
 	age: number | null;
 	gender: string;
-	height: number | null | undefined;
-	weight: number | null | undefined;
+	height: number | null;
+	weight: number | null;
 	// Chief Complaint & History
 	chiefComplaint: { title: string; description: string };
 	modeOfArrival: string;
@@ -17,8 +29,8 @@ export interface TriageData {
 	medicalHistory: string[];
 	currentMedication: string[];
 	// Social History
-	smoker: string | null;
-	alcohol: string | null;
+	smoker: string;
+	alcohol: string;
 	// Additional History
 	allergies: string[];
 	surgicalHistory: string[];
@@ -34,7 +46,7 @@ export interface TriageData {
 		bhcg: string;
 	};
 	// Urinalysis
-	urinalysis: {
+	urinanalysis: {
 		blood: string;
 		nitrites: string;
 		protein: string;
@@ -44,23 +56,23 @@ export interface TriageData {
 		wbc: string;
 		ketones: string;
 	} | null;
-}
+	otherLabs?: {
+		[key: string]: any;
+	} | null;
+};
 export type APIResponse<T> = {
 	error: string | null;
 	redirect: string | null;
 	success: boolean;
 	data: T;
 };
-export interface PatientScenario extends TriageData {
+export type PatientScenario = TriageData & {
 	scenarioId: string;
 	createdAt: Date;
-}
+};
 
-export interface Scenario {
+export type Scenario = Authoring & {
 	id: string;
-	authorId: string;
-	createdAt: Date;
-	updatedAt: Date;
 	gradedBy: string[] | null;
 	public: boolean;
 	editable: boolean;
@@ -70,28 +82,32 @@ export interface Scenario {
 	metadata: {
 		[key: string]: any;
 	} | null;
-}
-export interface ScenarioContent {
+};
+export type ScenarioContent = {
+	subjectId: string;
 	// Demographics
-	age: number | null;
-	gender: string;
-	height: number | null;
-	weight: number | null;
+	age?: number | null;
+	gender?: string;
+	height?: number | null;
+	weight?: number | null;
 	// Chief Complaint & History
 	chiefComplaint: ChiefComplaint;
+
+	labsSummary?: string;
+	currentMedication?: string[];
 	// Past Medical History
-	medicalHistory: string[];
+	medicalHistorySummary?: string[];
 	// Vitals
-	vitals: Vitals | null;
+	vitals?: Vitals | null;
 	// Urinalysis
-	urinalysis: Urinalysis | null;
-	extras: {
+	urinalysis?: Urinalysis | null;
+	extras?: {
 		[key: string]: any;
 	} | null;
-	otherLabs: {
+	otherLabs?: {
 		[key: string]: any;
 	} | null;
-}
+};
 
 export interface ChiefComplaint {
 	title: string;
@@ -127,32 +143,45 @@ export interface Vitals {
 	} | null;
 }
 export interface AIResponse {
-	triageLevel: {
-		level: "ESI-1" | "ESI-2" | "ESI-3" | "ESI-4" | "ESI-5";
-		reasoning: string;
-		confidence: number;
-	};
-	diagnosis: {
-		primary: string;
-		reasoning: string;
-		confidence: number;
-	};
-	treatment: {
-		reccommendations: string[];
-		reasoning: string;
-		confidence: number;
-	};
+	triage: AITriageResponse;
+	diagnosis: AIDiagnosisResponse;
+	treatment: AITreatmentResponse;
 }
 
-export interface ClinicalGrading {
-	triageLevelScale: number; // 1-5
-	correctTriageLevel?: string;
-	diagnosisScale: number; // 1-5
-	correctDiagnosis?: string;
-	treatmentScale: number; // 1-5
-	correctTreatment?: string;
-	notes?: string;
-}
+export type AITriageResponse = {
+	level: 1 | 2 | 3 | 4 | 5;
+	reason: string;
+	confidence: number;
+};
+
+export type AIDiagnosisResponse = {
+	primary: string;
+	reason: string;
+	confidence: number;
+};
+
+export type AITreatmentResponse = {
+	recommendations: string[];
+	reason: string;
+	confidence: number;
+};
+
+export type ClinicalGrading = Authoring & {
+	id: string;
+	triageGrading: number; // 1-5
+	triageFeedback?: string;
+	diagnosisGrading: number; // 1-5
+	diagnosisFeedback?: string;
+	treatmentGrading: number; // 1-5
+	treatmentFeedback?: string;
+	additionalNotes?: string;
+	extras?: Record<string, unknown>;
+	exclude: boolean;
+	public: boolean;
+	score: number; // Overall score calculated from the individual gradings
+	scenarioId: string; // ID of the scenario being graded
+	authorId: string; // ID of the clinician submitting the grading
+};
 
 export interface AccessRequest {
 	id: string;
@@ -164,14 +193,10 @@ export interface AccessRequest {
 	institution: string;
 	tosAccepted: boolean;
 	tosAcceptedAt: Date;
-	registrationStatus:
-		| "pending"
-		| "confirmed"
-		| "under_review"
-		| "unconfirmed";
+	registrationStatus: "pending" | "under_review" | "approved" | "denied";
 	speciality: string | null;
 	approvedAt: Date | null;
-	denied: boolean;
+	disabled: boolean;
 	denialReason: string | null;
 	createdAt: Date;
 	updatedAt: Date;
@@ -181,26 +206,40 @@ export interface ClinicianProfile {
 	professionalRole: string;
 	registrationNumber: string;
 	institution: string;
+	registrationStatus: "pending" | "under_review" | "approved" | "denied";
 	speciality: string | null;
 	createdAt: Date;
 	updatedAt: Date;
 }
-export interface UserProfile {
+export interface AccountDetails {
 	id: string;
 	firstName: string;
 	lastName: string;
 	email: string;
-	role: string;
 	tosAccepted: boolean;
 	emailVerified: boolean;
 	disabled: boolean;
 	updatedAt: Date;
 	createdAt: Date;
+    role: UserRole;
 }
-export interface UserData extends UserProfile {
+
+export type UserMetrics = {
+	id: string;
+	referrals: number;
+	logIns: number;
+	scenariosAdded: number;
+	gradingsSubmitted: number;
+	lastActive: Date;
+};
+export interface UserData extends AccountDetails {
 	clinicianProfile: ClinicianProfile | null;
+	metrics: UserMetrics;
 }
 export interface User {
 	data: UserData | null;
 	session: Session | null;
+	loggedIn: boolean;
 }
+
+// export type UserProfiled

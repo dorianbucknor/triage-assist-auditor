@@ -1,0 +1,39 @@
+{
+  "subjectId": "10037928",
+  "inTime": "2183-11-28 17:19:00",
+  "outTime": "2183-11-28 23:57:00",
+  "triageDuration": 23880,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Head injury, s/p Fall",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 2.5,
+    "pulse": 76,
+    "respiratoryRate": 18,
+    "bloodPressure": "125/44",
+    "oxygenSaturation": 95,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "HISPANIC/LATINO - CUBAN"
+  },
+  "id": "1451ea97-9984-44e2-a00e-d041c8d50bb9"
+}

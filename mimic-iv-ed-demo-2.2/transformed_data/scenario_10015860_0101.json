@@ -1,0 +1,40 @@
+{
+  "subjectId": "10015860",
+  "inTime": "2193-05-03 19:12:00",
+  "outTime": "2193-05-05 02:13:00",
+  "triageDuration": 111660,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "L Arm numbness, L Arm swelling",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.67,
+    "pulse": 99,
+    "respiratoryRate": 20,
+    "bloodPressure": "156/88",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "d968e860-b453-4f32-9cfa-a943325fab78"
+}

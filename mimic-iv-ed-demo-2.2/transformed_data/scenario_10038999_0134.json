@@ -1,0 +1,40 @@
+{
+  "subjectId": "10038999",
+  "inTime": "2132-05-17 19:56:00",
+  "outTime": "2132-05-18 01:36:00",
+  "triageDuration": 20400,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "s/p Fall, Transfer",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37,
+    "pulse": 116,
+    "respiratoryRate": 20,
+    "bloodPressure": "131/82",
+    "oxygenSaturation": 98,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "e11ea731-94cb-4db6-98ce-68a61186b55e"
+}

@@ -1,0 +1,40 @@
+{
+  "subjectId": "10039997",
+  "inTime": "2137-03-15 15:27:00",
+  "outTime": "2137-03-15 22:08:46",
+  "triageDuration": 24106,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "L Weakness, Unable to ambulate",
+    "description": ""
+  },
+  "modeOfArrival": "WALK IN",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.22,
+    "pulse": 58,
+    "respiratoryRate": 15,
+    "bloodPressure": "154/68",
+    "oxygenSaturation": 99,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "b4d8469e-1fbc-4110-869a-6d1f66d4e1d3"
+}

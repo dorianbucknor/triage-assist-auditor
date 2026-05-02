@@ -1,0 +1,40 @@
+{
+  "subjectId": "10003400",
+  "inTime": "2134-06-05 21:42:00",
+  "outTime": "2134-06-06 03:44:00",
+  "triageDuration": 21720,
+  "age": null,
+  "gender": "F",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "ELEVATED INR",
+    "description": ""
+  },
+  "modeOfArrival": "OTHER",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.44,
+    "pulse": 112,
+    "respiratoryRate": 18,
+    "bloodPressure": "131/84",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "BLACK/AFRICAN AMERICAN"
+  },
+  "id": "6411fef0-49bc-4b31-bd82-84b8d7055c20"
+}

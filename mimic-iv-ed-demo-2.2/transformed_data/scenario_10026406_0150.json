@@ -1,0 +1,39 @@
+{
+  "subjectId": "10026406",
+  "inTime": "2129-01-02 23:41:00",
+  "outTime": "2129-01-03 18:33:00",
+  "triageDuration": 67920,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Assault",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.67,
+    "pulse": 80,
+    "respiratoryRate": 14,
+    "bloodPressure": "116/85",
+    "oxygenSaturation": 96,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "3.0",
+    "race": "WHITE"
+  },
+  "id": "3e78a56c-d4e4-41bf-9808-8e37a96c969e"
+}

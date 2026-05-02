@@ -1,0 +1,40 @@
+{
+  "subjectId": "10014354",
+  "inTime": "2148-08-14 16:32:00",
+  "outTime": "2148-08-15 00:27:00",
+  "triageDuration": 28500,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Cough, Dyspnea",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 37.89,
+    "pulse": 97,
+    "respiratoryRate": 16,
+    "bloodPressure": "153/95",
+    "oxygenSaturation": 100,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "ff66dff7-0e11-4ffd-8859-f54ba4bd7f4f"
+}

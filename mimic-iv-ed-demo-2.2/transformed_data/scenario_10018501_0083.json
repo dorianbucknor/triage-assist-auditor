@@ -1,0 +1,40 @@
+{
+  "subjectId": "10018501",
+  "inTime": "2141-07-30 18:53:00",
+  "outTime": "2141-07-31 00:01:00",
+  "triageDuration": 18480,
+  "age": null,
+  "gender": "M",
+  "height": null,
+  "weight": null,
+  "chiefComplaint": {
+    "title": "Transfer, MVC",
+    "description": ""
+  },
+  "modeOfArrival": "AMBULANCE",
+  "mentalStatus": null,
+  "respiratoryStatus": null,
+  "medicalHistory": [],
+  "currentMedication": [],
+  "smoker": null,
+  "alcohol": null,
+  "allergies": [],
+  "surgicalHistory": [],
+  "immunization": [],
+  "vitals": {
+    "temperature": 36.83,
+    "pulse": 72,
+    "respiratoryRate": 20,
+    "bloodPressure": "160/67",
+    "oxygenSaturation": 96,
+    "glucose": null,
+    "bhcg": null
+  },
+  "urinalysis": null,
+  "otherLabs": {
+    "acuity": "2.0",
+    "pain": 0,
+    "race": "WHITE"
+  },
+  "id": "d9ee72df-7fa2-447f-bfba-1efd17aba3e6"
+}
