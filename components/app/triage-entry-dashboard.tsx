@@ -20,7 +20,6 @@ export default function TriageEntryDashboard() {
 	const [mounted, setMounted] = useState(false);
 
 	useEffect(() => {
-		
 		// eslint-disable-next-line react-hooks/set-state-in-effect
 		setMounted(true);
 	}, [user]);
@@ -33,7 +32,7 @@ export default function TriageEntryDashboard() {
 	const canCreateTriage =
 		(!!user?.data?.clinicianProfile?.professionalRole &&
 			!user?.data?.disabled) ||
-		userRole !== "user";
+		userRole === "admin";
 	const userName =
 		user?.data?.firstName ||
 		user?.data?.email?.split("@")[0] ||

@@ -161,6 +161,8 @@ export async function POST(request: NextRequest) {
 		const superbase = await createServerClient();
 
 		switch (action) {
+            case "DELETE_USER":
+                return await handleUserDelete(superbase, data.userId);
 			case "NEW_REQUEST":
 				return await handleAccessRequest(superbase, data);
 			default:
@@ -240,3 +242,52 @@ async function handleAccessRequest(
 		},
 	});
 }
+async function handleUserDelete(superbase: SupabaseClient<any, "public", "public", any, any>, userId: any): Promise<NextResponse> {
+    
+    try {
+        const { error } = await superbase.from("user_profiles").delete().eq("id", userId);
+
+        if (error) {
+            console.error("Error deleting user:", error);
+            return new NextResponse(
+                JSON.stringify({
+                    success: false,
+                    error: error.message,
+                }),
+                {
+                    status: 500,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                },
+            );
+        }
+
+        return new NextResponse(
+            JSON.stringify({
+                success: true,
+            }),
+            {
+                status: 200,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            },
+        );
+    } catch (error) {
+        console.error("Unexpected error deleting user:", error);
+        return new NextResponse(
+            JSON.stringify({
+                success: false,
+                error: error instanceof Error ? error.message : "Unknown error",
+            }),
+            {
+                status: 500,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            },
+        );
+    }
+}
+
