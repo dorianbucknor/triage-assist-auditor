@@ -29,10 +29,7 @@ export default function TriageEntryDashboard() {
 	}
 
 	const userRole = user?.session ? getUserRole(user.session) : "user";
-	const canCreateTriage =
-		(!!user?.data?.clinicianProfile?.professionalRole &&
-			!user?.data?.disabled) ||
-		userRole === "admin";
+	const canCreateTriage = true;
 	const userName =
 		user?.data?.firstName ||
 		user?.data?.email?.split("@")[0] ||
