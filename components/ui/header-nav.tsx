@@ -59,41 +59,54 @@ export default function HeaderNav() {
 
 				<DropdownMenu>
 					<DropdownMenuTrigger>
-						<DropdownMenuLabel className=" !cursor-pointer text-muted-foreground hover:text-foreground hover:bg-accent text-sm">
+						<DropdownMenuLabel className=" cursor-pointer! text-muted-foreground hover:text-foreground hover:bg-accent text-sm">
 							<Menu />
 						</DropdownMenuLabel>
 					</DropdownMenuTrigger>
-					<DropdownMenuContent>
-						<DropdownMenuGroup>
-							<DropdownMenuItem asChild>
-								<Link href="/app">Scenarios</Link>
-							</DropdownMenuItem>
-							<DropdownMenuItem asChild>
-								<Link href="/profile">Profile</Link>
-							</DropdownMenuItem>
-						</DropdownMenuGroup>
-						<DropdownMenuSeparator />
-						<DropdownMenuGroup>
-							<DropdownMenuItem asChild>
-								<Link href="/admin/dashboard">
-									Admin Dashboard
-								</Link>
-							</DropdownMenuItem>
-						</DropdownMenuGroup>
-						<DropdownMenuSeparator />
-						<DropdownMenuGroup>
-							<DropdownMenuItem variant="destructive" asChild>
-								<Link
-									href="/auth/sign-in"
-									onClick={async () => {
-										await supabaseClient.auth.signOut();
-									}}
-								>
-									Sign out
-								</Link>
-							</DropdownMenuItem>
-						</DropdownMenuGroup>
-					</DropdownMenuContent>
+					{user && user.loggedIn ? (
+						<DropdownMenuContent>
+							<DropdownMenuGroup>
+								<DropdownMenuItem asChild>
+									<Link href="/app">Scenarios</Link>
+								</DropdownMenuItem>
+								<DropdownMenuItem asChild>
+									<Link href="/profile">Profile</Link>
+								</DropdownMenuItem>
+							</DropdownMenuGroup>
+							<DropdownMenuSeparator />
+							<DropdownMenuGroup>
+								<DropdownMenuItem asChild>
+									<Link href="/admin/dashboard">
+										Admin Dashboard
+									</Link>
+								</DropdownMenuItem>
+							</DropdownMenuGroup>
+							<DropdownMenuSeparator />
+							<DropdownMenuGroup>
+								<DropdownMenuItem variant="destructive" asChild>
+									<Link
+										href="/auth/sign-in"
+										onClick={async () => {
+											await supabaseClient.auth.signOut();
+										}}
+									>
+										Sign out
+									</Link>
+								</DropdownMenuItem>
+							</DropdownMenuGroup>
+							:
+						</DropdownMenuContent>
+					) : (
+						<DropdownMenuContent>
+							(
+							<DropdownMenuGroup>
+								<DropdownMenuItem variant="destructive" asChild>
+									<Link href="/auth/sign-in">Sign in</Link>
+								</DropdownMenuItem>
+							</DropdownMenuGroup>
+							)
+						</DropdownMenuContent>
+					)}
 				</DropdownMenu>
 			</div>
 		</nav>
