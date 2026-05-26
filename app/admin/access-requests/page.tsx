@@ -46,8 +46,6 @@ import { AccessRequest, UserRole } from "@/lib/types";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 export default function AccessRequestsPage() {
-	// const [requests, setUsers] = useState<AccessRequest[]>([]);
-
 	// Edit sheet state
 	const [editingRequest, setEditingUser] = useState<AccessRequest | null>(
 		null,
@@ -73,13 +71,6 @@ export default function AccessRequestsPage() {
 
 	const saveEdit = () => {
 		if (!editingRequest) return;
-		// setUsers((s) =>
-		// 	s.map((u) =>
-		// 		u.id === editingRequest.id
-		// 			? { ...u, ...(editForm as AccessRequest) }
-		// 			: u,
-		// 	),
-		// );
 		setEditingUser(null);
 		setEditForm({});
 
@@ -127,9 +118,9 @@ export default function AccessRequestsPage() {
 						<h2 className="text-lg font-semibold">
 							Clinician Access Requests
 						</h2>
-						<Button onClick={() => setShowAddSheet(true)}>
+						{/* <Button onClick={() => setShowAddSheet(true)}>
 							Add Request
-						</Button>
+						</Button> */}
 					</div>
 				</CardHeader>
 				<CardContent>
@@ -142,7 +133,7 @@ export default function AccessRequestsPage() {
 								<TableHead>Reg #</TableHead>
 								<TableHead>Institution</TableHead>
 								<TableHead>Account Status</TableHead>
-								<TableHead>Actions</TableHead>
+								{/* <TableHead>Actions</TableHead> */}
 							</TableRow>
 						</TableHeader>
 						<TableBody>
@@ -174,7 +165,7 @@ export default function AccessRequestsPage() {
 												? "Disabled"
 												: "Active"}
 										</TableCell> */}
-										<TableCell>
+										{/* <TableCell>
 											<div className="flex gap-2">
 												<Button
 													size="sm"
@@ -261,7 +252,7 @@ export default function AccessRequestsPage() {
 													</DialogContent>
 												</Dialog>
 											</div>
-										</TableCell>
+										</TableCell> */}
 									</TableRow>
 								))}
 						</TableBody>
@@ -407,6 +398,8 @@ async function getAccessRequests(
 	pageParam: number,
 	PAGE_SIZE: number,
 ): Promise<AccessRequest[]> {
+	toast.loading("Fetching access requests...");
+
 	const results = await fetch(
 		`/api/access-request?action=GET_REQUESTS&page=${pageParam}&size=${PAGE_SIZE}`,
 		{
@@ -428,8 +421,7 @@ async function getAccessRequests(
 		toast.error("Failed to fetch access requests. Please try again.");
 		throw new Error(error || "Failed to fetch access requests");
 	}
-
-	console.log(data);
+	toast.dismiss();
 
 	return data as AccessRequest[];
 }

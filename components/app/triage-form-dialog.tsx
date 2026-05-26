@@ -52,9 +52,6 @@ export default function TriageFormDialog({
 			}
 
 			const scenarioId = result?.data?.id;
-
-			toast.success("Scenario added successfully!");
-
 			// Close the dialog
 			onOpenChange(false);
 
@@ -76,7 +73,15 @@ export default function TriageFormDialog({
 
 	return (
 		<Dialog open={open} onOpenChange={onOpenChange}>
-			<DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+			<DialogContent
+				className="max-w-4xl max-h-[90vh] overflow-y-auto"
+				onInteractOutside={(e) => {
+					const target = e.target as HTMLElement;
+					if (target?.closest("[data-sonner-toast]")) {
+						e.preventDefault();
+					}
+				}}
+			>
 				<DialogHeader>
 					<DialogTitle>Add New Triage Entry</DialogTitle>
 					<DialogDescription>

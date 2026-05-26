@@ -25,6 +25,7 @@ import {
 	Users,
 	Upload,
 	FileJson,
+	MailQuestionMark,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
@@ -78,11 +79,11 @@ export default function AppSidebar({
 								// 		: {}
 								// }
 							>
-								<TrendingUpDown className="mr-2 h-4 w-4" />{" "}
-								Metrics
+								<Users className="mr-2 h-4 w-4" /> User
+								Managment
 							</SidebarMenuButton>
 						</SidebarMenuItem>
-						<SidebarMenuItem>
+						{/* <SidebarMenuItem>
 							<SidebarMenuButton
 								className="cursor-pointer"
 								onClick={() => {
@@ -94,7 +95,7 @@ export default function AppSidebar({
 								<Users className="mr-2 h-4 w-4" />
 								User Management
 							</SidebarMenuButton>
-						</SidebarMenuItem>
+						</SidebarMenuItem> */}
 						<SidebarMenuItem>
 							<SidebarMenuButton
 								className="cursor-pointer"
@@ -104,21 +105,8 @@ export default function AppSidebar({
 								}}
 								isActive={tab === "access-requests"}
 							>
-								<Users className="mr-2 h-4 w-4" />
+								<MailQuestionMark className="mr-2 h-4 w-4" />
 								Access Requests
-							</SidebarMenuButton>
-						</SidebarMenuItem>
-						<SidebarMenuItem>
-							<SidebarMenuButton
-								className="cursor-pointer"
-								onClick={() => {
-									router.push("/admin/batch-scenarios");
-									sidebar.setOpenMobile(false);
-								}}
-								isActive={tab === "batch-scenarios"}
-							>
-								<Upload className="mr-2 h-4 w-4" />
-								Batch Upload
 							</SidebarMenuButton>
 						</SidebarMenuItem>
 						<SidebarMenuItem>
@@ -132,6 +120,19 @@ export default function AppSidebar({
 							>
 								<FileJson className="mr-2 h-4 w-4" />
 								Single Scenario
+							</SidebarMenuButton>
+						</SidebarMenuItem>
+						<SidebarMenuItem>
+							<SidebarMenuButton
+								className="cursor-pointer"
+								onClick={() => {
+									router.push("/admin/batch-scenarios");
+									sidebar.setOpenMobile(false);
+								}}
+								isActive={tab === "batch-scenarios"}
+							>
+								<Upload className="mr-2 h-4 w-4" />
+								Batch Upload
 							</SidebarMenuButton>
 						</SidebarMenuItem>
 					</SidebarMenu>
@@ -148,7 +149,7 @@ export default function AppSidebar({
 						>
 							<div className="cursor-pointer">
 								<NotebookPenIcon className="mr-2 h-4 w-4 " />
-								AI Scenario Audit
+								Clinician Dashboard
 							</div>
 						</SidebarMenuButton>
 					</SidebarMenuItem>

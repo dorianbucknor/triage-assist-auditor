@@ -221,7 +221,7 @@ export interface AccountDetails {
 	disabled: boolean;
 	updatedAt: Date;
 	createdAt: Date;
-    role: UserRole;
+	role: UserRole;
 }
 
 export type UserMetrics = {
@@ -242,4 +242,8 @@ export interface User {
 	loggedIn: boolean;
 }
 
-// export type UserProfiled
+export interface APIRequest<T> {
+	method: "GET" | "POST" | "PUT" | "DELETE";
+	action: string;
+	data?: T;
+}

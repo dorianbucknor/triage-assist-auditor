@@ -36,11 +36,11 @@ import { REGEXP_ONLY_DIGITS } from "input-otp";
 const validationSchema = z.object({
 	firstName: z.string().min(1, "First name is required"),
 	lastName: z.string().min(1, "Last name is required"),
-	email: z.email("Invalid email address"),
+	email: z.email("Invalid email address").min(1, "Email is required"),
 	otp: z
 		.string()
 		.min(8, "OTP must be 8 digits")
-		.refine((val) => /^\d+$/.test(val), "OTP must contain only digits"),
+		.max(8, "OTP must contain only digits"),
 	role: z.string().min(1, "Role is required"),
 	registrationNumber: z.string().min(5, "Registration number is required"),
 	institution: z.string().min(1, "Institution is required"),
@@ -127,21 +127,30 @@ export function AccessRequestForm({
 		try {
 			if (currentStep === 1) {
 				// Validate step 1 fields
-				const result = await form.trigger([
+				const valid = await form.trigger([
 					"firstName",
 					"lastName",
 					"email",
 				]);
-				if (result) {
+				if (valid) {
 					await sendEmailOTP();
+
+					toast.dismiss();
+					toast.success(
+						"Verification code sent to " + formValues.email,
+					);
 					setCurrentStep(currentStep + 1);
 				}
 			} else if (currentStep === 2) {
 				await verifyEmailOTP();
+				toast.dismiss();
+				toast.success("Email verified successfully!");
+
 				// Move to step 3
 				setCurrentStep(currentStep + 1);
 			}
 		} catch (error) {
+			toast.dismiss();
 			toast.error("An unexpected error occurred. Error: " + error);
 		}
 	}
@@ -153,8 +162,10 @@ export function AccessRequestForm({
 	};
 
 	async function sendEmailOTP() {
-		if (!form.trigger("otp")) {
+		form.setValue("otp", "");
+		if (!form.trigger("email")) {
 			toast.error("Please enter a valid email before requesting OTP.");
+			setCurrentStep(1);
 			return;
 		}
 
@@ -169,9 +180,13 @@ export function AccessRequestForm({
 			}),
 		});
 
+		captchaRef.current?.reset();
+		setCaptchaToken(null);
+
 		if (!response.ok) {
-			toast.error("Failed to send verification code. Please try again.");
-			return;
+			throw new Error(
+				"Failed to send verification code. Please try again.",
+			);
 		}
 
 		const { success, data, error } = await response.json();
@@ -179,12 +194,14 @@ export function AccessRequestForm({
 		if (error) {
 			throw new Error("Failed to send verification code: " + error);
 		}
-
-		toast.dismiss();
-		toast.success("Verification code sent to " + formValues.email);
 	}
 
 	async function verifyEmailOTP(): Promise<void> {
+		const valid = await form.trigger(["otp"]);
+		if (!valid) {
+			throw new Error(form.getFieldState("otp").error?.message);
+		}
+
 		const response = await fetch("/api/auth", {
 			method: "POST",
 			headers: {
@@ -201,18 +218,17 @@ export function AccessRequestForm({
 		});
 
 		if (!response.ok) {
-			toast.error("Failed to verify OTP. Please try again.");
-			return Promise.reject(new Error("Failed to verify OTP"));
+			return Promise.reject(
+				new Error("Failed to verify OTP. Please try again."),
+			);
 		}
 
 		const { data, error } = await response.json();
 
 		if (error) {
-			toast.error("Failed to verify OTP: " + error);
 			return Promise.reject(new Error("Failed to verify OTP: " + error));
 		}
 
-		toast.success("Email verified successfully!");
 		return Promise.resolve();
 	}
 
@@ -243,9 +259,7 @@ export function AccessRequestForm({
 				}),
 			});
 
-			const { success, error, redirect, data: d } = await res.json();
-
-			console.log(d, error);
+			const { success, error, redirect, data: _data } = await res.json();
 
 			if (!success) {
 				toast.dismiss(loadingToast);
@@ -484,7 +498,16 @@ export function AccessRequestForm({
 									{...field}
 									maxLength={8}
 									onComplete={async () => {
-										await verifyEmailOTP();
+										// await verifyEmailOTP();
+									}}
+									onBlur={(e) => {
+										console.log(e.currentTarget.value);
+
+										field.onBlur();
+										form.setValue(
+											"otp",
+											e.currentTarget.value.trim(),
+										);
 									}}
 									pattern={REGEXP_ONLY_DIGITS}
 									containerClassName="w-full flex items-center justify-center"
@@ -662,6 +685,7 @@ export function AccessRequestForm({
 						<Button
 							type="button"
 							onClick={(e) => handleNext()}
+							// disabled={!canProceed}
 							className="px-8"
 						>
 							Next

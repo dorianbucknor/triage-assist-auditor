@@ -5,10 +5,11 @@ import { Button } from "./button";
 import { Minus, Plus } from "lucide-react";
 import { Input } from "./input";
 import { cn } from "@/lib/utils";
+import { es } from "zod/v4/locales";
 
 export default function NumberInput({
 	increment = 1,
-	allowFloats = true,
+	allowFloats: allowsDecimal = true,
 	onChange = () => {},
 	onBlur = () => {},
 	placeholder,
@@ -38,26 +39,29 @@ export default function NumberInput({
 			isNumber(value)
 		);
 	};
-	const min = allowFloats
+	const min = allowsDecimal
 		? parseFloat(props?.min as string)
 		: parseInt(props?.min as string, 10);
 
-	const max = allowFloats
+	const max = allowsDecimal
 		? parseFloat(props?.max as string)
 		: parseInt(props?.max as string, 10);
 
 	function handleIncrement(increment: number) {
 		if (!ref.current) return;
 		const input = ref.current;
+
+		handleInput();
+
 		if (input) {
-			const val = allowFloats
+			const val = allowsDecimal
 				? parseFloat(input.value.trim())
 				: parseInt(input.value.trim(), 10);
 
 			if (isNaN(val)) {
 				input.value = min ? min.toString() : "0";
-				onChange(undefined);
-				onBlur(undefined);
+				onChange(input.value);
+				onBlur(input.value);
 			} else {
 				let newVal = val + increment;
 				if (props?.min !== undefined && !isNaN(min) && newVal < min) {
@@ -66,9 +70,13 @@ export default function NumberInput({
 				if (props?.max !== undefined && !isNaN(max) && newVal > max) {
 					newVal = max;
 				}
-				input.value = newVal.toFixed(1);
-				onChange(newVal.toFixed(1));
-				onBlur(newVal.toFixed(1));
+
+				input.value = allowsDecimal
+					? newVal.toFixed(1)
+					: newVal.toString();
+
+				onChange(input.value);
+				onBlur(input.value);
 			}
 		}
 	}
@@ -79,18 +87,93 @@ export default function NumberInput({
 		if (!input) return;
 		const inputString = input.value.trim();
 
-		if (isValidInput(inputString) && onChange) {
+		if (isValidInput(inputString)) {
 			let newValue = inputString;
 
-			if (inputString.trim() === ".") {
-				newValue = "0.";
+			if (inputString === ".") {
+				if (allowsDecimal) {
+					newValue = "0.";
+				} else {
+					newValue = "";
+					handleError("Decimal values are not allowed");
+				}
+			}
+			if (inputString === "-" || inputString === "-.") {
+				if (allowsDecimal) {
+					newValue = "-0.";
+				} else {
+					newValue = "-";
+				}
 			}
 
+			if (inputString === "") {
+				newValue = "";
+			}
+
+			if (inputString.includes(".") && !allowsDecimal) {
+				newValue = inputString.replace(".", "");
+				handleError("Decimal values are not allowed");
+			}
+
+			if (allowsDecimal) {
+				newValue = newValue.replace(
+					/^([+-]?)0+(?=\d)|(\.\d*?[1-9])0+(?=$|[eE])|(\.0+)(?=$|[eE])/g,
+					"$1$2",
+				);
+			} else {
+				newValue = newValue.replace(/^([+-]?)0+(?=\d)/, "$1");
+			}
+
+			const parsedValue = allowsDecimal
+				? parseFloat(inputString)
+				: parseInt(inputString, 10);
+
+			if (
+				props?.min !== undefined &&
+				!isNaN(parsedValue) &&
+				!isNaN(min) &&
+				parsedValue < min
+			) {
+				newValue = allowsDecimal ? min.toFixed(1) : min.toString();
+				handleError(`Value must be at least ${newValue}`);
+			}
+			if (
+				props?.max !== undefined &&
+				!isNaN(parsedValue) &&
+				!isNaN(max) &&
+				parsedValue > max
+			) {
+				newValue = allowsDecimal ? max.toFixed(1) : max.toString();
+				handleError(`Value must be at most ${newValue}`);
+			}
+
+			input.value = newValue;
+
 			onChange(newValue);
+			onBlur(newValue);
 		} else {
 			input.value = "";
+			onChange("");
+			onBlur("");
 		}
 	}
+
+	const handleInput = () => {
+		const inputNode = ref.current;
+		if (inputNode) {
+			inputNode.setCustomValidity("");
+			inputNode.classList.remove("error");
+		}
+	};
+
+	const handleError = (message: string) => {
+		const inputNode = ref.current;
+		if (inputNode) {
+			inputNode.setCustomValidity(message);
+			inputNode.reportValidity();
+			inputNode.classList.add("error");
+		}
+	};
 
 	return (
 		<ButtonGroup>
@@ -107,6 +190,7 @@ export default function NumberInput({
 			</Button>
 			<Input
 				placeholder={placeholder}
+				onInput={handleInput}
 				{...props}
 				className={cn("no-outer-arrows ", props.className)}
 				ref={ref}
@@ -136,7 +220,7 @@ export default function NumberInput({
 				onBlur={(e) => {
 					handleInputChange(e.target, true);
 					// Ensure floats display with at least one decimal place
-					// if (allowFloats && ref.current && ref.current.value) {
+					// if (allowsDecimal && ref.current && ref.current.value) {
 					// 	const val = parseFloat(ref.current.value);
 					// 	if (!isNaN(val) && !ref.current.value.includes(".")) {
 					// 		ref.current.value = val.toFixed(1);

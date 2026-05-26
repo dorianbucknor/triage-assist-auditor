@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "ES2017",
+		"target": "es2018",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
@@ -30,7 +30,8 @@
 		".next/dev/types/**/*.ts",
 		"**/*.mts",
 		"app/app/scenario",
-		"app/api/auth/verify/route.js"
-, "app/api/scenarios/route.ts"	],
+		"app/api/auth/verify/route.js",
+		"app/api/scenarios/route.ts"
+	],
 	"exclude": ["node_modules"]
 }

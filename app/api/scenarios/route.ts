@@ -1,15 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-//
-// This file defines the API routes for handling scenarios in the TriageAssist application. It includes endpoints for creating new scenarios, fetching ungraded scenarios for a user, and submitting grading for scenarios. The API interacts with a Supabase database to store and retrieve scenario data, including scenario content and AI-generated responses. The code also includes placeholder functions for summarizing chief complaints, medical history, and labs using AI, as well as generating AI responses based on scenario content.
-
-//==== ignore typescript errors in this file since it's a server component and we can be more flexible with types here ====
-//
-//
-
 import { verifySession } from "@/lib/dal";
 import {
 	AIResponse,
-	APIResponse,
 	ChiefComplaint,
 	Scenario,
 	ScenarioContent,
@@ -21,9 +13,8 @@ import { createServerClient } from "@/providers/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 import camelize from "camelize-ts";
 import snakify, { Snakify } from "snakify-ts";
-import { callHFInference } from "@/lib/hf-client";
 import { SupabaseClient } from "@supabase/supabase-js";
-// import logger from "@/providers/vestig/vestig";
+import { callHFInference } from "@/providers/huggingface/hf-client";
 
 export async function GET(request: NextRequest) {
 	const { loggedIn: isAuth, userId } = await verifySession();
@@ -47,14 +38,21 @@ export async function GET(request: NextRequest) {
 
 	if (action) {
 		switch (action) {
-			case "GET_UNGRADED":
+			case "GET_UNGRADED_BY_USER": {
 				const limit = parseInt(searchParams.get("amount") || "5");
 				const page = parseInt(searchParams.get("page") || "0");
 				return await fetchUngradedByUser(limit, userId, page);
-			case "GET_USER_SCENARIOS":
-				const userLimit = parseInt(searchParams.get("amount") || "10");
-				const userPage = parseInt(searchParams.get("page") || "0");
-				return await fetchUserScenarios(userLimit, userId, userPage);
+			}
+			case "GET_USER_SCENARIOS": {
+				const limit = parseInt(searchParams.get("amount") || "10");
+				const page = parseInt(searchParams.get("page") || "0");
+				return await fetchUserScenarios(limit, userId, page);
+			}
+			case "GET_ALL_SCENARIOS": {
+				const limit = parseInt(searchParams.get("amount") || "10");
+				const page = parseInt(searchParams.get("page") || "0");
+				return await fetchAllScenarios(limit, userId, page);
+			}
 			case "GET_SCENARIO":
 				const scenarioId = searchParams.get("scenarioId");
 				if (!scenarioId) {
@@ -236,7 +234,6 @@ async function handleTestScenario(data: TriageAssistData, userId: string) {
 	} catch (error) {
 		console.error("Error adding scenario: ", error);
 
-        
 		return new NextResponse(
 			JSON.stringify({
 				success: false,
@@ -258,7 +255,7 @@ async function handleAddScenario(data: TriageData, userId: string) {
 			JSON.stringify(data).replaceAll('"unknown"', "null"),
 		);
 
-		//create summaries using AI
+		//todo create summaries using AI
 		const medicalHistorySummary =
 			await summarizeMedicalHistory(scrubbedData);
 		const labsSummary = await summarizeLabs({
@@ -312,7 +309,7 @@ async function handleAddScenario(data: TriageData, userId: string) {
 		);
 	} catch (error) {
 		console.error("Error adding scenario: ", error);
-        
+
 		return new NextResponse(
 			JSON.stringify({
 				success: false,
@@ -364,8 +361,6 @@ async function addScenario() {
 	if (!data) {
 		throw new Error("Failed to add scenario: No data returned");
 	}
-
-	// const scenarioData = camelize(data) as unknown as Scenario;
 
 	return data;
 }
@@ -725,6 +720,49 @@ async function fetchUserScenarios(
 	);
 }
 
+async function fetchAllScenarios(
+	limit: number,
+	userId: string,
+	page: number,
+): Promise<NextResponse> {
+	const { data, error } = await getAllScenarios(limit, page);
+	const convertedData = camelize(data) as unknown as Scenario[];
+
+	if (error) {
+		console.error("Error fetching scenarios: ", error, {
+			userId,
+		});
+
+		return new NextResponse(
+			JSON.stringify({
+				success: false,
+				error: "Failed to fetch scenarios",
+			}),
+			{
+				status: 500,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			},
+		);
+	}
+
+	console.log("Successfully fetched scenarios", {
+		userId,
+		count: convertedData.length,
+	});
+
+	return new NextResponse(
+		JSON.stringify({ success: true, data: convertedData, error: null }),
+		{
+			status: 200,
+			headers: {
+				"Content-Type": "application/json",
+			},
+		},
+	);
+}
+
 async function getUserCreatedScenarios(
 	limit: number,
 	userId: string,
@@ -740,6 +778,19 @@ async function getUserCreatedScenarios(
 		)
 		.order("created_at", { ascending: false })
 		.eq("author_id", userId)
+		.range(page * limit, (page + 1) * limit - 1);
+}
+
+async function getAllScenarios(limit: number, page: number) {
+	const supabase = await createServerClient();
+
+	return await supabase
+		.schema("ai_auditing")
+		.from("scenarios")
+		.select(
+			"id, created_at, author_id, updated_at, metadata, graded_by, editable, public, content: scenario_content(extras, age, height, weight, gender, chief_complaint : scenario_chief_complaints(title, description), medical_history : medical_history_summary, urinanalysis, other_labs, vitals : scenario_vitals(blood_pressure, pulse, respiratory_rate, temperature, oxygen_saturation, glucose, bhcg, other_vitals)), ai_response: ai_scenario_responses( triage: ai_triage_responses(level, confidence, reason),diagnosis: ai_diagnosis_responses(primary, reason, confidence),treatment: ai_treatment_responses(reason,confidence, recommendations) )",
+		)
+		.order("created_at", { ascending: false })
 		.range(page * limit, (page + 1) * limit - 1);
 }
 
