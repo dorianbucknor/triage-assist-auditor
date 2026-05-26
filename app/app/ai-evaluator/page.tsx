@@ -49,9 +49,18 @@ const PAGE_SIZE: number = 5;
 async function getUngradedScenarios(
 	page: number,
 	limit = PAGE_SIZE,
+	userId?: string,
 ): Promise<Scenario[]> {
+	if (!userId) {
+		const user = await store.get(userAtom);
+		if (!user || !user.loggedIn || !user.data) {
+			throw new Error("User not logged in");
+		}
+		userId = user.data.id;
+	}
+
 	const res = await fetch(
-		`/api/scenarios?action=GET_UNGRADED&amount=${limit}&page=${page}`,
+		`/api/scenarios?action=GET_UNGRADED_BY_USER&id=${userId}&amount=${limit}&page=${page}`,
 		{
 			method: "GET",
 			headers: {
@@ -90,6 +99,10 @@ function getScenariosBatch(
 	return data?.pages.flat() ?? [];
 }
 
+/**
+ * Triage Assistant page component
+ * @returns
+ */
 export default function TriageAssistantPage() {
 	const [user] = useAtom(userAtom, { store: store });
 	const [currentScenarioIndex, setCurrentScenarioIndex] = useState(0);
@@ -100,7 +113,7 @@ export default function TriageAssistantPage() {
 	const queryClient = useQueryClient();
 
 	if (!user || !user?.loggedIn) {
-		redirect("/user/sign-in");
+		redirect("/auth/sign-in");
 	}
 
 	const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =

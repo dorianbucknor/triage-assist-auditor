@@ -179,11 +179,11 @@ export default function UserManagementPage() {
 				<CardHeader>
 					<div className="flex items-center justify-between">
 						<h2 className="text-lg font-semibold">
-							User Management
+							User Management2
 						</h2>
-						<Button onClick={() => setShowAddSheet(true)}>
+						{/* <Button onClick={() => setShowAddSheet(true)}>
 							Add User
-						</Button>
+						</Button> */}
 					</div>
 				</CardHeader>
 				<CardContent>

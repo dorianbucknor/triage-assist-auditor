@@ -20,6 +20,7 @@ export default function SignOutTrigger() {
 					onClick={async () => {
 						setPending(true);
 						await supabaseClient.auth.signOut();
+						await fetch("/api/auth?action=LOGOUT");
 						setPending(false);
 					}}
 					disabled={pending}

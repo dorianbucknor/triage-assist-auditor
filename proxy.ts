@@ -29,16 +29,10 @@ export async function proxy(request: NextRequest) {
 	}
 
 	//get current session and user app role
-	const {
-		loggedIn: isAuth,
-		userId,
-		userRole,
-		session,
-		user,
-	} = await verifySession();
+	const { loggedIn, userId, userRole, session, user } = await verifySession();
 
 	//Block any unauthenticated user from protected routes
-	if (!isAuth) {
+	if (!loggedIn) {
 		return NextResponse.redirect(new URL(`${basePath}/auth/sign-in`));
 	}
 

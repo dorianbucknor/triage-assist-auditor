@@ -2,12 +2,61 @@ import { createServerClient } from "@/providers/supabase/server";
 import { verify } from "crypto";
 import { NextRequest } from "next/server";
 
+export async function GET(request: NextRequest) {
+	const supabase = await createServerClient();
+
+	switch (request.nextUrl.searchParams.get("action")) {
+		case "CHECK_SESSION": {
+			const {
+				data: { session },
+				error,
+			} = await supabase.auth.getSession();
+			if (error) {
+				console.error("Error checking session:", error);
+				return new Response(
+					JSON.stringify({ loggedIn: false, error: error.message }),
+					{ status: 200 },
+				);
+			}
+			const loggedIn = !!session;
+			return new Response(JSON.stringify({ loggedIn, session }), {
+				status: 200,
+			});
+		}
+
+		case "LOGOUT":
+			const { error: logoutError } = await supabase.auth.signOut();
+			if (logoutError) {
+				console.error("Error during logout:", logoutError);
+				return new Response(
+					JSON.stringify({
+						success: false,
+						error: logoutError.message,
+					}),
+					{ status: 500 },
+				);
+			}
+			return new Response(
+				JSON.stringify({
+					success: true,
+					message: "Logged out successfully",
+				}),
+				{ status: 200 },
+			);
+
+		default:
+			return new Response(
+				JSON.stringify({ success: false, error: "Invalid action" }),
+				{ status: 400 },
+			);
+	}
+}
+
 export async function POST(request: NextRequest) {
 	const { action, data } = await request.json();
 
 	switch (action) {
 		case "SEND_EMAIL_OTP":
-			console.log(action, data);
 			const { email, captchaToken } = data;
 			if (validateEmail(email)) {
 				await sendEmailOTP({
@@ -87,7 +136,7 @@ async function verifyOTP(
 			email,
 			// token_hash: tokenHash,
 			token: otp,
-			type: "email",
+			type: "magiclink",
 		});
 
 		if (response.error) {
@@ -118,7 +167,7 @@ async function sendEmailOTP({
 			email: email,
 			options: {
 				emailRedirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/register`,
-				shouldCreateUser: false,
+				// shouldCreateUser: false,
 				captchaToken: captchaToken || "",
 			},
 		}); // Adjust the redirect URL as needed

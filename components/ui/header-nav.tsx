@@ -67,11 +67,11 @@ export default function HeaderNav() {
 						<DropdownMenuContent>
 							<DropdownMenuGroup>
 								<DropdownMenuItem asChild>
-									<Link href="/app">Scenarios</Link>
+									<Link href="/app">Dashboard</Link>
 								</DropdownMenuItem>
-								<DropdownMenuItem asChild>
+								{/* <DropdownMenuItem asChild>
 									<Link href="/profile">Profile</Link>
-								</DropdownMenuItem>
+								</DropdownMenuItem> */}
 							</DropdownMenuGroup>
 							<DropdownMenuSeparator />
 							<DropdownMenuGroup>
@@ -88,6 +88,9 @@ export default function HeaderNav() {
 										href="/auth/sign-in"
 										onClick={async () => {
 											await supabaseClient.auth.signOut();
+											await fetch(
+												"/api/auth?action=LOGOUT",
+											);
 										}}
 									>
 										Sign out

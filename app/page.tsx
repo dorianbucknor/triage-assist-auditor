@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import Header from "@/components/ui/header";
 import MouseGlow from "@/components/ui/mouse-glow";
+import { HeartPulse } from "lucide-react";
 // import { useRef } from "react";
 
 const FEATURES = [
@@ -41,25 +42,17 @@ const STATS = [
 ];
 //
 export default function LandingPage() {
-	// const parentRef = useRef<HTMLDivElement>(null);
-
 	return (
 		<div
-			// ref={parentRef}
 			className="min-h-screen bg-background text-foreground overflow-x-hidden transition-colors duration-300"
 			style={{ fontFamily: "'DM Sans', sans-serif" }}
 		>
-			{/* <MouseGlow parentRef={parentRef} /> */}
-			{/* ── Grid texture overlay ─────────────────────────────────────────
-          Uses CSS class from triage-theme.css which handles opacity per theme */}
 			<div className="grid-texture pointer-events-none fixed inset-0" />
 
-			{/* ── Ambient glow ─────────────────────────────────────────────── */}
 			<div className="ambient-cglow pointer-events-none fixed top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full blur-[120px]" />
 
 			<Header />
 			<section className="relative z-10 max-w-6xl mx-auto px-8 pt-28 pb-24">
-				{/* Top label */}
 				<div
 					className="inline-flex items-center gap-2 mb-8 text-[11px] tracking-[0.25em] uppercase text-primary border border-primary/25 px-4 py-2 rounded-sm bg-accent/50"
 					style={{ fontFamily: "'DM Mono', monospace" }}
@@ -84,7 +77,6 @@ export default function LandingPage() {
 					between AI inference and real patient care.
 				</p>
 
-				{/* CTA Block */}
 				<div className="flex flex-col sm:flex-row items-start gap-4">
 					<Button
 						asChild
@@ -105,7 +97,6 @@ export default function LandingPage() {
 					</Button>
 				</div>
 
-				{/* Role callout */}
 				<p
 					className="mt-5 text-xs text-muted-foreground/50 tracking-wide"
 					style={{ fontFamily: "'DM Mono', monospace" }}
@@ -114,10 +105,6 @@ export default function LandingPage() {
 					verified on signup.
 				</p>
 			</section>
-
-			{/* ════════════════════════════════════════════════════════════════
-          STATS STRIP
-      ════════════════════════════════════════════════════════════════ */}
 			<section className="relative z-10 border-y border-border/60 bg-muted/30">
 				<div className="max-w-6xl mx-auto px-8 py-10 grid grid-cols-2 md:grid-cols-4 gap-8">
 					{STATS.map((s) => (
@@ -143,10 +130,6 @@ export default function LandingPage() {
 					))}
 				</div>
 			</section>
-
-			{/* ════════════════════════════════════════════════════════════════
-          ABOUT / HOW IT WORKS
-      ════════════════════════════════════════════════════════════════ */}
 			<section
 				id="about"
 				className="relative z-10 max-w-6xl mx-auto px-8 py-28"
@@ -255,10 +238,6 @@ export default function LandingPage() {
 					</div>
 				</div>
 			</section>
-
-			{/* ════════════════════════════════════════════════════════════════
-          EVAL DIMENSIONS
-      ════════════════════════════════════════════════════════════════ */}
 			<section
 				id="features"
 				className="relative z-10 max-w-6xl mx-auto px-8 py-16 pb-28"
@@ -312,10 +291,6 @@ export default function LandingPage() {
 					))}
 				</div>
 			</section>
-
-			{/* ════════════════════════════════════════════════════════════════
-          CTA SECTION
-      ════════════════════════════════════════════════════════════════ */}
 			<section className="relative z-10 border-t border-border/60">
 				<div className="max-w-6xl mx-auto px-8 py-28 flex flex-col items-center text-center">
 					{/* Decorative lines */}
@@ -360,7 +335,7 @@ export default function LandingPage() {
 							variant="ghost"
 							className="text-muted-foreground hover:text-foreground hover:bg-accent rounded-sm px-10 py-6 text-base"
 						>
-							<Link href="/sign-in">
+							<Link href="/auth/sign-in">
 								Already registered? Sign In
 							</Link>
 						</Button>
@@ -371,41 +346,14 @@ export default function LandingPage() {
 						style={{ fontFamily: "'DM Mono', monospace" }}
 					>
 						All scenario data is de-identified. Participation is
-						voluntary. Institutional access available for research
-						teams.
+						voluntary.
 					</p>
 				</div>
 			</section>
-
-			{/* ════════════════════════════════════════════════════════════════
-          FOOTER
-      ════════════════════════════════════════════════════════════════ */}
 			<footer className="relative z-10 border-t border-border/60 px-8 py-8">
 				<div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
 					<div className="flex items-center gap-3">
-						<svg
-							width="18"
-							height="18"
-							viewBox="0 0 28 28"
-							fill="none"
-						>
-							<rect
-								x="11"
-								y="2"
-								width="6"
-								height="24"
-								rx="1.5"
-								className="fill-primary"
-							/>
-							<rect
-								x="2"
-								y="11"
-								width="24"
-								height="6"
-								rx="1.5"
-								className="fill-primary"
-							/>
-						</svg>
+						<HeartPulse className="h-6 w-6 text-primary" />
 						<span
 							className="text-xs tracking-[0.2em] uppercase text-muted-foreground/40"
 							style={{ fontFamily: "'DM Mono', monospace" }}

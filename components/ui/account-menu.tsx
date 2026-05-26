@@ -40,11 +40,11 @@ export default function AccountMenu() {
 					<DropdownMenuItem asChild>
 						<Link href="/app/ai-evaluator">AI Evaluator</Link>
 					</DropdownMenuItem>
-					<DropdownMenuItem asChild>
+					{/* <DropdownMenuItem asChild>
 						<Link href={`/profile?u=${user?.data?.id}`}>
 							Profile
 						</Link>
-					</DropdownMenuItem>
+					</DropdownMenuItem> */}
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
 				<DropdownMenuGroup>
