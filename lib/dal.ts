@@ -3,15 +3,16 @@ import "server-only";
 import { cache } from "react";
 import { createServerClient } from "@/providers/supabase/server";
 import { decodeJwt } from "jose";
-import { UserData } from "@/lib/types";
+import { UserData, UserRole } from "@/lib/types";
 import { Session, User } from "@supabase/supabase-js";
 
 async function supabaseClient() {
 	return await createServerClient();
 }
 
-export const getUser = cache(async () => {
+export const getUser = cache(async (): Promise<UserData | null> => {
 	const session = await verifySession();
+
 	if (!session) return null;
 
 	try {
@@ -19,7 +20,7 @@ export const getUser = cache(async () => {
 			.schema("user_info")
 			.from("full_user_profiles")
 			.select("*")
-			.eq("id", session.userId)
+			.eq("id", session.userId )
 			.limit(1)
 			.single();
 
@@ -34,7 +35,7 @@ export const getUser = cache(async () => {
 			firstName: user["first_name"],
 			lastName: user["last_name"],
 			email: user["email"],
-			role: "user",
+			role: session["userRole"] as UserRole,
 			tosAccepted: user["tos_accepted"],
 			emailVerified: user["email_verified"],
 			disabled: user["disabled"],
@@ -63,10 +64,10 @@ export type SessionResponse = {
 	session: Session | null;
 	userRole: string | null;
 	user: User | null;
-    userData?: UserData | null;
+	userData?: UserData | null;
 };
 
-export const verifySession = cache(async () => {
+export const verifySession = cache(async (): Promise<SessionResponse> => {
 	const {
 		data: { session },
 	} = await (await supabaseClient()).auth.getSession();
@@ -95,7 +96,7 @@ export const verifySession = cache(async () => {
 		loggedIn: session && user ? true : false,
 		userId: user.id,
 		session,
-		userRole: cookie["user_role"],
+		userRole: cookie["user_role"] as UserRole,
 		user,
 	} as SessionResponse;
 });

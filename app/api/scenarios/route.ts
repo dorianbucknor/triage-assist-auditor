@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { verifySession } from "@/lib/dal";
+import { getUser, verifySession } from "@/lib/dal";
 import {
 	AIResponse,
 	ChiefComplaint,
@@ -7,6 +7,7 @@ import {
 	ScenarioContent,
 	TriageData,
 	Urinalysis,
+	UserData,
 	Vitals,
 } from "@/lib/types";
 import { createServerClient } from "@/providers/supabase/server";
@@ -95,9 +96,9 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-	const { loggedIn: isAuth, userId } = await verifySession();
+	const userData = await getUser();
 
-	if (!isAuth) {
+	if (!userData) {
 		return new NextResponse(
 			JSON.stringify({ success: false, error: "Unauthorized" }),
 			{
@@ -109,11 +110,13 @@ export async function POST(request: NextRequest) {
 		);
 	}
 
+	const { id: userId, clinicianProfile, role } = userData;
+
 	const { action, data } = await request.json();
 
 	switch (action) {
 		case "ADD_SCENARIO":
-			return await handleAddScenario(data, userId!);
+			return await handleAddScenario(data, userData);
 		case "ADD_TEST_SCENARIO":
 			return await handleTestScenario(data, userId!);
 		case "ADD_GRADING":
@@ -249,8 +252,10 @@ async function handleTestScenario(data: TriageAssistData, userId: string) {
 	}
 }
 
-async function handleAddScenario(data: TriageData, userId: string) {
+async function handleAddScenario(data: TriageData, userData: UserData) {
 	try {
+		const { id: userId, clinicianProfile, role } = userData;
+
 		const scrubbedData = JSON.parse(
 			JSON.stringify(data).replaceAll('"unknown"', "null"),
 		);
@@ -283,11 +288,28 @@ async function handleAddScenario(data: TriageData, userId: string) {
 		} as ScenarioContent;
 
 		await addScenarioContent(scenarioData.id, scenarioContent);
+		await handleAuditing("scenario_audit_logs", {
+			scenarioId: scenarioData.id,
+			action: "ADD_SCENARIO",
+			user: userId,
+			userRole: role,
+			actionTimestamp: scrubbedData.createdAt || new Date(),
+			userAppRole: clinicianProfile?.professionalRole || "user",
+		});
 
 		//get AI response
 		const aiResponse = await getAIResponse(scenarioContent);
 
 		await addAIResponse(scenarioData.id, aiResponse);
+
+		await handleAuditing("ai_response_audit_logs", {
+			scenarioId: scenarioData.id,
+			action: "GENERATE_AI_RESPONSE",
+			user: userId,
+			userRole: role,
+			actionTimestamp: scrubbedData.createdAt || new Date(),
+			userAppRole: clinicianProfile?.professionalRole || "user",
+		});
 
 		return new NextResponse(
 			JSON.stringify({
@@ -309,6 +331,8 @@ async function handleAddScenario(data: TriageData, userId: string) {
 		);
 	} catch (error) {
 		console.error("Error adding scenario: ", error);
+
+		await handleCleanupOnError(data.id);
 
 		return new NextResponse(
 			JSON.stringify({
@@ -531,17 +555,7 @@ async function addAIResponse(scenarioId: string, aiResponse: AIResponse) {
 
 		return true;
 	} catch (error) {
-		await supabase
-			.schema("ai_auditing")
-			.from("ai_scenario_responses")
-			.delete()
-			.eq("id", scenarioId);
-
-		await supabase
-			.schema("ai_auditing")
-			.from("scenarios")
-			.delete()
-			.eq("id", scenarioId);
+		await handleCleanupOnError(scenarioId);
 
 		console.error("Error adding AI response: ", error, {
 			scenarioId,
@@ -827,6 +841,15 @@ async function fetchScenarioById(scenarioId: string): Promise<NextResponse> {
 
 	const convertedData = camelize(data) as unknown as Scenario;
 
+    await handleAuditing("scenario_audit_logs", {
+        scenarioId: scenarioId,
+        action: "FETCH_SCENARIO",
+        user: "system", // or you can pass the actual userId if available
+        userRole: "system", // or you can pass the actual user role if available
+        actionTimestamp: new Date(),
+        userAppRole: null, // or you can pass the actual user app role if available
+    });
+
 	return new NextResponse(
 		JSON.stringify({ success: true, data: convertedData, error: null }),
 		{
@@ -910,4 +933,84 @@ async function handleAddGrading(data: any, userId: string) {
 		},
 		{ status: 200 },
 	);
+}
+async function handleAuditing(
+	logTable: string,
+	logData: {
+		scenarioId: string;
+		action: string;
+		user: string;
+		userRole: string;
+		userAppRole: string | null;
+		actionTimestamp: Date;
+	},
+) {
+	try {
+		// Insert the audit log into the specified table
+		const supabase = await createServerClient();
+
+		const { error } = await supabase
+			.schema("ai_auditing")
+			.from(logTable)
+			.insert({ ...snakify(logData), hash: "" });
+	} catch (error) {
+		console.error("Error inserting audit log:", error, {
+			scenarioId: logData.scenarioId,
+			userId: logData.user,
+		});
+
+		throw error;
+	}
+}
+async function handleCleanupOnError(id: string) {
+	try {
+		const supabase = await createServerClient();
+
+		// Delete the scenario content
+		await deleteScenarioContent(supabase, id);
+
+		// Delete the AI response
+		await deleteAIResponseById(supabase, id);
+
+		// Delete the scenario itself
+		await deleteScenarioById(supabase, id);
+	} catch (error) {
+		console.error("Error during cleanup on error:", error, {
+			scenarioId: id,
+		});
+		// throw error;
+	}
+}
+
+async function deleteScenarioById(
+	supabase: SupabaseClient<any, "public", "public", any, any>,
+	id: string,
+) {
+	await supabase
+		.schema("ai_auditing")
+		.from("scenarios")
+		.delete()
+		.eq("id", id);
+}
+
+async function deleteAIResponseById(
+	supabase: SupabaseClient<any, "public", "public", any, any>,
+	id: string,
+) {
+	await supabase
+		.schema("ai_auditing")
+		.from("ai_scenario_responses")
+		.delete()
+		.eq("id", id);
+}
+
+async function deleteScenarioContent(
+	supabase: SupabaseClient<any, "public", "public", any, any>,
+	id: string,
+) {
+	await supabase
+		.schema("ai_auditing")
+		.from("scenario_content")
+		.delete()
+		.eq("id", id);
 }
